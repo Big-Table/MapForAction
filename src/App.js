@@ -11,43 +11,60 @@ import TwitterContainer from './components/TwitterContainer'
 
 import Nav from './Nav'
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { incidentForm: false};
-  }
+  state = {
+    incidents: [],
+    currentIncident: null,
+    incidentForm: false
+  };
+
 
   handleShowForm = () => {
-    this.setState({...this.state, incidentForm: !this.state.incidentForm})
+    this.setState({incidentForm: !this.state.incidentForm})
   }
 
+  deleteCurrentIncident = () => {
+    this.setState({
+      currentIncident: null,
+    });
+  };
+
+  setCurrentIncident = (incident) => {
+    this.setState({
+      currentIncident: incident,
+    });
+  };
+
+  setIncidents = (incidents) => {
+    this.setState({
+      ...this.state,
+      incidents,
+    });
+  };
 
   render() {
     return (
-      <div style={{backgroundColor: 'black'}}>
-        <Router>
-          <FlexRow>
-            <FlexColumn style={{width:"70vw", height:"100vh"}}>
-                  <Map />
+      <Router>
+        <FlexColumn style={{ width: "70vw", height: "100vh" }}>
+          {/* Map goes here */}
+          <Map
+            deleteCurrentIncident={this.deleteCurrentIncident}
+            setCurrentIncident={this.setCurrentIncident}
+            setIncidents={this.setIncidents}
+            incidents={this.state.incidents}
+          />
                   <AddIncidentButton onClick={this.handleShowForm} />
                   {this.state.incidentForm && <IncidentForm />}
-            </FlexColumn>
-            <FlexColumn style={{width:"30vw", height:"100vh"}}>
-              <div style={{height: '150px', position: 'relative'}}>
-                <Nav/>
-              </div>
-              <Switch>
-                {/* Routes to different side pages go here */}
-                <Route
-                  path="/"
-                  render={(routerProps) => (
-                    <IncidentsContainer {...routerProps} />
-                  )}
-                />
-              </Switch>
-            </FlexColumn>
-          </FlexRow>
-        </Router>
-      </div>
+        </FlexColumn>
+        <FlexColumn style={{ width: "30vw", height: "100vh" }}>
+          <Switch>
+            {/* Routes to different side pages go here */}
+            <Route
+              path="/"
+              render={(routerProps) => <IncidentsContainer {...routerProps} />}
+            />
+          </Switch>
+        </FlexColumn>
+      </Router>
     );
   }
 }
