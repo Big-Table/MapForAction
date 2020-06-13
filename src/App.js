@@ -7,6 +7,7 @@ import {
 import './App.css'
 import IncidentsContainer from './containers/IncidentsContainer'
 import FlexColumn from './Theme/FlexColumn';
+import Map from "./Map";
 
 
 class App extends React.Component {
@@ -17,7 +18,7 @@ class App extends React.Component {
       <Router >
         <FlexColumn>
         {/* Map goes here */}
-
+          <Map />
         </FlexColumn>
         <FlexColumn>
         <Switch >
