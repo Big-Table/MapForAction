@@ -28,6 +28,9 @@ class Map extends Component {
       center: this.state.current,
       disableDefaultUI: true,
       styles: mapStyles,
+      zoomControl: true,
+      scaleControl: true,
+      streetViewControl: true,
     });
 
   createMarker = () =>
