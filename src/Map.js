@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import { Component, createRef } from "react";
 import mapStyles from "./mapStyles";
 
 class Map extends Component {
@@ -22,24 +22,12 @@ class Map extends Component {
     });
   }
 
-  createGoogleMap = () =>
+  createGoogleMap = () => 
     new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 14,
       center: this.state.current,
       disableDefaultUI: true,
       styles: mapStyles,
-    });
-
-  createMarker = () =>
-    new window.google.maps.Marker({
-      position: { lat: 40.7278722, lng: -73.9572483 },
-      map: this.googleMap,
-      icon: {
-        path: window.google.maps.SymbolPath.CIRCLE,
-        fillColor: "#EBC700",
-        fillOpacity: 1,
-        strokeColor: "#EBC700",
-        strokeOpacity: 0.9,
         strokeWeight: 1,
         scale: 10,
       },
