@@ -16,7 +16,7 @@ class Map extends Component {
   componentDidMount() {
     axios
       .get("http://localhost:3001/incidents")
-      .then((incidents) => console.log(incidents));
+      .then((resp) => console.log(resp.data));
 
     const googleScript = document.createElement("script");
     googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
@@ -60,7 +60,7 @@ class Map extends Component {
       <div
         id="google-map"
         ref={this.googleMapRef}
-        style={{ width: "100vw", height: "100vh" }}
+        style={{ width: "100%", height: "100%" }}
       />
     );
   }

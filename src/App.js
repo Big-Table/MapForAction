@@ -1,24 +1,20 @@
-import React from 'react';
-import {
-  Route, 
-  Switch,
-  BrowserRouter as Router
-} from 'react-router-dom';
-import './App.css'
-import IncidentsContainer from './containers/IncidentsContainer'
-import FlexColumn from './Theme/FlexColumn';
+import React from "react";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import IncidentsContainer from "./containers/IncidentsContainer";
+import FlexColumn from "./Theme/FlexColumn";
+import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
-
+import IncidentForm from './components/IncidentForm'
 
 class App extends React.Component {
-  
-  render(){
-
+  render() {
     return (
       <Router >
         <FlexColumn>
         {/* Map goes here */}
           <Map />
+          {/* <IncidentForm></IncidentForm> */}
         </FlexColumn>
         <FlexColumn>
         <Switch >
@@ -30,6 +26,6 @@ class App extends React.Component {
       </Router>
     );
   }
-};
+}
 
-export default App
+export default App;
