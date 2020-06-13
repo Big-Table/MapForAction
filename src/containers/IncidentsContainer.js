@@ -3,13 +3,20 @@ import Grid from '@material-ui/core/Grid'
 import Incident from '../components/Incident'
 import {makeStyles, Grow} from '@material-ui/core'
 import {getIncidents} from '../requests/requests.js'
+import FlexColumn from '../Theme/FlexColumn'
 
 const useStyles = makeStyles({
     container: {
-        // width: "40%",
+        
+        width: "100%",
+        height: '100%',
+        // paddingRight: 10
     },
     gridItem: {
-        flex: "grow",
+        // flex: "grow",
+        // display: 'flex', 
+        // justifyContent: 'center'
+        width: '100%',
     }
 })
 
@@ -20,6 +27,7 @@ const IncidentsContainer = (props) =>  {
         .then(inc=> setIncidents(inc))
     }, [])
     const classes = useStyles()
+    console.log(incidents)
     const renderIncidentsGrid = () => {
         return incidents.map((incident)=>{
             return(

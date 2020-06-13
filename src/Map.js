@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import mapStyles from "./mapStyles";
+import mapStyles from "./Theme/mapStyles";
 
 class Map extends Component {
   googleMapRef = createRef();
