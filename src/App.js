@@ -12,10 +12,9 @@ class App extends React.Component {
       <Router>
         <FlexRow>
           <FlexColumn style={{width:"65%", height:"100%"}}>
-            {/* Map goes here */}
             <Map />
           </FlexColumn>
-          <FlexColumn>
+          <FlexColumn style={{width:"35%", height:"100%"}}>
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
