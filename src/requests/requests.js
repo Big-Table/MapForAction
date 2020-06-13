@@ -12,3 +12,6 @@ export const postIncidents = (data) => fetch(`${baseURL}/incidents`, {
     body: JSON.stringify(data)
 })
 .then(parseData)
+
+export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData)
+    
