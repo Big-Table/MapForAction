@@ -15,11 +15,11 @@ const useStyles = makeStyles({
 const IncidentsContainer = (props) =>  {
     const [incidents, setIncidents] = useState()
     useEffect(() => {
-            fetch("http://localhost:3000/incidents")
-            .then(resp=> resp.json())
-            .then(i => console.log(i))
-            // (incidents)=> setIncidents((prevState)=> ({incidents: [incidents]}) )
+        fetch("http://localhost:3000/incidents")
+        .then(resp=> resp.json())
+        .then((incidents)=> setIncidents({incidents})
     }, [])
+    console.log(incidents)
     const classes = useStyles()
     const accidents = [{title:"bad", description:"things happened", location:"1232,1223"},{title:"worse", description:"things happened", location:"54,184"}]
     const renderIncidentsGrid = () => {
