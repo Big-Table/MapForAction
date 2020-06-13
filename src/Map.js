@@ -1,5 +1,6 @@
 import React, { Component, createRef } from "react";
 import mapStyles from "./mapStyles";
+import axios from "axios";
 
 class Map extends Component {
   googleMapRef = createRef();
@@ -9,9 +10,14 @@ class Map extends Component {
       lat: 40.7278722,
       lng: -73.9572483,
     },
+    markers: [],
   };
 
   componentDidMount() {
+    axios
+      .get("http://localhost:3001/incidents")
+      .then((incidents) => console.log(incidents));
+
     const googleScript = document.createElement("script");
     googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
     window.document.body.appendChild(googleScript);
