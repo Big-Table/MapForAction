@@ -31,6 +31,7 @@ class Map extends Component {
       zoomControl: true,
       scaleControl: true,
       streetViewControl: true,
+      mapTypeControl: true,
     });
 
   createMarker = () =>
