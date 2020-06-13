@@ -6,23 +6,33 @@ import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from './components/IncidentForm'
-
+import Nav from './Nav'
 class App extends React.Component {
   render() {
     return (
-      <Router >
-        <FlexColumn style={{width: "70vw", height: "100vh"}}>
-        {/* Map goes here */}
+      <div style={{backgroundColor: 'black'}}>
+      <Router>
+        <FlexRow>
+          <FlexColumn style={{width:"70vw", height:"100vh"}}>
             <Map />
-          {/* <IncidentForm></IncidentForm> */}
-        </FlexColumn>
-        <FlexColumn style={{ width: "30vw", height: "100vh" }}>
-        <Switch >
-          {/* Routes to different side pages go here */}
-            <Route path="/incidents" render={(routerProps) => < IncidentsContainer {...routerProps} />} />
-        </Switch>
-        </FlexColumn>
+          </FlexColumn>
+          <FlexColumn style={{width:"30vw", height:"100vh"}}>
+            <div style={{height: '150px', position: 'relative'}}>
+              <Nav/>
+            </div>
+            <Switch>
+              {/* Routes to different side pages go here */}
+              <Route
+                path="/"
+                render={(routerProps) => (
+                  <IncidentsContainer {...routerProps} />
+                )}
+              />
+            </Switch>
+          </FlexColumn>
+        </FlexRow>
       </Router>
+      </div>
     );
   }
 }
