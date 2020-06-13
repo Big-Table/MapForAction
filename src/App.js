@@ -8,7 +8,7 @@ import './App.css'
 import IncidentsContainer from './containers/IncidentsContainer'
 import FlexColumn from './Theme/FlexColumn';
 import Map from "./Map";
-
+import IncidentForm from './components/IncidentForm'
 
 class App extends React.Component {
   
@@ -18,7 +18,8 @@ class App extends React.Component {
       <Router >
         <FlexColumn>
         {/* Map goes here */}
-          <Map />
+          {/* <Map /> */}
+          <IncidentForm></IncidentForm>
         </FlexColumn>
         <FlexColumn>
         <Switch >

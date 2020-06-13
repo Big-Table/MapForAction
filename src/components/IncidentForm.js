@@ -1,16 +1,18 @@
 import React from "react";
 import "./IncidentForm.css";
-
+import { makeStyles } from '@material-ui/core'
+import { postIncidents} from '../requests/requests'
 class IncidentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: "",
       description: "",
-      location: "",
+      lat: "", 
+      lng: "", 
       organization: "",
       petition: "",
-      images: "",
+      image_url: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +30,16 @@ class IncidentForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log("Hello World");
+    postIncidents(this.state)
+    this.setState({
+      title: "",
+      description: "",
+      lat: "", 
+      lng: "", 
+      organization: "",
+      petition: "",
+      image_url: "",
+    })
     //invoke a function that will send created incident to the database
     //clean state
     //alert("This incidence has been reported, thank you for being proactive");
@@ -62,15 +74,29 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <label htmlFor="location">
-            Location<span className="required">*</span>
+          <label htmlFor="lat">
+            Latitude<span className="required">*</span>
           </label>
           <input
-            name="location"
+            hidden 
+            name="lat"
             type="text"
             title="Enter street address or intersections"
             aria-describedby="required-description"
-            value={this.state.location}
+            value={this.state.lat}
+            onChange={this.handleChange}
+          />
+
+          <label htmlFor="lng">
+            Longitude<span className="required">*</span>
+          </label>
+          <input
+            hidden
+            name="lng"
+            type="text"
+            title="Enter street address or intersections"
+            aria-describedby="required-description"
+            value={this.state.lng}
             onChange={this.handleChange}
           />
 
@@ -92,12 +118,12 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <label htmlFor="images">Upload Photos</label>
+          <label htmlFor="image_url">Upload Photos</label>
           <input
-            name="images"
+            name="image_url"
             type="file"
             id="imageUpload"
-            value={this.state.images}
+            value={this.state.image_url}
             onChange={this.handleChange}
             accept=".png, .jpg, .jpeg"
           />
