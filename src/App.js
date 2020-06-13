@@ -11,16 +11,15 @@ class App extends React.Component {
   render() {
     return (
       <Router >
-        <FlexColumn>
+        <FlexColumn style={{width: "70vw", height: "100vh"}}>
         {/* Map goes here */}
-          <Map />
+            <Map />
           {/* <IncidentForm></IncidentForm> */}
         </FlexColumn>
-        <FlexColumn>
+        <FlexColumn style={{ width: "30vw", height: "100vh" }}>
         <Switch >
           {/* Routes to different side pages go here */}
-          <Route path="/incidents" render={(routerProps) => < IncidentsContainer {...routerProps} />} />
-          
+            <Route path="/incidents" render={(routerProps) => < IncidentsContainer {...routerProps} />} />
         </Switch>
         </FlexColumn>
       </Router>
