@@ -20,6 +20,7 @@ class App extends React.Component {
             <div style={{height: '150px', position: 'relative'}}>
               <Nav/>
             </div>
+            <br></br>
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
