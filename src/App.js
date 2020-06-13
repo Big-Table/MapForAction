@@ -6,15 +6,17 @@ import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from './components/IncidentForm'
+import  AddIncidentButton from './components/AddIncidentButton'
 
 class App extends React.Component {
   render() {
     return (
       <Router >
         <FlexColumn>
+          <AddIncidentButton />
         {/* Map goes here */}
           <Map />
-          {/* <IncidentForm></IncidentForm> */}
+          <IncidentForm></IncidentForm>
         </FlexColumn>
         <FlexColumn>
         <Switch >
