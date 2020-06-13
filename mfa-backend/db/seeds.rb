@@ -12,3 +12,6 @@ Tweet.create(url: 'https://twitter.com/VippusaO/status/1271810625463869442')
 Action.create(title: "Help us take action now!", action_type: 'donate', url: 'https://blacklivesmatter.com/')
 Action.create(title: "Call your reps!", action_type: 'speak out', url: 'https://myreps.datamade.us/')
 
+Incident.create(title:"Example Title" , description: "A fake description", date: "1/3/20", image_url: "https://www.reviewjournal.com/wp-content/uploads/2020/06/13811294_web1_BLM-PROTEST_EDIT_JUNE02_20_001.jpg", lat: "", lng: "")
+Incident.create(title: "Another Example Incident", description: "This is a description of the second event", date: "3/2/20", image_url: "https://s.abcnews.com/images/International/EPA_blm_germany_as_160713_16x9_992.jpg", lat: "", lng: "")
+Incident.create(title: "A third example", description: "This is another description of the last even", date: "4/5/20", image_url: "https://media.vanityfair.com/photos/5ed67abbdf4b3d936b967346/master/w_2560%2Cc_limit/GettyImages-1216832831.jpg", lat: "", lng: "")
