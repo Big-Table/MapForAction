@@ -5,6 +5,7 @@ const useStyles = makeStyles({
     root: {
         position: "absolute",
         top: 10,
+        zIndex: 10,
         backgroundColor: "#000000",
         color: "#FCC42C",
         borderStyle: "solid",
@@ -15,7 +16,8 @@ const useStyles = makeStyles({
         borderRadius: 20,
         fontFamily: 'Work Sans',
         fontWeight: 700,
-        cursor: "pointer"
+        cursor: "pointer",
+        outline: "none"
     }
 })
 const AddIncidentButton = props => {

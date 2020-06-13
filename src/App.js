@@ -7,22 +7,32 @@ import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from './components/IncidentForm'
 import  AddIncidentButton from './components/AddIncidentButton'
+import TwitterContainer from './components/TwitterContainer'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { incidentForm: false};
+  }
+
+  handleShowForm = () => {
+    this.setState({...this.state, incidentForm: !this.state.incidentForm})
+  }
+
+
   render() {
     return (
       <Router >
-        <FlexColumn>
-          <AddIncidentButton />
+        <FlexColumn style={{width: "70vw", height: "100vh"}}>
         {/* Map goes here */}
-          <Map />
-          <IncidentForm></IncidentForm>
+            <Map />
+            <AddIncidentButton onClick={this.handleShowForm}/>
+          {this.state.incidentForm && <IncidentForm />}
         </FlexColumn>
-        <FlexColumn>
+        <FlexColumn style={{ width: "30vw", height: "100vh" }}>
         <Switch >
           {/* Routes to different side pages go here */}
-          <Route path="/incidents" render={(routerProps) => < IncidentsContainer {...routerProps} />} />
-          
+            <Route path="/incidents" render={(routerProps) => < IncidentsContainer {...routerProps} />} />
         </Switch>
         </FlexColumn>
       </Router>
@@ -31,3 +41,6 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+{/* <TwitterContainer /> */ }
