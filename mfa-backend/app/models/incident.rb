@@ -1,0 +1,3 @@
+class Incident < ApplicationRecord
+    
+end
