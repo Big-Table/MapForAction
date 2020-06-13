@@ -1,0 +1,24 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: solid;
+  font-size: 1.5em;
+  margin: 1em;
+}
+
+form input {
+  padding: 2em;
+  margin: 1em 0;
+  width: 50%;
+  font-size: 20px;
+}
+
+form button {
+  color: white;
+  background-color: #257529;
+  width: 16px;
+  height: 80px;
+  font-size: 25px;
+}

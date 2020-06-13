@@ -1,6 +1,7 @@
 import React from "react";
+import "./IncidentForm.css";
 
-export class IncidentForm extends React.Component {
+class IncidentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,76 +35,81 @@ export class IncidentForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onsubmit}>
-        <label htmlFor="title">
-          Title<span className="required">*</span>
-        </label>
-        <input
-          name="title"
-          type="text"
-          title="Write the incident title"
-          aria-describedby="required-description"
-          value={this.state.title}
-          onChange={this.handleChange}
-        />
+      <>
+        <h2>Report an Incident</h2>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="title">
+            Title<span className="required">*</span>
+          </label>
+          <input
+            name="title"
+            type="text"
+            title="Write the incident title"
+            aria-describedby="required-description"
+            value={this.state.title}
+            onChange={this.handleChange}
+          />
 
-        <label htmlFor="description">
-          Explain what you saw<span className="required">*</span>
-        </label>
-        <input
-          name="description"
-          type="text"
-          title="The more details, the better!"
-          aria-describedby="required-description"
-          value={this.state.description}
-          onChange={this.handleChange}
-        />
+          <label htmlFor="description">
+            Explain what you saw<span className="required">*</span>
+          </label>
+          <input
+            name="description"
+            type="text"
+            title="The more details, the better!"
+            aria-describedby="required-description"
+            value={this.state.description}
+            onChange={this.handleChange}
+          />
 
-        <label htmlFor="location">
-          Location<span className="required">*</span>
-        </label>
-        <input
-          name="location"
-          type="text"
-          title="Enter street address or intersections"
-          aria-describedby="required-description"
-          value={this.state.location}
-          onChange={this.handleChange}
-        />
+          <label htmlFor="location">
+            Location<span className="required">*</span>
+          </label>
+          <input
+            name="location"
+            type="text"
+            title="Enter street address or intersections"
+            aria-describedby="required-description"
+            value={this.state.location}
+            onChange={this.handleChange}
+          />
 
-        <label htmlFor="organization">Organization</label>
-        <input
-          name="organization"
-          type="text"
-          title="Add a link to related organization"
-          value={this.state.organization}
-          onChange={this.handleChange}
-        />
+          <label htmlFor="organization">Organization</label>
+          <input
+            name="organization"
+            type="text"
+            title="Add a link to related organization"
+            value={this.state.organization}
+            onChange={this.handleChange}
+          />
 
-        <label htmlFor="petition">Petition</label>
-        <input
-          name="petition"
-          type="text"
-          title="Add a link to related petition"
-          value={this.state.petition}
-          onChange={this.handleChange}
-        />
+          <label htmlFor="petition">Petition</label>
+          <input
+            name="petition"
+            type="text"
+            title="Add a link to related petition"
+            value={this.state.petition}
+            onChange={this.handleChange}
+          />
 
-        <label htmlFor="images">Upload Photos</label>
-        <input
-          name="images"
-          type="file"
-          id="imageUpload"
-          value={this.state.images}
-          onChange={this.handleChange}
-          accept=".png, .jpg, .jpeg"
-        />
+          <label htmlFor="images">Upload Photos</label>
+          <input
+            name="images"
+            type="file"
+            id="imageUpload"
+            value={this.state.images}
+            onChange={this.handleChange}
+            accept=".png, .jpg, .jpeg"
+          />
 
-        <input type="submit" value="Submit" />
-        <p aria-hidden="true" id="required-description">
-          <span class="required">*</span>Required field
-        </p>
-      </form>
+          <input type="submit" value="Submit" />
+          <p aria-hidden="true" id="required-description">
+            <span className="required">*</span>Required field
+          </p>
+        </form>
+      </>
     );
   }
 }
+
+export default IncidentForm;
