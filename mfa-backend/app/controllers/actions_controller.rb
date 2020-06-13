@@ -17,6 +17,6 @@ class ActionsController < ApplicationController
     private 
 
     def action_params 
-        params.require(:action).permit(:title,:description, :date, :image_url)
+        params.require(:action).permit(:title, :action_type, :url)
     end 
 end
