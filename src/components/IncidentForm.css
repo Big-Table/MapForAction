@@ -1,18 +1,36 @@
+#incidentForm {
+  text-align: left;
+  margin: 2em;
+}
+
+#incidentForm h2 {
+  /* padding: 20px, 0px, 20px, 0px; */
+  margin: 35px, 0px, 35px, 0px;
+  font-size: 35px;
+}
+
 form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   text-decoration: solid;
   font-size: 1.5em;
-  margin: 1em;
+  width: 100%;
 }
 
-form input {
-  padding: 2em;
+form label {
+  font-weight: bold;
+  text-align: left;
+}
+
+form input,
+form textarea {
+  padding: 10px;
   margin: 1em 0;
-  width: 50%;
+  width: 100vh;
+  height: 10%;
   font-size: 20px;
+  font-family: "Work Sans", sans-serif;
 }
 
 form button {
@@ -21,4 +39,24 @@ form button {
   width: 16px;
   height: 80px;
   font-size: 25px;
+}
+
+input#imageUpload {
+  margin: 0em;
+  padding: 10px 0px 10px 0px;
+}
+
+input#submitButton {
+  text-align: center;
+  width: 40%;
+  border-radius: 50px;
+  align-self: center;
+  background-color: #fcc42c;
+  padding: 10px;
+  border-style: none;
+  font-weight: bold;
+}
+
+#descriptionInput {
+  height: 50%;
 }
