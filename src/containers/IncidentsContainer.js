@@ -1,20 +1,38 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import {makeStyles} from '@material-ui/core'
+import Incident from '../Incident'
+import {makeStyles, Grow} from '@material-ui/core'
 
 const useStyles = makeStyles({
-    root: {
-        flexGrow: 1
+    container: {
+        width: "40%",
+    },
+    gridItem: {
+        flex: "grow",
     }
 })
+
 const IncidentsContainer = (props) =>  {
-    const classes = useStyles(props)
+    // const [incident, setIncident] = useState()
+    // useEffect(() => {
+    //     return () => {
+    //         setIncident(())
+    //     }
+    // }, [input])
+    const classes = useStyles()
+    const incidents = [{title:"bad", description:"things happened", location:"1232,1223"},{title:"worse", description:"things happened", location:"54,184"}]
+    const renderIncidentsGrid = () => {
+        return incidents.map((incident)=>{
+            return(
+                <Incident key={incident.location} {...incident}/>
+            )
+        })
+    }
         return(                    
             
-            <Grid container className={classes.root} spacing={3} >
-                <Grid item>
-                    Hello
+            <Grid container className={classes.container} spacing={1} >
+                <Grid className={classes.gridItem} item>
+                   {renderIncidentsGrid()}
                 </Grid>
             </Grid> 
                 
