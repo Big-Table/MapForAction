@@ -1,3 +1,3 @@
-class Action < ApplicationController
+class Action < ApplicationRecord
     belongs_to :incident
 end 
