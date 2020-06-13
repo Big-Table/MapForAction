@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Incident from '../components/Incident'
 import {makeStyles, Grow} from '@material-ui/core'
+import {getIncidents} from '../requests/requests.js'
 
 const useStyles = makeStyles({
     container: {
-        width: "40%",
+        // width: "40%",
     },
     gridItem: {
         flex: "grow",
@@ -13,21 +14,16 @@ const useStyles = makeStyles({
 })
 
 const IncidentsContainer = (props) =>  {
-    const [incidents, setIncidents] = useState()
+    const [incidents, setIncidents] = useState([])
     useEffect(() => {
-        return () => {
-            fetch("http://localhost:3000/incidents")
-            .then(resp=> resp.json())
-            .then(console.log)
-            // (incidents)=> setIncidents((prevState)=> ({incidents: [incidents]}) )
-        }
+        getIncidents()
+        .then(inc=> setIncidents(inc))
     }, [])
     const classes = useStyles()
-    const accidents = [{title:"bad", description:"things happened", location:"1232,1223"},{title:"worse", description:"things happened", location:"54,184"}]
     const renderIncidentsGrid = () => {
-        return accidents.map((incident)=>{
+        return incidents.map((incident)=>{
             return(
-                <Incident key={incident.location} {...incident}/>
+                <Incident key={incident.id} {...incident}/>
             )
         })
     }

@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 
 const Incident = (props) => {
   const classes = useStyles();
-  console.log(props);
   return (
     <Paper>
       <Card className={classes.root}>
