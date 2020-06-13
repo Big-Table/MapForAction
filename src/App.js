@@ -8,8 +8,8 @@ import Map from "./Map";
 import IncidentForm from './components/IncidentForm'
 import  AddIncidentButton from './components/AddIncidentButton'
 import TwitterContainer from './components/TwitterContainer'
-
 import Nav from './Nav'
+
 class App extends React.Component {
   state = {
     incidents: [],
@@ -44,6 +44,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
+        <FlexRow>
         <FlexColumn style={{ width: "70vw", height: "100vh" }}>
           {/* Map goes here */}
           <Map
@@ -55,7 +56,11 @@ class App extends React.Component {
                   <AddIncidentButton onClick={this.handleShowForm} />
                   {this.state.incidentForm && <IncidentForm />}
         </FlexColumn>
-        <FlexColumn style={{ width: "30vw", height: "100vh" }}>
+          <FlexColumn style={{
+            width: "30vw", height: "100vh",
+            backgroundColor: "#000000" }}>
+            <Nav />
+          
           <Switch>
             {/* Routes to different side pages go here */}
             <Route
@@ -64,6 +69,7 @@ class App extends React.Component {
             />
           </Switch>
         </FlexColumn>
+      </FlexRow>
       </Router>
     );
   }

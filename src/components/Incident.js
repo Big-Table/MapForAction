@@ -14,7 +14,6 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'start',
     height: '100px',
-    overflow: 'scroll',
     backgroundColor: '#707070'
 
   },

@@ -7,7 +7,7 @@ import FlexColumn from '../Theme/FlexColumn'
 
 const useStyles = makeStyles({
     container: {
-        
+        overflowY: 'scroll',
         width: "100%",
         height: '100%',
         // paddingRight: 10
