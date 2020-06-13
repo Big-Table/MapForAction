@@ -6,6 +6,7 @@ import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from './components/IncidentForm'
+import TwitterContainer from './components/TwitterContainer'
 
 class App extends React.Component {
   render() {
@@ -28,3 +29,6 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+{/* <TwitterContainer /> */ }
