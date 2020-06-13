@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 2020_06_13_150459) do
     t.string "description"
     t.string "date"
     t.string "image_url"
+  end
+  
+  create_table "actions", force: :cascade do |t|
+    t.string "title"
+    t.string "action_type"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

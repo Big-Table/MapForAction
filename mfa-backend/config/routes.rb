@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   get '/incidents', to: 'incidents#index'
 
+  resources :tweets 
+  resources :actions 
+
+
 end
