@@ -64,6 +64,10 @@ class App extends React.Component {
           <Switch>
             {/* Routes to different side pages go here */}
             <Route
+              path="/incident"
+              render={(routerProps) => <IncidentsContainer incident={this.state.currentIncident} {...routerProps} />}
+            />
+            <Route
               path="/"
               render={(routerProps) => <IncidentsContainer {...routerProps} />}
             />

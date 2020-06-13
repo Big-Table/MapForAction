@@ -10,12 +10,8 @@ const useStyles = makeStyles({
         overflowY: 'scroll',
         width: "100%",
         height: '100%',
-        // paddingRight: 10
     },
     gridItem: {
-        // flex: "grow",
-        // display: 'flex', 
-        // justifyContent: 'center'
         width: '100%',
     }
 })
