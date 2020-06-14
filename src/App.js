@@ -17,7 +17,7 @@ class App extends React.Component {
     incidents: [],
     currentIncident: null,
     incidentForm: false,
-    searchForm: ''
+    searchForm: "",
   };
 
   componentDidMount() {
@@ -49,26 +49,25 @@ class App extends React.Component {
     });
 
   updateForm = (event) => {
-    console.log("here")
+    console.log("here");
     this.setState({
-      searchForm: event.target.value
-    })
-  }
+      searchForm: event.target.value,
+    });
+  };
 
   search = () => {
-    let searchedIncidents = this.state.incidents
+    let searchedIncidents = this.state.incidents;
     searchedIncidents.filter((incident) => {
-      incident.title.includes(this.state.search)
-    })
+      incident.title.includes(this.state.search);
+    });
     this.setState({
-      incidents: searchedIncidents
-    })
-  }
+      incidents: searchedIncidents,
+    });
+  };
 
   render() {
     return (
       <Router>
-       
         <FlexRow>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
             {/* Map goes here */}
@@ -87,10 +86,7 @@ class App extends React.Component {
                 updateIncidents={this.updateIncidents}
               />
             )}
-            {this.state.incidentForm && (
-              <div id="overlay">
-              </div>
-            )}
+            {this.state.incidentForm && <div id="overlay"></div>}
           </FlexColumn>
           <FlexColumn
             style={{
@@ -100,20 +96,24 @@ class App extends React.Component {
             }}
           >
             <Nav />
-
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
                 path="/"
-                render={(routerProps) => (
-                  this.state.currentIncident? <IncidentDetailContainer
-                  {...routerProps}
-                  incident={this.state.currentIncident}
-                /> : <IncidentsContainer
-                    {...routerProps}
-                    incidents={this.state.incidents}
-                  />
-                )}
+                render={(routerProps) =>
+                  this.state.currentIncident ? (
+                    <IncidentDetailContainer
+                      {...routerProps}
+                      incident={this.state.currentIncident}
+                    />
+                  ) : (
+                    <IncidentsContainer
+                      {...routerProps}
+                      incidents={this.state.incidents}
+                      setCurrentIncident={this.setCurrentIncident}
+                    />
+                  )
+                }
               />
             </Switch>
           </FlexColumn>
