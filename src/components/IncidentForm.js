@@ -110,7 +110,7 @@ class IncidentForm extends React.Component {
             name="image_url"
             type="text"
             placeholder="Paste an Image URL"
-            value={this.state.petition}
+            value={this.state.image_url}
             onChange={this.handleChange}
           />
 

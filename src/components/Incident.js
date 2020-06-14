@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     justifyContent: "start",
     height: "150px",
     backgroundColor: "#212121",
+    cursor: "pointer"
   },
   avatar: {
     height: 120,

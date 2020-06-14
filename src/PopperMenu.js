@@ -9,14 +9,24 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from 'react-router-dom'
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-      
+        cursor: "pointer"
     },
     paper: {
         marginRight: theme.spacing(2),
+    }, 
+    smallPic: {
+        height: '35px',
+        width: '35px',
+        borderRadius: '50%',
+        color: 'white',
+        border: 'solid',
+        borderColor: 'grey',
+        borderWidth: 1
     },
 }));
 
@@ -59,11 +69,17 @@ export default function MenuListComposition() {
     return (
         <div className={classes.root}>
             <div>
-                <Avatar ref={anchorRef}
+                {/* <Avatar ref={anchorRef}
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
-                    alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                <PersonIcon 
+                    className={classes.smallPic}
+                    ref={anchorRef}
+                    aria-controls={open ? 'menu-list-grow' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}/>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow

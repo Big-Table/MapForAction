@@ -30,12 +30,15 @@ const useStyles = makeStyles({
   },
   button: {
     color: '#707070',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    marginTop: 20,
   }, 
   icon: {
     color: "#FCC42C"
   }
 });
+
+
 
 const IncidentDetailContainer = (props) => {
   const classes = useStyles();
@@ -50,7 +53,7 @@ const IncidentDetailContainer = (props) => {
     <FlexColumn className={classes.container}>
         {/* back-button */}
       {formState ? 
-      <Button className={classes.button}><CloseIcon className={classes.icon}></CloseIcon>Close</Button> :
+        <Button className={classes.button} onClick={() => props.deleteCurrentIncident()}><CloseIcon className={classes.icon}></CloseIcon>Close</Button> :
         <Button className={classes.button} onClick={handleClick}><ChevronLeftIcon className={classes.icon}></ChevronLeftIcon>Go Back</Button>
       }
         
