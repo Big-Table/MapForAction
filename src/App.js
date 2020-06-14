@@ -14,7 +14,8 @@ class App extends React.Component {
   state = {
     incidents: [],
     currentIncident: null,
-    incidentForm: false
+    incidentForm: false,
+    searchForm: ''
   };
 
 
@@ -41,6 +42,23 @@ class App extends React.Component {
     });
   };
 
+  updateForm = (event) => {
+    console.log("here")
+    this.setState({
+      searchForm: event.target.value
+    })
+  }
+
+  search = () => {
+    let searchedIncidents = this.state.incidents
+    searchedIncidents.filter((incident) => {
+      incident.title.includes(this.state.search)
+    })
+    this.setState({
+      incidents: searchedIncidents
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -53,9 +71,12 @@ class App extends React.Component {
             setCurrentIncident={this.setCurrentIncident}
             setIncidents={this.setIncidents}
             incidents={this.state.incidents}
-          />      
-          <AddIncidentButton  onClick={this.handleShowForm} />
-          {this.state.incidentForm && <IncidentForm />}
+          />
+            <div style={{width: "100%", position: 'absolute', top: 0}}>
+              <AddIncidentButton onClick={this.handleShowForm} />
+            </div>
+            {this.state.incidentForm && <IncidentForm onClick={this.handleShowForm} />}
+            {this.state.incidentForm && <div id="overlay"></div>}
         </FlexColumn>
 
        
@@ -63,18 +84,18 @@ class App extends React.Component {
           <FlexColumn style={{
             width: "30vw", height: "100vh",
             backgroundColor: "#000000" }}>
-            <Nav />
+            <Nav search={this.state.searchForm} updateForm={this.updateForm}/>
             <br></br>
           <Switch>
             {/* Routes to different side pages go here */}
             <Route
               path="/"
-              render={(routerProps) => <IncidentsContainer {...routerProps} />}
+              render={(routerProps) => <IncidentsContainer {...routerProps}  />}
             />
           </Switch>
         </FlexColumn>
       </FlexRow>
-      
+        
       </Router>
     );
   }

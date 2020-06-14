@@ -5,6 +5,7 @@ import Avatar from '@material-ui/core/Avatar';
 import PopperMenu from './PopperMenu'
 import TextField from '@material-ui/core/TextField';
 import logo from './logo.png'
+import zIndex from '@material-ui/core/styles/zIndex';
 const useStyles = makeStyles({
     root: {
         width: '100%',
@@ -32,7 +33,8 @@ const useStyles = makeStyles({
 
     },
     right: {
-        paddingTop: '40px'
+        paddingTop: '40px',
+        zIndex: 10
         // display: "inline-block",
     }, 
     search: {
@@ -45,10 +47,8 @@ const NavBar = props => {
     const history = useHistory()
     const classes = useStyles(props)
 
-    const test = () => {
-
-    }
-
+    
+    console.log(props.search)
     return(
         <div>
             <div className={classes.root}>
@@ -65,7 +65,7 @@ const NavBar = props => {
                
             </div>
             <br></br>
-            <TextField  className={classes.search} placeholder='search...' id="outlined-basic"  variant="outlined" />
+            <TextField onChange={props.updateForm} value={props.search}className={classes.search} placeholder='search...' id="outlined-basic"  variant="outlined" />
         
         </div>
     )
