@@ -90,7 +90,7 @@ class App extends React.Component {
             {/* Routes to different side pages go here */}
             <Route
               path="/"
-              render={(routerProps) => <IncidentsContainer {...routerProps}  />}
+              render={(routerProps) => <IncidentsContainer search={this.state.searchForm} {...routerProps} incidents={this.state.incidents} />}
             />
           </Switch>
         </FlexColumn>

@@ -65,7 +65,7 @@ const NavBar = props => {
                
             </div>
             <br></br>
-            <TextField onChange={props.updateForm} value={props.search}className={classes.search} placeholder='search...' id="outlined-basic"  variant="outlined" />
+            <TextField onChange={props.updateForm} value={props.search} className={classes.search} placeholder='search...' id="outlined-basic"  variant="outlined" />
         
         </div>
     )
