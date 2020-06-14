@@ -77,8 +77,16 @@ class App extends React.Component {
               setIncidents={this.setIncidents}
               incidents={this.state.incidents}
             />
-            <AddIncidentButton onClick={this.handleShowForm} />
-            {this.state.incidentForm && <IncidentForm />}
+            <div style={{ width: "100%", position: "absolute", top: 0 }}>
+              <AddIncidentButton onClick={this.handleShowForm} />
+            </div>
+            {this.state.incidentForm && (
+              <IncidentForm
+                onClick={this.handleShowForm}
+                updateIncidents={this.updateIncidents}
+              />
+            )}
+            {this.state.incidentForm && <div id="overlay"></div>}
           </FlexColumn>
           <FlexColumn
             style={{
@@ -88,55 +96,24 @@ class App extends React.Component {
             }}
           >
             <Nav />
-
-            <Switch>
-              {/* Routes to different side pages go here */}
-              <Route
-                path="/incident"
-                render={(routerProps) => (
-                  <IncidentsContainer
-                    incident={this.state.currentIncident}
-                    {...routerProps}
-                  />
-                )}
-              />
-              <Route
-                path="/"
-                render={(routerProps) => (
-                  <IncidentsContainer {...routerProps} />
-                )}
-              />
-              <div style={{ width: "100%", position: "absolute", top: 0 }}>
-                <AddIncidentButton onClick={this.handleShowForm} />
-              </div>
-              {this.state.incidentForm && (
-                <IncidentForm
-                  onClick={this.handleShowForm}
-                  updateIncidents={this.updateIncidents}
-                />
-              )}
-              {this.state.incidentForm && <div id="overlay"></div>}
-            </Switch>
-          </FlexColumn>
-          <FlexColumn
-            style={{
-              width: "30vw",
-              height: "100vh",
-              backgroundColor: "#000000",
-            }}
-          >
-            <Nav />
-
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
                 path="/"
-                render={(routerProps) => (
-                  <IncidentsContainer
-                    {...routerProps}
-                    incidents={this.state.incidents}
-                  />
-                )}
+                render={(routerProps) =>
+                  this.state.currentIncident ? (
+                    <IncidentDetailContainer
+                      {...routerProps}
+                      incident={this.state.currentIncident}
+                    />
+                  ) : (
+                    <IncidentsContainer
+                      {...routerProps}
+                      incidents={this.state.incidents}
+                      setCurrentIncident={this.setCurrentIncident}
+                    />
+                  )
+                }
               />
             </Switch>
           </FlexColumn>

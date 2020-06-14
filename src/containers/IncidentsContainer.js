@@ -18,9 +18,15 @@ const useStyles = makeStyles({
   },
 });
 
-const renderIncidentsGrid = (incidents) => {
+const renderIncidentsGrid = (incidents, setCurrentIncident) => {
   return incidents.map((incident) => {
-    return <Incident key={incident.id} {...incident} />;
+    return (
+      <Incident
+        setCurrentIncident={setCurrentIncident}
+        key={incident.id}
+        incident={incident}
+      />
+    );
   });
 };
 
@@ -43,13 +49,13 @@ const renderIncidentsGrid = (incidents) => {
 
 // }
 
-const IncidentsContainer = ({ incidents }) => {
+const IncidentsContainer = ({ incidents, setCurrentIncident }) => {
   const classes = useStyles();
 
   return (
     <Grid container className={classes.container} spacing={1}>
       <Grid className={classes.gridItem} item>
-        {renderIncidentsGrid(incidents)}
+        {renderIncidentsGrid(incidents, setCurrentIncident)}
       </Grid>
     </Grid>
   );

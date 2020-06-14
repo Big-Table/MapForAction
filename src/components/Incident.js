@@ -32,21 +32,21 @@ const useStyles = makeStyles({
 const Incident = (props) => {
   const classes = useStyles();
   return (
-    <Paper onClick={console.log(props)}>
+    <Paper onClick={() => props.setCurrentIncident(props.incident)}>
       <Card className={classes.root}>
         <FlexColumn>
           <Avatar
             variant="square"
             className={classes.avatar}
             alt="Remy Sharp"
-            src={props.image_url}
+            src={props.incident.image_url}
           ></Avatar>
-          {/* <FlexRow>{props.image_url}</FlexRow> */}
+          {/* <FlexRow>{props.incident.image_url}</FlexRow> */}
         </FlexColumn>
         <FlexColumn className={classes.info}>
-          <FlexRow>{props.date}</FlexRow>
-          <FlexRow>{props.title}</FlexRow>
-          <FlexRow>{props.description}</FlexRow>
+          <FlexRow>{props.incident.date}</FlexRow>
+          <FlexRow>{props.incident.title}</FlexRow>
+          <FlexRow>{props.incident.description}</FlexRow>
         </FlexColumn>
       </Card>
     </Paper>
