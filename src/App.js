@@ -7,7 +7,7 @@ import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from './components/IncidentForm'
 import  AddIncidentButton from './components/AddIncidentButton'
-import TwitterContainer from './components/TwitterContainer'
+import Tweet from './components/Tweet'
 import Nav from './Nav'
 
 class App extends React.Component {
@@ -53,8 +53,10 @@ class App extends React.Component {
             setIncidents={this.setIncidents}
             incidents={this.state.incidents}
           />
-                  <AddIncidentButton onClick={this.handleShowForm} />
-                  {this.state.incidentForm && <IncidentForm />}
+            <div style={{width: "100%", position: 'absolute', top: 0}}>
+              <AddIncidentButton onClick={this.handleShowForm} />
+            </div>
+            {this.state.incidentForm && <IncidentForm onClick={this.handleShowForm} />}
         </FlexColumn>
           <FlexColumn style={{
             width: "30vw", height: "100vh",

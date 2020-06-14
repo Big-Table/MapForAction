@@ -2,6 +2,8 @@ import React from "react";
 import "./IncidentForm.css";
 import { makeStyles } from "@material-ui/core";
 import { postIncidents } from "../requests/requests";
+import CloseIcon from '@material-ui/icons/Close';
+
 class IncidentForm extends React.Component {
   constructor(props) {
     super(props);
@@ -72,9 +74,9 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <label htmlFor="lat">
+          {/* <label htmlFor="lat">
             Latitude<span className="required">*</span>
-          </label>
+          </label> */}
           <input
             hidden
             name="lat"
@@ -85,9 +87,9 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <label htmlFor="lng">
+          {/* <label htmlFor="lng">
             Longitude<span className="required">*</span>
-          </label>
+          </label> */}
           <input
             hidden
             name="lng"
@@ -131,6 +133,7 @@ class IncidentForm extends React.Component {
             <span className="required">*</span>Required field
           </p> */}
         </form>
+        <CloseIcon id="close-button" onClick={this.props.onClick} style={{cursor: "pointer"}}/>
       </div>
     );
   }
