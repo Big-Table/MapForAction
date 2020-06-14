@@ -44,6 +44,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
+       
         <FlexRow>
         <FlexColumn style={{ width: "70vw", height: "100vh" }}>
           {/* Map goes here */}
@@ -52,17 +53,18 @@ class App extends React.Component {
             setCurrentIncident={this.setCurrentIncident}
             setIncidents={this.setIncidents}
             incidents={this.state.incidents}
-          />
-            <div style={{width: "100%", position: 'absolute', top: 0}}>
-              <AddIncidentButton onClick={this.handleShowForm} />
-            </div>
-            {this.state.incidentForm && <IncidentForm onClick={this.handleShowForm} />}
+          />      
+          <AddIncidentButton  onClick={this.handleShowForm} />
+          {this.state.incidentForm && <IncidentForm />}
         </FlexColumn>
+
+       
+
           <FlexColumn style={{
             width: "30vw", height: "100vh",
             backgroundColor: "#000000" }}>
             <Nav />
-          
+            <br></br>
           <Switch>
             {/* Routes to different side pages go here */}
             <Route
@@ -72,6 +74,7 @@ class App extends React.Component {
           </Switch>
         </FlexColumn>
       </FlexRow>
+      
       </Router>
     );
   }
