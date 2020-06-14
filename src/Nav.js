@@ -70,11 +70,19 @@ const NavBar = props => {
                
             </div>
            
-            <br></br>
-            <TextField onChange={props.updateForm} value={props.search} className={classes.search} placeholder='Search incidents...' id="outlined-basic"  variant="outlined" />
-            <br></br>
-            <br></br>
-            <span className={classes.span}>Incidents you should know about!</span>
+           {
+                !props.currentIncident?
+                <>
+                <br></br>
+                <TextField onChange={props.updateForm} value={props.search} className={classes.search} placeholder='Search incidents...' id="outlined-basic"  variant="outlined" />
+                <br></br>
+                <br></br>
+                <span className={classes.span}>Incidents you should know about!</span>
+                </>
+            :
+                null
+           }
+            
 
         </div>
     )

@@ -29,12 +29,15 @@ const useStyles = makeStyles({
   },
   button: {
     color: '#707070',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    marginTop: 20,
   }, 
   icon: {
     color: "#FCC42C"
   }
 });
+
+
 
 const IncidentDetailContainer = (props) => {
   const classes = useStyles();
@@ -42,7 +45,7 @@ const IncidentDetailContainer = (props) => {
   return (
     <FlexColumn className={classes.container}>
         {/* back-button */}
-        <Button className={classes.button}><CloseIcon className={classes.icon}></CloseIcon>Close</Button>
+        <Button onClick={()=>props.deleteCurrentIncident()} className={classes.button}><CloseIcon className={classes.icon}></CloseIcon>Close</Button>
       <Paper className={classes.paper}>
         <Card>
         

@@ -94,7 +94,7 @@ class App extends React.Component {
               backgroundColor: "#000000",
             }}
           >
-            <Nav search={this.state.searchForm} updateForm={this.updateForm}/>
+            <Nav currentIncident={this.state.currentIncident}search={this.state.searchForm} updateForm={this.updateForm}/>
             <br></br>
             <Switch>
               {/* Routes to different side pages go here */}
@@ -105,6 +105,7 @@ class App extends React.Component {
                     <IncidentDetailContainer
                       {...routerProps}
                       incident={this.state.currentIncident}
+                      deleteCurrentIncident={this.deleteCurrentIncident}
                     />
                   ) : (
                     <IncidentsContainer
