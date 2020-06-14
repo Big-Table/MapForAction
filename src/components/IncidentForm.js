@@ -2,6 +2,7 @@ import React from "react";
 import "./IncidentForm.css";
 import { postIncidents } from "../requests/requests";
 import CloseIcon from "@material-ui/icons/Close";
+import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
 const incidentFormInitialState = {
   title: "",
@@ -36,6 +37,15 @@ class IncidentForm extends React.Component {
     alert("This incidence has been reported, thank you for being proactive");
   }
 
+  handleAddress(address) {
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) =>
+        this.setState({ lat, lng })
+      );
+  }
+
+
   render() {
     return (
       <div id="incidentForm">
@@ -68,30 +78,13 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          {/* <label htmlFor="lat">
-            Latitude<span className="required">*</span>
-          </label> */}
-          <input
-            hidden
-            name="lat"
-            type="text"
-            placeholder="Enter street address or intersections"
-            aria-describedby="required-description"
-            value={this.state.lat}
-            onChange={this.handleChange}
-          />
+          <label htmlFor="lat">
+            Location<span className="required">*</span>
+          </label>
 
-          {/* <label htmlFor="lng">
-            Longitude<span className="required">*</span>
-          </label> */}
-          <input
-            hidden
-            name="lng"
-            type="text"
-            placeholder="Enter street address or intersections"
-            aria-describedby="required-description"
-            value={this.state.lng}
-            onChange={this.handleChange}
+          <GooglePlacesAutocomplete
+            onSelect={(description) => this.handleAddress(description.description)}
+            placeholder="Address or nearby location"
           />
 
           <label htmlFor="organization">Organization</label>
@@ -111,6 +104,7 @@ class IncidentForm extends React.Component {
             value={this.state.petition}
             onChange={this.handleChange}
           />
+
 
           <label htmlFor="image_url">Upload Photos</label>
           <input
