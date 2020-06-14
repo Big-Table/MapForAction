@@ -5,6 +5,7 @@ import FlexColumn from "../Theme/FlexColumn";
 import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
 import TwitterContainer from "../containers/TwitterContainer";
+import ActionsContainer from '../containers/ActionsContainer'
 
 const useStyles = makeStyles({
   container: {
@@ -28,8 +29,9 @@ const IncidentDetailContainer = (props) => {
         <Card>
           <IncidentDetails key={props.id} {...props} />
           {/* <Tweets/> */}
-          <TwitterContainer incident={props.incident} tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/>
+          {/* <TwitterContainer incident={props.incident} tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/> */}
           {/* <Actions/> */}
+          <ActionsContainer incident={props.incident}/>
         </Card>
       </Paper>
     </FlexColumn>
