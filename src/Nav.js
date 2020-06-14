@@ -74,7 +74,7 @@ const NavBar = props => {
             <TextField onChange={props.updateForm} value={props.search} className={classes.search} placeholder='Search incidents...' id="outlined-basic"  variant="outlined" />
             <br></br>
             <br></br>
-            <span className={classes.span}>Recent Incidents</span>
+            <span className={classes.span}>Incidents you should know about!</span>
 
         </div>
     )

@@ -28,7 +28,11 @@ const IncidentsContainer = (props) =>  {
         if(text === ''){
             return props.incidents.map((incident)=>{
                 return(
+                    <div>
+                    
                     <Incident key={incident.id} {...incident}/>
+                    <br></br>
+                    </div>
                 )
             })
         } else {
@@ -37,7 +41,10 @@ const IncidentsContainer = (props) =>  {
                 )
                 return results.map((incident) => {
                     return(
+                        <div>
                         <Incident key={incident.id} {...incident}/>
+                        <br></br>
+                        </div>
                     )
                 })
         }

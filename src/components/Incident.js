@@ -14,14 +14,15 @@ const useStyles = makeStyles({
     borderColor: "black",
     display: 'flex',
     justifyContent: 'start',
-    height: '120px',
-    backgroundColor: '#707070',
-    fontFamily: 'Work Sans' + 'sans-serif',
-    overflowY: 'auto'
+    height: '150px',
+    backgroundColor: '#212121',
+    // fontFamily: 'Work Sans' + 'sans-serif',
+    // overflowY: 'auto'
+
   },
   avatar: {
-    height: 100,
-    width: 100,
+    height: 120,
+    width: 120,
     borderRadius: 10,
     margin: 10,
   }, 
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     alignItems: 'start',
     paddingLeft: 10,
+    color: '#898989'
     // padding: 5
   }, 
   title: {
@@ -57,7 +59,7 @@ const Incident = (props) => {
           <FlexRow className={classes.title}>
               {props.title}
           </FlexRow>
-          <FlexRow>
+          <FlexRow style={{overflow: 'auto', maxHeight: '80px', width: '275px'}}>
               {props.description}
           </FlexRow>
           <FlexRow>
