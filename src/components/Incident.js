@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "start",
     height: "100px",
-    backgroundColor: "#707070",
+    backgroundColor: "#212121",
   },
   avatar: {
     height: 120,

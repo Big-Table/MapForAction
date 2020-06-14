@@ -5,6 +5,11 @@ class IncidentsController < ApplicationController
         render json: incidents
     end 
 
+    def incidents_tweets
+        incident = Incident.find_by(id: params[:id])
+        render json: incident, include: [:tweets]
+    end
+
     def create 
         incident = Incident.new(incident_params)
             if incident.save

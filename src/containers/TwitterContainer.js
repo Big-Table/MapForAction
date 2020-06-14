@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core'
 import Tweet from '../components/Tweet'
 import "./TwitterContainer.css";
 import TwitterIcon from '@material-ui/icons/Twitter';
+import { getIncidentWithTweets } from '../requests/requests'
 
 const useStyles = makeStyles({
     root: {
@@ -28,22 +29,26 @@ const useStyles = makeStyles({
 })
 const TwitterContainer = props => {
     const classes = useStyles(props)
+    const [tweets, setTweets] = useState([])
+ 
+    useEffect(() => {
+        getIncidentWithTweets(props.incident.id)
+        .then(body => setTweets(body.tweets))
+    }, [])
 
     const renderTweets = () => {
-        if(props.tweets){
-            return props.tweets.map(tweet => {
+            return tweets.map(tweet => {
                 return <div className={classes.tweet}>
                     <Tweet url={tweet.url} />
                 </div>
             })
         }
-    }    
+    
     
     return(
         <div className={classes.root}>
             <span className={classes.logo}><TwitterIcon /></span> Tweets
-            {props.tweets.length > 0 ? renderTweets() : <div className={classes.noTweets}>There are no tweets for this incident.</div>}
-        
+            {tweets.length > 0 ? renderTweets() : <div className={classes.noTweets}>There are no tweets for this incident.</div>}
         </div>
     )
 }

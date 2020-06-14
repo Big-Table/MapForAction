@@ -15,3 +15,6 @@ export const postIncidents = (data) => fetch(`${baseURL}/incidents`, {
 
 export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData)
     
+
+
+export const getIncidentWithTweets = (id) => fetch(`${baseURL}/incidents/tweets/${id}`).then(parseData)
