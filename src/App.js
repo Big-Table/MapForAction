@@ -87,6 +87,7 @@ class App extends React.Component {
               setIncidents={this.setIncidents}
               incidents={this.state.incidents}
               mapCenter={this.state.mapCenter}
+              setMapCenter={this.setMapCenter}
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
               <AddIncidentButton onClick={this.handleShowForm} />
