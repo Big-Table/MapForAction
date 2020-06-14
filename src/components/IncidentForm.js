@@ -1,21 +1,22 @@
 import React from "react";
 import "./IncidentForm.css";
-import { makeStyles } from "@material-ui/core";
 import { postIncidents } from "../requests/requests";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
+
+const incidentFormInitialState = {
+  title: "",
+  description: "",
+  lat: "",
+  lng: "",
+  organization: "",
+  petition: "",
+  image_url: "",
+};
 
 class IncidentForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: "",
-      description: "",
-      lat: "",
-      lng: "",
-      organization: "",
-      petition: "",
-      image_url: "",
-    };
+    this.state = incidentFormInitialState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,19 +27,12 @@ class IncidentForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     console.log("Hello World");
-    postIncidents(this.state);
-    this.setState({
-      title: "",
-      description: "",
-      lat: "",
-      lng: "",
-      organization: "",
-      petition: "",
-      image_url: "",
-    });
+    await postIncidents(this.state);
+    this.setState(incidentFormInitialState);
+    this.props.updateIncidents();
     alert("This incidence has been reported, thank you for being proactive");
   }
 
@@ -133,7 +127,11 @@ class IncidentForm extends React.Component {
             <span className="required">*</span>Required field
           </p> */}
         </form>
-        <CloseIcon id="close-button" onClick={this.props.onClick} style={{cursor: "pointer"}}/>
+        <CloseIcon
+          id="close-button"
+          onClick={this.props.onClick}
+          style={{ cursor: "pointer" }}
+        />
       </div>
     );
   }
