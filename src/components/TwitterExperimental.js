@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 
-const TwitterContainer = props => {
+const TwitterExperimental = props => {
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -21,4 +21,4 @@ const TwitterContainer = props => {
     )
 }
 
-export default TwitterContainer
+export default TwitterExperimental

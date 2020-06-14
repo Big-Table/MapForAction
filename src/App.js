@@ -2,12 +2,12 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import IncidentsContainer from "./containers/IncidentsContainer";
+import IncidentDetailContainer from "./containers/IncidentDetailContainer";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
-import Tweet from "./components/Tweet";
 import Nav from "./Nav";
 import { getIncidents } from "./requests/requests.js";
 
@@ -16,7 +16,7 @@ class App extends React.Component {
     incidents: [],
     currentIncident: null,
     incidentForm: false,
-    searchForm: ''
+    searchForm: "",
   };
 
   componentDidMount() {
@@ -48,26 +48,25 @@ class App extends React.Component {
     });
 
   updateForm = (event) => {
-    console.log("here")
+    console.log("here");
     this.setState({
-      searchForm: event.target.value
-    })
-  }
+      searchForm: event.target.value,
+    });
+  };
 
   search = () => {
-    let searchedIncidents = this.state.incidents
+    let searchedIncidents = this.state.incidents;
     searchedIncidents.filter((incident) => {
-      incident.title.includes(this.state.search)
-    })
+      incident.title.includes(this.state.search);
+    });
     this.setState({
-      incidents: searchedIncidents
-    })
-  }
+      incidents: searchedIncidents,
+    });
+  };
 
   render() {
     return (
       <Router>
-       
         <FlexRow>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
             {/* Map goes here */}
@@ -86,10 +85,7 @@ class App extends React.Component {
                 updateIncidents={this.updateIncidents}
               />
             )}
-            {this.state.incidentForm && (
-              <div id="overlay">
-              </div>
-            )}
+            {this.state.incidentForm && <div id="overlay"></div>}
           </FlexColumn>
           <FlexColumn
             style={{
@@ -98,18 +94,26 @@ class App extends React.Component {
               backgroundColor: "#000000",
             }}
           >
-            <Nav />
-
+            <Nav search={this.state.searchForm} updateForm={this.updateForm}/>
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
                 path="/"
-                render={(routerProps) => (
-                  <IncidentsContainer
-                    {...routerProps}
-                    incidents={this.state.incidents}
-                  />
-                )}
+                render={(routerProps) =>
+                  this.state.currentIncident ? (
+                    <IncidentDetailContainer
+                      {...routerProps}
+                      incident={this.state.currentIncident}
+                    />
+                  ) : (
+                    <IncidentsContainer
+                      {...routerProps}
+                      incidents={this.state.incidents}
+                      setCurrentIncident={this.setCurrentIncident}
+                      search={this.state.searchForm}
+                    />
+                  )
+                }
               />
             </Switch>
           </FlexColumn>
@@ -120,7 +124,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-{
-  /* <TwitterContainer /> */
-}

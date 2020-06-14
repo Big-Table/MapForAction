@@ -1,39 +1,71 @@
-import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Incident from "../components/Incident";
-import { makeStyles } from "@material-ui/core";
+import React, { useState, useEffect } from 'react'
+import Grid from '@material-ui/core/Grid'
+import Incident from '../components/Incident'
+import {makeStyles, Grow} from '@material-ui/core'
+import {getIncidents} from '../requests/requests.js'
+import FlexColumn from '../Theme/FlexColumn'
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles({
-  container: {
-    overflowY: "scroll",
-    width: "100%",
-    height: "100%",
-    // paddingRight: 10
-  },
-  gridItem: {
-    // flex: "grow",
-    // display: 'flex',
-    // justifyContent: 'center'
-    width: "100%",
-  },
-});
+    container: {
+        overflowY: 'scroll',
+        width: "100%",
+        height: '100%',
+    },
+    gridItem: {
+        width: '100%',
 
-const renderIncidentsGrid = (incidents) => {
-  return incidents.map((incident) => {
-    return <Incident key={incident.id} {...incident} />;
-  });
-};
+    },
+  
+})
 
-const IncidentsContainer = ({ incidents }) => {
-  const classes = useStyles();
+const IncidentsContainer = (props) =>  {
+    const text = props.search
+  
+    const classes = useStyles()
 
-  return (
-    <Grid container className={classes.container} spacing={1}>
-      <Grid className={classes.gridItem} item>
-        {renderIncidentsGrid(incidents)}
-      </Grid>
-    </Grid>
-  );
-};
+    const renderIncidentsGrid = () => {
+        if(text === ''){
+            return props.incidents.map((incident)=>{
+                return(
+                    <div>
+                    
+                    <Incident 
+                      setCurrentIncident={props.setCurrentIncident}
+                      key={incident.id}
+                      incident={incident} />
+                    <br></br>
+                    </div>
+                )
+            })
+        } else {
+                let results = props.incidents.filter(inc => 
+                inc.title.toLowerCase().includes(text.toLowerCase())
+                )
+                return results.map((incident) => {
+                    return(
+                        <div>
+                        <Incident 
+                          setCurrentIncident={props.setCurrentIncident}
+                          key={incident.id}
+                          incident={incident} />
+                        <br></br>
+                        </div>
+                    )
+                })
+        }
+           
+    }
+
+        return(                    
+            <Grid container className={classes.container} spacing={1} >
+                {/* <span className={classes.span}>Recent Incidents</span> */}
+                <Grid className={classes.gridItem} item>
+                   {renderIncidentsGrid()}
+                </Grid>
+            </Grid> 
+        )
+    
+}
 
 export default IncidentsContainer;
