@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-places-autocomplete": "^2.0.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-tweet-embed": "^1.2.2"
