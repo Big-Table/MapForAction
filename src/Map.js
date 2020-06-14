@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import mapStyles from "./mapStyles";
+import mapStyles from "./Theme/mapStyles";
 import axios from "axios";
 
 class Map extends Component {
@@ -15,7 +15,7 @@ class Map extends Component {
   componentDidMount() {
     console.log(this.state.current);
     axios
-      .get("http://localhost:3001/incidents")
+      .get("http://localhost:3000/incidents")
       .then((resp) => this.props.setIncidents(resp.data))
       .then(() => {
         const googleScript = document.createElement("script");

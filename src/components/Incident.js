@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles, Card } from "@material-ui/core";
 import FlexColumn from "../Theme/FlexColumn";
 import FlexRow from "../Theme/FlexRow";
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles({
   root: {
@@ -10,22 +11,47 @@ const useStyles = makeStyles({
     borderStyle: "solid",
     borderWidth: "2px",
     borderColor: "black",
-    flex: "grow",
+    display: 'flex',
+    justifyContent: 'start',
+    height: '100px',
+    backgroundColor: '#707070'
+
   },
+  avatar: {
+    height: 90,
+    width: 100,
+    borderRadius: 4,
+    margin: 5,
+  }, 
+  info: {
+    alignItems: 'start',
+    paddingLeft: 15,
+    padding: 5
+  }
 });
 
 const Incident = (props) => {
   const classes = useStyles();
-  console.log(props);
   return (
     <Paper>
       <Card className={classes.root}>
         <FlexColumn>
-          <FlexRow>{props.image_url}</FlexRow>
-          <FlexRow>{`Title: ${props.title}`} </FlexRow>
+            <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={props.image_url}>
+            
+          </Avatar>
+          {/* <FlexRow>{props.image_url}</FlexRow> */}
         </FlexColumn>
-        <FlexColumn>{`Date: ${props.date}`}</FlexColumn>
-        <FlexColumn>{`Description ${props.description}`}</FlexColumn>
+        <FlexColumn className={classes.info}>
+          <FlexRow>
+              {props.date}
+          </FlexRow>
+          <FlexRow>
+              {props.title}
+          </FlexRow>
+          <FlexRow>
+              {props.description}
+          </FlexRow>
+        </FlexColumn>
       </Card>
     </Paper>
   );
