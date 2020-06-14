@@ -5,7 +5,8 @@ const useStyles = makeStyles({
     root: {
         position: "absolute",
         top: 10,
-        zIndex: 10,
+        right: '16%',
+        zIndex: 4,
         backgroundColor: "#000000",
         color: "#FCC42C",
         borderStyle: "solid",
@@ -21,7 +22,7 @@ const useStyles = makeStyles({
     }
 })
 const AddIncidentButton = props => {
-    const classes = useStyles()
+    const classes = useStyles(props)
 
     return (
         <button className={classes.root} onClick={props.onClick}>
