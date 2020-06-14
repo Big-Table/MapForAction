@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     overflowY: "scroll",
     width: "100%",
     height: "100%",
+    alignItems: "start",
   },
   gridItem: {
     width: "100%",
@@ -21,6 +22,7 @@ const IncidentDetailContainer = (props) => {
 
   return (
     <FlexColumn className={classes.container}>
+        {/* back-button */}
       <Paper>
         <Card>
           <IncidentDetails key={props.id} {...props} />

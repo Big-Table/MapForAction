@@ -7,24 +7,34 @@ import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles({
   root: {
-    border: 1,
-    borderStyle: "solid",
-    borderWidth: "2px",
-    borderColor: "black",
     display: 'flex',
     justifyContent: 'start',
+    backgroundColor: "#707070",
     height: '300px',
-    backgroundColor: '#707070'
+    fontFamily: "work-sans",
   },
   header:{
-    color:"white",
+    color:"'#707070'",
     fontSize: 10,
     alignSelf: 'start',
   },
   avatar: {
-    height: 30,
-    width: 50,
-    borderRadius: 4,
+    height: 15,
+    width: 20,
+    borderRadius: 50,
+    margin: 5,
+    alignSelf: 'start',
+  }, 
+  reporter: {
+    color: '#707070',
+    fontSize: 9,
+    margin: 5,
+    alignSelf: 'start',
+  }, 
+  title: {
+    fontWeight: 700,
+    color: "white",
+    fontSize: 9,
     margin: 5,
     alignSelf: 'start',
   }, 
@@ -42,16 +52,18 @@ const IncidentDetails= (props) => {
   return (
     <Paper>
       <Card className={classes.root}>
-        <FlexColumn>
+        <FlexColumn style={{justifyContent: "start", alignItems:"start"}}>
           <FlexRow className={classes.header}>
-            {/* date, location */}
-            {incident? incident.date : "Date Unknown"} {incident.Lat} { incident.lng}
+            {incident? incident.date : "Date Unknown"} 
+            {/* Locaiton: */}
+            {/* {incident.Lat} { incident.lng} */}
           </FlexRow>
           <FlexRow>
             {/* tiny avatar, reported by: anonymous */}
             <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={incident.image_url}/>
+            <div className={classes.reporter}>Reported by: Anonymous</div>
           </FlexRow>
-          <FlexRow>
+          <FlexRow className={classes.title}>
             {/* Title */}
               {incident.title}
           </FlexRow>
