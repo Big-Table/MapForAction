@@ -6,7 +6,7 @@ const useStyles = makeStyles({
         position: "absolute",
         top: 10,
         right: 240,
-        zIndex: 10,
+        zIndex: 4,
         backgroundColor: "#000000",
         color: "#FCC42C",
         borderStyle: "solid",

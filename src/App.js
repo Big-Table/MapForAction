@@ -57,6 +57,7 @@ class App extends React.Component {
               <AddIncidentButton onClick={this.handleShowForm} />
             </div>
             {this.state.incidentForm && <IncidentForm onClick={this.handleShowForm} />}
+            {this.state.incidentForm && <div id="overlay"></div>}
         </FlexColumn>
           <FlexColumn style={{
             width: "30vw", height: "100vh",
@@ -72,6 +73,7 @@ class App extends React.Component {
           </Switch>
         </FlexColumn>
       </FlexRow>
+        
       </Router>
     );
   }

@@ -28,7 +28,6 @@ class IncidentForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("Hello World");
     postIncidents(this.state);
     this.setState({
       title: "",

@@ -69,6 +69,8 @@ input#submitButton {
   padding: 10px;
   border-style: none;
   font-weight: bold;
+
+  cursor: pointer;
 }
 
 #descriptionInput {
