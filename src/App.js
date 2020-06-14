@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import IncidentsContainer from "./containers/IncidentsContainer";
+import IncidentDetailContainer from "./containers/IncidentDetailContainer";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
@@ -64,13 +65,13 @@ class App extends React.Component {
           <Switch>
             {/* Routes to different side pages go here */}
             <Route
-              path="/incident"
-              render={(routerProps) => <IncidentsContainer incident={this.state.currentIncident} {...routerProps} />}
+              path="/"
+              render={(routerProps) => this.state.currentIncident? <IncidentDetailContainer incident={this.state.currentIncident} {...routerProps} /> : <IncidentsContainer {...routerProps} />}
             />
-            <Route
+            {/* <Route
               path="/"
               render={(routerProps) => <IncidentsContainer {...routerProps} />}
-            />
+            /> */}
           </Switch>
         </FlexColumn>
       </FlexRow>

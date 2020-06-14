@@ -23,7 +23,6 @@ const IncidentsContainer = (props) =>  {
         .then(inc=> setIncidents(inc))
     }, [])
     const classes = useStyles()
-    console.log(incidents)
     const renderIncidentsGrid = () => {
         return incidents.map((incident)=>{
             return(

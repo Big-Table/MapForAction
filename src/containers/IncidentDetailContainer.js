@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import Grid from '@material-ui/core/Grid'
-import Incident from '../components/Incident'
-import {makeStyles, Grow} from '@material-ui/core'
-import {getIncidents} from '../requests/requests.js'
-import FlexColumn from '../Theme/FlexColumn'
+import React, { useState, useEffect } from "react";
+import IncidentDetails from "../components/IncidentDetails";
+import { makeStyles } from "@material-ui/core";
+import FlexColumn from "../Theme/FlexColumn";
+import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
 
 const useStyles = makeStyles({
-    container: {
-        overflowY: 'scroll',
-        width: "100%",
-        height: '100%',
-    },
-    gridItem: {
-        width: '100%',
-    }
-})
+  container: {
+    overflowY: "scroll",
+    width: "100%",
+    height: "100%",
+  },
+  gridItem: {
+    width: "100%",
+  },
+});
 
-const IncidentDetailContainer = (props) =>  {
+const IncidentDetailContainer = (props) => {
+  const classes = useStyles();
 
-    const classes = useStyles()
-
-        return(                    
-            <FlexColumn>
-                <IncidentDetails key={incident.id} {...props}/>
-                {/* <Tweets/> */}
-                {/* Actions */}
-            </FlexColumn>
-                
-                
-        )
-    
-}
+  return (
+    <FlexColumn className={classes.container}>
+      <Paper>
+        <Card>
+          <IncidentDetails key={props.id} {...props} />
+          {/* <Tweets/> */}
+          {/* <Actions/> */}
+        </Card>
+      </Paper>
+    </FlexColumn>
+  );
+};
 
 export default IncidentDetailContainer;
