@@ -95,7 +95,7 @@ class App extends React.Component {
               backgroundColor: "#000000",
             }}
           >
-            <Nav />
+            <Nav search={this.state.searchForm} updateForm={this.updateForm}/>
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
@@ -111,6 +111,7 @@ class App extends React.Component {
                       {...routerProps}
                       incidents={this.state.incidents}
                       setCurrentIncident={this.setCurrentIncident}
+                      search={this.state.searchForm}
                     />
                        // <TwitterContainer tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/>
                   )
