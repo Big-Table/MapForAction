@@ -15,7 +15,7 @@ class Map extends Component {
   componentDidMount() {
     console.log(this.state.current);
     axios
-      .get("http://localhost:3000/incidents")
+      .get("http://localhost:3001/incidents")
       .then((resp) => this.props.setIncidents(resp.data))
       .then(() => {
         const googleScript = document.createElement("script");
@@ -27,38 +27,6 @@ class Map extends Component {
         });
       });
   }
-
-  //  Possibly replacing button on the map with a
-
-  // CenterControl = (controlDiv, map, center) => {
-  //   // Set CSS for the control border.
-  //   var controlUI = document.createElement("div");
-  //   controlUI.style.backgroundColor = "#fff";
-  //   controlUI.style.border = "2px solid #fff";
-  //   controlUI.style.borderRadius = "3px";
-  //   controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-  //   controlUI.style.cursor = "pointer";
-  //   controlUI.style.marginBottom = "22px";
-  //   controlUI.style.textAlign = "center";
-  //   controlUI.title = "Click to recenter the map";
-  //   controlDiv.appendChild(controlUI);
-
-  //   // Set CSS for the control interior.
-  //   var controlText = document.createElement("div");
-  //   controlText.style.color = "rgb(25,25,25)";
-  //   controlText.style.fontFamily = "Roboto,Arial,sans-serif";
-  //   controlText.style.fontSize = "16px";
-  //   controlText.style.lineHeight = "38px";
-  //   controlText.style.paddingLeft = "5px";
-  //   controlText.style.paddingRight = "5px";
-  //   controlText.textContent = "Center Map";
-  //   controlUI.appendChild(controlText);
-
-  //   // Setup the click event listeners: simply set the map to Chicago.
-  //   controlUI.addEventListener("click", function () {
-  //     map.setCenter(center);
-  //   });
-  // };
 
   createGoogleMap = () => {
     let map = new window.google.maps.Map(this.googleMapRef.current, {
@@ -75,18 +43,6 @@ class Map extends Component {
     map.addListener("click", () => {
       this.props.deleteCurrentIncident();
     });
-
-    // const centerControlDiv = document.createElement("div");
-    // const centerControl = this.CenterControl(
-    //   centerControlDiv,
-    //   map,
-    //   this.state.current
-    // );
-
-    // centerControlDiv.index = 1;
-    // map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(
-    //   centerControlDiv
-    // );
 
     this.createMarker(map);
   };
@@ -135,3 +91,47 @@ class Map extends Component {
 }
 
 export default Map;
+
+//  Possibly replacing button on the map with a
+
+// CenterControl = (controlDiv, map, center) => {
+//   // Set CSS for the control border.
+//   var controlUI = document.createElement("div");
+//   controlUI.style.backgroundColor = "#fff";
+//   controlUI.style.border = "2px solid #fff";
+//   controlUI.style.borderRadius = "3px";
+//   controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+//   controlUI.style.cursor = "pointer";
+//   controlUI.style.marginBottom = "22px";
+//   controlUI.style.textAlign = "center";
+//   controlUI.title = "Click to recenter the map";
+//   controlDiv.appendChild(controlUI);
+
+//   // Set CSS for the control interior.
+//   var controlText = document.createElement("div");
+//   controlText.style.color = "rgb(25,25,25)";
+//   controlText.style.fontFamily = "Roboto,Arial,sans-serif";
+//   controlText.style.fontSize = "16px";
+//   controlText.style.lineHeight = "38px";
+//   controlText.style.paddingLeft = "5px";
+//   controlText.style.paddingRight = "5px";
+//   controlText.textContent = "Center Map";
+//   controlUI.appendChild(controlText);
+
+//   // Setup the click event listeners: simply set the map to Chicago.
+//   controlUI.addEventListener("click", function () {
+//     map.setCenter(center);
+//   });
+// };
+
+// const centerControlDiv = document.createElement("div");
+// const centerControl = this.CenterControl(
+//   centerControlDiv,
+//   map,
+//   this.state.current
+// );
+
+// centerControlDiv.index = 1;
+// map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(
+//   centerControlDiv
+// );
