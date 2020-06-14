@@ -20,6 +20,28 @@ class Map extends Component {
       });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.mapCenter !== prevProps.mapCenter) {
+      const googleScript = document.createElement("script");
+      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
+      window.document.body.appendChild(googleScript);
+
+      googleScript.addEventListener("load", () => {
+        this.googleMap = this.createGoogleMap();
+      });
+    }
+
+    if (this.props.incidents !== prevProps.incidents) {
+      const googleScript = document.createElement("script");
+      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
+      window.document.body.appendChild(googleScript);
+
+      googleScript.addEventListener("load", () => {
+        this.googleMap = this.createGoogleMap();
+      });
+    }
+  }
+
   //  Possibly replacing button on the map with a
 
   // CenterControl = (controlDiv, map, center) => {
@@ -54,7 +76,7 @@ class Map extends Component {
 
   createGoogleMap = () => {
     let map = new window.google.maps.Map(this.googleMapRef.current, {
-      zoom: 14,
+      zoom: 11,
       center: this.props.mapCenter,
       disableDefaultUI: true,
       styles: mapStyles,

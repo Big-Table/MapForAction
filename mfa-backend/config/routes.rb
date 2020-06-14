@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/incidents', to: 'incidents#index'
   post '/incidents', to: 'incidents#create'
+  get '/incidents/tweets/:id', to: 'incidents#incidents_tweets'
   resources :tweets 
   resources :actions 
 

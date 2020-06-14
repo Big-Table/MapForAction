@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     borderColor: "black",
     display: "flex",
     justifyContent: "start",
-    height: "100px",
+    height: "150px",
     backgroundColor: "#212121",
   },
   avatar: {
@@ -61,13 +61,15 @@ const Incident = (props) => {
           {/* <FlexRow>{props.image_url}</FlexRow> */}
         </FlexColumn>
         <FlexColumn className={classes.info}>
-          <FlexRow>{props.incident.date}</FlexRow>
-          <FlexRow className={classes.title}>{props.incident.title}</FlexRow>
-          <FlexRow
-            style={{ overflow: "auto", maxHeight: "80px", width: "275px" }}
-          >
-            {props.incident.description}
+          <FlexRow >
+              {props.incident.date}
           </FlexRow>
+          <FlexRow className={classes.title}>
+              {props.incident.title}
+          </FlexRow>
+          {/* <FlexRow style={{overflow: 'auto', maxHeight: '80px', width: '275px'}}>
+              {props.incident.description}
+          </FlexRow> */}
           <FlexRow>
             <TwitterIcon style={{ color: "#FCC42C" }}></TwitterIcon>
           </FlexRow>
