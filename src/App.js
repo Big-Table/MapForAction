@@ -67,6 +67,10 @@ class App extends React.Component {
                 updateIncidents={this.updateIncidents}
               />
             )}
+            {this.state.incidentForm && (
+              <div id="overlay">
+              </div>
+            )}
           </FlexColumn>
           <FlexColumn
             style={{
