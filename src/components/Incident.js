@@ -4,6 +4,7 @@ import { makeStyles, Card } from "@material-ui/core";
 import FlexColumn from "../Theme/FlexColumn";
 import FlexRow from "../Theme/FlexRow";
 import Avatar from '@material-ui/core/Avatar';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 const useStyles = makeStyles({
   root: {
@@ -13,20 +14,28 @@ const useStyles = makeStyles({
     borderColor: "black",
     display: 'flex',
     justifyContent: 'start',
-    height: '100px',
-    backgroundColor: '#707070'
-
+    height: '120px',
+    backgroundColor: '#707070',
+    fontFamily: 'Work Sans' + 'sans-serif',
+    overflowY: 'auto'
   },
   avatar: {
-    height: 90,
+    height: 100,
     width: 100,
-    borderRadius: 4,
-    margin: 5,
+    borderRadius: 10,
+    margin: 10,
   }, 
   info: {
+    display: 'flex',
+    alignItems: 'center',
     alignItems: 'start',
-    paddingLeft: 15,
-    padding: 5
+    paddingLeft: 10,
+    // padding: 5
+  }, 
+  title: {
+    color: 'white', 
+    fontWeight: 'bold',
+    fontSize: '20px'
   }
 });
 
@@ -36,20 +45,23 @@ const Incident = (props) => {
     <Paper>
       <Card className={classes.root}>
         <FlexColumn>
-            <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={props.image_url}>
+            <Avatar variant="square" className={classes.avatar} alt="" src={props.image_url}>
             
           </Avatar>
           {/* <FlexRow>{props.image_url}</FlexRow> */}
         </FlexColumn>
         <FlexColumn className={classes.info}>
-          <FlexRow>
+          <FlexRow >
               {props.date}
           </FlexRow>
-          <FlexRow>
+          <FlexRow className={classes.title}>
               {props.title}
           </FlexRow>
           <FlexRow>
               {props.description}
+          </FlexRow>
+          <FlexRow>
+            <TwitterIcon style={{color: "#FCC42C"}}></TwitterIcon>
           </FlexRow>
         </FlexColumn>
       </Card>

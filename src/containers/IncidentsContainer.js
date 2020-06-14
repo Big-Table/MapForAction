@@ -13,9 +13,10 @@ const useStyles = makeStyles({
         height: '100%',
     },
     gridItem: {
-    
         width: '100%',
-    }
+
+    },
+  
 })
 
 const IncidentsContainer = (props) =>  {
@@ -50,6 +51,7 @@ const IncidentsContainer = (props) =>  {
 
         return(                    
             <Grid container className={classes.container} spacing={1} >
+                {/* <span className={classes.span}>Recent Incidents</span> */}
                 <Grid className={classes.gridItem} item>
                    {renderIncidentsGrid()}
                 </Grid>

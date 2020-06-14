@@ -39,7 +39,12 @@ const useStyles = makeStyles({
     }, 
     search: {
         width: '100%',
-        background: 'grey'
+        background: 'grey',
+    },
+    span: {
+        color: 'white',
+        fontSize: '20px', 
+        
     }
 
 })
@@ -64,9 +69,13 @@ const NavBar = props => {
                 </div>
                
             </div>
+           
             <br></br>
-            <TextField onChange={props.updateForm} value={props.search} className={classes.search} placeholder='search...' id="outlined-basic"  variant="outlined" />
-        
+            <TextField onChange={props.updateForm} value={props.search} className={classes.search} placeholder='Search incidents...' id="outlined-basic"  variant="outlined" />
+            <br></br>
+            <br></br>
+            <span className={classes.span}>Recent Incidents</span>
+
         </div>
     )
 }
