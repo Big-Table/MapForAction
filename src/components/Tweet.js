@@ -6,7 +6,7 @@ const Tweet = props => {
 
 
     return(
-        <TweetEmbed id={props.url.split("/")[5]} options={{theme: "dark", cards: "hidden"}}/>
+        <TweetEmbed id={props.url.split("/")[5]} options={{theme: "dark"}}/>
     )
 }
 
