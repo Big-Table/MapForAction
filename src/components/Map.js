@@ -1,19 +1,11 @@
 import React, { Component, createRef } from "react";
-import mapStyles from "./Theme/mapStyles";
+import mapStyles from "../Theme/mapStyles";
 import axios from "axios";
 
 class Map extends Component {
   googleMapRef = createRef();
 
-  state = {
-    current: {
-      lat: 40.7278722,
-      lng: -73.9572483,
-    },
-  };
-
   componentDidMount() {
-    console.log(this.state.current);
     axios
       .get("http://localhost:3000/incidents")
       .then((resp) => this.props.setIncidents(resp.data))
@@ -63,7 +55,7 @@ class Map extends Component {
   createGoogleMap = () => {
     let map = new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 14,
-      center: this.state.current,
+      center: this.props.mapCenter,
       disableDefaultUI: true,
       styles: mapStyles,
       zoomControl: true,
@@ -126,6 +118,7 @@ class Map extends Component {
   render() {
     return (
       <div
+        key={this.props.mapCenter}
         id="google-map"
         ref={this.googleMapRef}
         style={{ width: "100%", height: "100%" }}

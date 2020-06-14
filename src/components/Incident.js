@@ -41,7 +41,15 @@ const useStyles = makeStyles({
 const Incident = (props) => {
   const classes = useStyles();
   return (
-    <Paper onClick={() => props.setCurrentIncident(props.incident)}>
+    <Paper
+      onClick={() => {
+        props.setCurrentIncident(props.incident);
+        props.setMapCenter({
+          lat: parseFloat(props.incident.lat),
+          lng: parseFloat(props.incident.lng),
+        });
+      }}
+    >
       <Card className={classes.root}>
         <FlexColumn>
           <Avatar

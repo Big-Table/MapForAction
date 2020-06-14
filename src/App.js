@@ -5,7 +5,7 @@ import IncidentsContainer from "./containers/IncidentsContainer";
 import IncidentDetailContainer from "./containers/IncidentDetailContainer";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
-import Map from "./Map";
+import Map from "./components/Map";
 import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
 import Nav from "./Nav";
@@ -17,6 +17,10 @@ class App extends React.Component {
     currentIncident: null,
     incidentForm: false,
     searchForm: "",
+    mapCenter: {
+      lat: 40.7278722,
+      lng: -73.9572483,
+    },
   };
 
   componentDidMount() {
@@ -42,10 +46,17 @@ class App extends React.Component {
     });
   };
 
-  setIncidents = (incidents) =>
+  setIncidents = (incidents) => {
     this.setState({
       incidents,
     });
+  };
+
+  setMapCenter = (center) => {
+    this.setState({
+      mapCenter: center,
+    });
+  };
 
   updateForm = (event) => {
     console.log("here");
@@ -75,6 +86,7 @@ class App extends React.Component {
               setCurrentIncident={this.setCurrentIncident}
               setIncidents={this.setIncidents}
               incidents={this.state.incidents}
+              mapCenter={this.state.mapCenter}
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
               <AddIncidentButton onClick={this.handleShowForm} />
@@ -94,7 +106,7 @@ class App extends React.Component {
               backgroundColor: "#000000",
             }}
           >
-            <Nav search={this.state.searchForm} updateForm={this.updateForm}/>
+            <Nav search={this.state.searchForm} updateForm={this.updateForm} />
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
@@ -110,6 +122,7 @@ class App extends React.Component {
                       {...routerProps}
                       incidents={this.state.incidents}
                       setCurrentIncident={this.setCurrentIncident}
+                      setMapCenter={this.setMapCenter}
                       search={this.state.searchForm}
                     />
                   )
