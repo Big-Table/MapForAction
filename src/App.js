@@ -2,14 +2,15 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import IncidentsContainer from "./containers/IncidentsContainer";
+import IncidentDetailContainer from "./containers/IncidentDetailContainer";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
-import Tweet from "./components/Tweet";
 import Nav from "./Nav";
 import { getIncidents } from "./requests/requests.js";
+import TwitterContainer from "./containers/TwitterContainer";
 
 class App extends React.Component {
   state = {
@@ -94,18 +95,27 @@ class App extends React.Component {
               backgroundColor: "#000000",
             }}
           >
-            <Nav />
-
+            <Nav search={this.state.searchForm} updateForm={this.updateForm}/>
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
                 path="/"
-                render={(routerProps) => (
-                  <IncidentsContainer
-                    {...routerProps}
-                    incidents={this.state.incidents}
-                  />
-                )}
+                render={(routerProps) =>
+                  this.state.currentIncident ? (
+                    <IncidentDetailContainer
+                      {...routerProps}
+                      incident={this.state.currentIncident}
+                    />
+                  ) : (
+                    <IncidentsContainer
+                      {...routerProps}
+                      incidents={this.state.incidents}
+                      setCurrentIncident={this.setCurrentIncident}
+                      search={this.state.searchForm}
+                    />
+                       // <TwitterContainer tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/>
+                  )
+                }
               />
             </Switch>
           </FlexColumn>
@@ -116,7 +126,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-{
-  /* <TwitterContainer /> */
-}
