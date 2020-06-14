@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+Incident.delete_all
 
 Tweet.create(url: 'https://twitter.com/RexChapman/status/1271832001364979716?s=20')
 Tweet.create(url: 'https://twitter.com/greg_doucette/status/1271637576642945025?s=20')
