@@ -105,11 +105,11 @@ class App extends React.Component {
               <Route
                 path="/"
                 render={(routerProps) => (
-                  // <IncidentsContainer
-                  //   {...routerProps}
-                  //   incidents={this.state.incidents}
-                  // />
-                  <TwitterContainer tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/>
+                  <IncidentsContainer
+                    {...routerProps}
+                    incidents={this.state.incidents}
+                  />
+                  // <TwitterContainer tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/>
                 )}
               />
             </Switch>
