@@ -10,7 +10,6 @@ import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
 import Nav from "./Nav";
 import { getIncidents } from "./requests/requests.js";
-import TwitterContainer from "./containers/TwitterContainer";
 
 class App extends React.Component {
   state = {
@@ -113,7 +112,6 @@ class App extends React.Component {
                       setCurrentIncident={this.setCurrentIncident}
                       search={this.state.searchForm}
                     />
-                       // <TwitterContainer tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/>
                   )
                 }
               />

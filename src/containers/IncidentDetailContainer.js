@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core";
 import FlexColumn from "../Theme/FlexColumn";
 import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
+import TwitterContainer from "../containers/TwitterContainer";
 
 const useStyles = makeStyles({
   container: {
@@ -27,6 +28,7 @@ const IncidentDetailContainer = (props) => {
         <Card>
           <IncidentDetails key={props.id} {...props} />
           {/* <Tweets/> */}
+          {/* <TwitterContainer tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/> */}
           {/* <Actions/> */}
         </Card>
       </Paper>
