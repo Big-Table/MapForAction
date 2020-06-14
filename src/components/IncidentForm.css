@@ -1,16 +1,26 @@
 #incidentForm {
-  position: fixed;
+  position: absolute;
   text-align: left;
   margin: 2em;
-  width: 600px;
+  width: 45%;
+  
+  height: auto;
   background-color: white;
-  padding: 40px;
+  padding: 20px;
+  top: 10px;
+  left: 25%;
+  z-index: 10;
+  /* max-width: 50vh; */
+  /* top: 25%;
+  bottom: 25% */
 }
 
 #incidentForm h2 {
   /* padding: 20px, 0px, 20px, 0px; */
-  margin: 35px, 0px, 35px, 0px;
-  font-size: 35px;
+  margin: 10px, 0px, 10px, 0px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  /* font-size: 35px; */
 }
 
 form {
@@ -18,8 +28,8 @@ form {
   flex-direction: column; 
   justify-content: center;
   text-decoration: solid;
-  font-size: 1.5em;
-  /* width: 100%; */
+  /* font-size: 1.5em; */
+  width: 100%;
 }
 
 form label {
@@ -31,7 +41,7 @@ form input,
 form textarea {
   padding: 10px;
   margin: 1em 0;
-  /* width: 100vh; */
+  width: 92%;
   height: 10%;
   font-size: 20px;
   font-family: "Work Sans", sans-serif;
@@ -59,8 +69,16 @@ input#submitButton {
   padding: 10px;
   border-style: none;
   font-weight: bold;
+
+  cursor: pointer;
 }
 
 #descriptionInput {
   height: 50%;
+}
+
+#close-button{
+  position: absolute;
+  top: 20px;
+  right: 30px
 }

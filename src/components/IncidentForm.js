@@ -1,19 +1,23 @@
 import React from "react";
 import "./IncidentForm.css";
-import { makeStyles } from "@material-ui/core";
 import { postIncidents } from "../requests/requests";
+import CloseIcon from "@material-ui/icons/Close";
+import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+
+const incidentFormInitialState = {
+  title: "",
+  description: "",
+  lat: "",
+  lng: "",
+  organization: "",
+  petition: "",
+  image_url: "",
+};
+
 class IncidentForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: "",
-      description: "",
-      lat: "",
-      lng: "",
-      organization: "",
-      petition: "",
-      image_url: "",
-    };
+    this.state = incidentFormInitialState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -24,21 +28,23 @@ class IncidentForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     console.log("Hello World");
-    postIncidents(this.state);
-    this.setState({
-      title: "",
-      description: "",
-      lat: "",
-      lng: "",
-      organization: "",
-      petition: "",
-      image_url: "",
-    });
+    await postIncidents(this.state);
+    this.setState(incidentFormInitialState);
+    this.props.updateIncidents();
     alert("This incidence has been reported, thank you for being proactive");
   }
+
+  handleAddress(address) {
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) =>
+        this.setState({ lat, lng })
+      );
+  }
+
 
   render() {
     return (
@@ -73,29 +79,12 @@ class IncidentForm extends React.Component {
           />
 
           <label htmlFor="lat">
-            Latitude<span className="required">*</span>
+            Location<span className="required">*</span>
           </label>
-          <input
-            hidden
-            name="lat"
-            type="text"
-            placeholder="Enter street address or intersections"
-            aria-describedby="required-description"
-            value={this.state.lat}
-            onChange={this.handleChange}
-          />
 
-          <label htmlFor="lng">
-            Longitude<span className="required">*</span>
-          </label>
-          <input
-            hidden
-            name="lng"
-            type="text"
-            placeholder="Enter street address or intersections"
-            aria-describedby="required-description"
-            value={this.state.lng}
-            onChange={this.handleChange}
+          <GooglePlacesAutocomplete
+            onSelect={(description) => this.handleAddress(description.description)}
+            placeholder="Address or nearby location"
           />
 
           <label htmlFor="organization">Organization</label>
@@ -116,6 +105,7 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
+
           <label htmlFor="image_url">Upload Photos</label>
           <input
             name="image_url"
@@ -131,6 +121,11 @@ class IncidentForm extends React.Component {
             <span className="required">*</span>Required field
           </p> */}
         </form>
+        <CloseIcon
+          id="close-button"
+          onClick={this.props.onClick}
+          style={{ cursor: "pointer" }}
+        />
       </div>
     );
   }

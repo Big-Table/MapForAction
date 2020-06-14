@@ -45,7 +45,7 @@ const IncidentDetails= (props) => {
         <FlexColumn>
           <FlexRow className={classes.header}>
             {/* date, location */}
-            {incident.date? incident.date : "Date Unknown"} {incident.Lat} { incident.lng}
+            {incident? incident.date : "Date Unknown"} {incident.Lat} { incident.lng}
           </FlexRow>
           <FlexRow>
             {/* tiny avatar, reported by: anonymous */}
