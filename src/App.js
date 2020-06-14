@@ -16,6 +16,7 @@ class App extends React.Component {
     incidents: [],
     currentIncident: null,
     incidentForm: false,
+    searchForm: ''
   };
 
   componentDidMount() {
@@ -46,9 +47,27 @@ class App extends React.Component {
       incidents,
     });
 
+  updateForm = (event) => {
+    console.log("here")
+    this.setState({
+      searchForm: event.target.value
+    })
+  }
+
+  search = () => {
+    let searchedIncidents = this.state.incidents
+    searchedIncidents.filter((incident) => {
+      incident.title.includes(this.state.search)
+    })
+    this.setState({
+      incidents: searchedIncidents
+    })
+  }
+
   render() {
     return (
       <Router>
+       
         <FlexRow>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
             {/* Map goes here */}
