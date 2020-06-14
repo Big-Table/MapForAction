@@ -8,9 +8,9 @@ import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";
 import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
-import Tweet from "./components/Tweet";
 import Nav from "./Nav";
 import { getIncidents } from "./requests/requests.js";
+import TwitterContainer from "./containers/TwitterContainer";
 
 class App extends React.Component {
   state = {
@@ -112,6 +112,7 @@ class App extends React.Component {
                       incidents={this.state.incidents}
                       setCurrentIncident={this.setCurrentIncident}
                     />
+                       // <TwitterContainer tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764"}, {url: "https://twitter.com/coder_blvck/status/1272185231030837250"}]}/>
                   )
                 }
               />
@@ -124,7 +125,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-{
-  /* <TwitterContainer /> */
-}
