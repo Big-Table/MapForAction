@@ -4,44 +4,67 @@ import { makeStyles, Card } from "@material-ui/core";
 import FlexColumn from "../Theme/FlexColumn";
 import FlexRow from "../Theme/FlexRow";
 import Avatar from '@material-ui/core/Avatar';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
     justifyContent: 'start',
-    backgroundColor: "#707070",
-    height: '300px',
+    backgroundColor: "#000000",
+    height: '100%',
     fontFamily: "work-sans",
   },
   header:{
-    color:"'#707070'",
+    color: '#707070',
     fontSize: 10,
     alignSelf: 'start',
+    color: 'white', 
+    fontSize: '20px',
+    paddingLeft: '20px', 
+    paddingBottom: '5px'
   },
   avatar: {
-    height: 15,
-    width: 20,
+    height: 300,
+    width: 430,
     borderRadius: 50,
     margin: 5,
     alignSelf: 'start',
   }, 
   reporter: {
     color: '#707070',
-    fontSize: 9,
+    fontSize: 15,
     margin: 5,
     alignSelf: 'start',
+    paddingBottom: '10px'
+    
   }, 
   title: {
     fontWeight: 700,
     color: "white",
-    fontSize: 9,
+    fontSize: 25,
     margin: 5,
     alignSelf: 'start',
+    paddingLeft: '15px'
+
   }, 
   info: {
     alignSelf: 'start',
     paddingLeft: 15,
     padding: 5
+  }, 
+  smallPic: {
+    height: '30px', 
+    width: '30px', 
+    borderRadius: '50%',
+    color: 'white',
+    border: 'solid',
+    borderColor: 'grey', 
+    borderWidth: 1
+  }, 
+  description: {
+    color: '#707070',
+    paddingLeft: '20px',
+    paddingRight: '20px'
   }
 });
 
@@ -53,21 +76,28 @@ const IncidentDetails= (props) => {
     <Paper>
       <Card className={classes.root}>
         <FlexColumn style={{justifyContent: "start", alignItems:"start"}}>
-          <FlexRow className={classes.header}>
-            {incident? incident.date : "Date Unknown"} 
+          <FlexRow className={classes.title}>
+            {/* Title */}
+              {incident.title}
+          </FlexRow>
+         
+          <FlexRow style={{paddingLeft: '20px'}}>
+            {/* tiny avatar, reported by: anonymous */}
+            
+            <PersonIcon className={classes.smallPic}></PersonIcon>
+            <div className={classes.reporter}>Reported by: Anonymous</div>
+            <div className={classes.reporter}>-</div>
+
+            <div className={classes.reporter}>{incident? incident.date : "Date Unknown"} </div>
             {/* Locaiton: */}
             {/* {incident.Lat} { incident.lng} */}
           </FlexRow>
           <FlexRow>
             {/* tiny avatar, reported by: anonymous */}
             <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={incident.image_url}/>
-            <div className={classes.reporter}>Reported by: Anonymous</div>
           </FlexRow>
-          <FlexRow className={classes.title}>
-            {/* Title */}
-              {incident.title}
-          </FlexRow>
-          <FlexRow>
+          <br></br>
+          <FlexRow className={classes.description}>
             {/* Details */}
               {incident.description}
           </FlexRow>

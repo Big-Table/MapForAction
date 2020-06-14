@@ -67,7 +67,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <FlexRow>
+        <FlexRow style={{backgroundColor: 'black'}}>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
             {/* Map goes here */}
             <Map
@@ -95,6 +95,7 @@ class App extends React.Component {
             }}
           >
             <Nav search={this.state.searchForm} updateForm={this.updateForm}/>
+            <br></br>
             <Switch>
               {/* Routes to different side pages go here */}
               <Route

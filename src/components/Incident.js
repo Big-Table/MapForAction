@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     borderColor: "black",
     display: "flex",
     justifyContent: "start",
-    height: "100px",
+    height: "150px",
     backgroundColor: "#212121",
   },
   avatar: {
@@ -55,9 +55,9 @@ const Incident = (props) => {
           <FlexRow className={classes.title}>
               {props.incident.title}
           </FlexRow>
-          <FlexRow style={{overflow: 'auto', maxHeight: '80px', width: '275px'}}>
+          {/* <FlexRow style={{overflow: 'auto', maxHeight: '80px', width: '275px'}}>
               {props.incident.description}
-          </FlexRow>
+          </FlexRow> */}
           <FlexRow>
             <TwitterIcon style={{color: "#FCC42C"}}></TwitterIcon>
           </FlexRow>
