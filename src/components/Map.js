@@ -40,13 +40,13 @@ class Map extends Component {
         this.googleMap = this.createGoogleMap();
       });
 
-      const lastIncident = this.props.incidents[
-        this.props.incidents.length - 1
-      ];
-      this.props.setMapCenter({
-        lat: parseFloat(lastIncident.lat),
-        lng: parseFloat(lastIncident.lng),
-      });
+      // const lastIncident = this.props.incidents[
+      //   this.props.incidents.length - 1
+      // ];
+      // this.props.setMapCenter({
+      //   lat: parseFloat(lastIncident.lat),
+      //   lng: parseFloat(lastIncident.lng),
+      // });
     }
   }
 

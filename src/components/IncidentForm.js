@@ -34,6 +34,7 @@ class IncidentForm extends React.Component {
     await postIncidents(this.state);
     this.setState(incidentFormInitialState);
     this.props.updateIncidents();
+    // this.props.onClick()
     alert("This incidence has been reported, thank you for being proactive");
   }
 
