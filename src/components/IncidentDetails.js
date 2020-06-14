@@ -13,18 +13,23 @@ const useStyles = makeStyles({
     borderColor: "black",
     display: 'flex',
     justifyContent: 'start',
-    height: '100px',
+    height: '300px',
     backgroundColor: '#707070'
-
+  },
+  header:{
+    color:"white",
+    fontSize: 10,
+    alignSelf: 'start',
   },
   avatar: {
-    height: 90,
-    width: 100,
+    height: 30,
+    width: 50,
     borderRadius: 4,
     margin: 5,
+    alignSelf: 'start',
   }, 
   info: {
-    alignItems: 'start',
+    alignSelf: 'start',
     paddingLeft: 15,
     padding: 5
   }
@@ -32,24 +37,30 @@ const useStyles = makeStyles({
 
 const IncidentDetails= (props) => {
   const classes = useStyles();
+  console.log("details",props)
+  let incident = props.incident
   return (
     <Paper>
       <Card className={classes.root}>
         <FlexColumn>
-            <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={props.image_url}>
-            
-          </Avatar>
-          {/* <FlexRow>{props.image_url}</FlexRow> */}
-        </FlexColumn>
-        <FlexColumn className={classes.info}>
-          <FlexRow>
-              {props.date}
+          <FlexRow className={classes.header}>
+            {/* date, location */}
+            {incident.date? incident.date : "Date Unknown"} {incident.Lat} { incident.lng}
           </FlexRow>
           <FlexRow>
-              {props.title}
+            {/* tiny avatar, reported by: anonymous */}
+            <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={incident.image_url}/>
           </FlexRow>
           <FlexRow>
-              {props.description}
+            {/* Title */}
+              {incident.title}
+          </FlexRow>
+          <FlexRow>
+            {/* Details */}
+              {incident.description}
+          </FlexRow>
+          <FlexRow>
+            {/* Photo Gallery, maybe grid */}
           </FlexRow>
         </FlexColumn>
       </Card>

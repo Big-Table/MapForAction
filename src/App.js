@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import IncidentsContainer from "./containers/IncidentsContainer";
+import IncidentDetailContainer from "./containers/IncidentDetailContainer";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import Map from "./Map";

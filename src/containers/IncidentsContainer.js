@@ -24,6 +24,25 @@ const renderIncidentsGrid = (incidents) => {
   });
 };
 
+// const IncidentsContainer = (props) =>  {
+//     const [incidents, setIncidents] = useState([])
+//     useEffect(() => {
+//         getIncidents()
+//         .then(inc=> setIncidents(inc))
+//     }, [])
+//     const classes = useStyles()
+//         return(
+
+//             <Grid container className={classes.container} spacing={1} >
+//                 <Grid className={classes.gridItem} item>
+//                    {renderIncidentsGrid()}
+//                 </Grid>
+//             </Grid>
+
+//         )
+
+// }
+
 const IncidentsContainer = ({ incidents }) => {
   const classes = useStyles();
 
