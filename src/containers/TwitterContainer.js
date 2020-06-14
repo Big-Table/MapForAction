@@ -11,9 +11,11 @@ const useStyles = makeStyles({
         overflow: "scroll",
         borderTop: "1px solid #FFFFFF",
         marginTop: "3px",
+        paddingTop: 3,
         fontFamily: "Work Sans",
         fontWeight: 700,
-        color: "white"
+        color: "white",
+        marginLeft: 7
     },
     tweet: {
         // borderBottom: "1px solid #898989",
@@ -24,7 +26,7 @@ const useStyles = makeStyles({
         top: 5
     },
     noTweets: {
-
+        padding: 40
     }
 })
 const TwitterContainer = props => {

@@ -1,9 +1,8 @@
 #incidentForm {
   position: absolute;
   text-align: left;
-  margin: 2em;
+  /* margin: 2px; */
   width: 45%;
-  
   height: auto;
   background-color: white;
   padding: 20px;
@@ -45,6 +44,11 @@ form textarea {
   height: 10%;
   font-size: 20px;
   font-family: "Work Sans", sans-serif;
+}
+
+form textarea {
+  max-height: 40px;
+  resize: none;
 }
 
 form button {

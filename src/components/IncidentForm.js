@@ -105,8 +105,17 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
+          <label htmlFor="image_url">Image</label>
+          <input
+            name="image_url"
+            type="text"
+            placeholder="Paste an Image URL"
+            value={this.state.petition}
+            onChange={this.handleChange}
+          />
 
-          <label htmlFor="image_url">Upload Photos</label>
+
+          {/* <label htmlFor="image_url">Upload Photos</label>
           <input
             name="image_url"
             type="file"
@@ -114,7 +123,7 @@ class IncidentForm extends React.Component {
             value={this.state.image_url}
             onChange={this.handleChange}
             accept=".png, .jpg, .jpeg"
-          />
+          /> */}
 
           <input type="submit" value="Submit" id="submitButton" />
           {/* <p aria-hidden="true" id="required-description">

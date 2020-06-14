@@ -1,10 +1,11 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles, Card } from "@material-ui/core";
+import { makeStyles, Card, Button } from "@material-ui/core";
 import FlexColumn from "../Theme/FlexColumn";
 import FlexRow from "../Theme/FlexRow";
 import Avatar from '@material-ui/core/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
+import ActionsButtons from '../components/ActionsButton'
 
 const useStyles = makeStyles({
   root: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles({
     justifyContent: 'start',
     backgroundColor: "#000000",
     height: '100%',
-    fontFamily: "work-sans",
+    // fontFamily: "Work-Sans",
   },
   header:{
     color: '#707070',
@@ -103,6 +104,7 @@ const IncidentDetails= (props) => {
           </FlexRow>
           <FlexRow>
             {/* Photo Gallery, maybe grid */}
+            <ActionsButtons onClick={props.actionButton}/>
           </FlexRow>
         </FlexColumn>
       </Card>
