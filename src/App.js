@@ -9,6 +9,7 @@ import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
 import Tweet from "./components/Tweet";
 import Nav from "./Nav";
+import { getIncidents } from "./requests/requests.js";
 
 class App extends React.Component {
   state = {
@@ -16,6 +17,13 @@ class App extends React.Component {
     currentIncident: null,
     incidentForm: false,
   };
+
+  componentDidMount() {
+    this.updateIncidents();
+  }
+
+  updateIncidents = () =>
+    getIncidents().then((incidents) => this.setIncidents(incidents));
 
   handleShowForm = () => {
     this.setState({ incidentForm: !this.state.incidentForm });
@@ -33,12 +41,10 @@ class App extends React.Component {
     });
   };
 
-  setIncidents = (incidents) => {
+  setIncidents = (incidents) =>
     this.setState({
-      ...this.state,
       incidents,
     });
-  };
 
   render() {
     return (
@@ -56,7 +62,10 @@ class App extends React.Component {
               <AddIncidentButton onClick={this.handleShowForm} />
             </div>
             {this.state.incidentForm && (
-              <IncidentForm onClick={this.handleShowForm} />
+              <IncidentForm
+                onClick={this.handleShowForm}
+                updateIncidents={this.updateIncidents}
+              />
             )}
             {this.state.incidentForm && <div id="overlay"></div>}
           </FlexColumn>
@@ -74,7 +83,10 @@ class App extends React.Component {
               <Route
                 path="/"
                 render={(routerProps) => (
-                  <IncidentsContainer {...routerProps} />
+                  <IncidentsContainer
+                    {...routerProps}
+                    incidents={this.state.incidents}
+                  />
                 )}
               />
             </Switch>
@@ -86,7 +98,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-{
-  /* <TwitterContainer /> */
-}
