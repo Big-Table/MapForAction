@@ -31,6 +31,7 @@ class IncidentForm extends React.Component {
   async handleSubmit(e) {
     e.preventDefault();
     console.log("Hello World");
+    console.log(this.state)
     await postIncidents(this.state);
     this.setState(incidentFormInitialState);
     this.props.updateIncidents();
