@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core'
 import TakeActionIcon from '../svgs/TakeActionIcon'
 import { getIncidentWithTweets } from '../requests/requests'
-
+import ActionForm from '../components/ActionForm'
+import AddActionButton from '../components/AddActionButton'
 const useStyles = makeStyles({
     root: {
         width: "90%",
@@ -31,12 +32,16 @@ const useStyles = makeStyles({
     },
     topBorder: {
         borderTop: "1px solid white"
+    },
+    actionForm: {
+        height: '100%', 
+        width: '100%',
+        border: 'solid'
     }
 })
 const ActionsContainer = props => {
     const classes = useStyles(props)
     const [actions, setActions] = useState([])
-
     useEffect(() => {
         getIncidentWithTweets(props.incident.id)
             .then(body => setActions(body.actions))
@@ -45,10 +50,18 @@ const ActionsContainer = props => {
     const renderSuggestedActions = () => {
         
             return actions.map(action => {
-                return <a href={action.url}>{action.title}</a>
+                
+                return <div>
+                    <a target='_blank' href={action.url}>{action.title}</a>
+                </div>
             })
         }
-    
+    //action form button toggle
+    const [actionButton, setActionButton] = useState(false)
+
+    const handleClick = () => {
+        setActionButton(!actionButton)
+    }
 
     return (
         <div className={classes.root}>
@@ -58,11 +71,19 @@ const ActionsContainer = props => {
                 <div className={classes.iconHolder}><TakeActionIcon /></div>
                 <h3 className={classes.title}>Suggested Actions: </h3>
                 <br></br>
+                {actionButton ?   
+                    <div className={classes.actionForm}>
+                        <ActionForm incident={props.incident} handleClick={handleClick}></ActionForm>
+                    </div>
+                    :
+                    null
+                }
+              
 
                 <div className={classes.spacing}>
                 {actions.length > 0 ? renderSuggestedActions() : <span>No actions have been suggested for this incident yet. </span>}
                 <br></br>
-                <a href="">Suggest an action.</a>
+                <AddActionButton onClick={handleClick}>Suggest an action.</AddActionButton>
                 </div>
                 <br></br>
                 <div className={classes.iconHolder}><TakeActionIcon /></div>

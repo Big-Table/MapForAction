@@ -6,6 +6,7 @@ class ActionsController < ApplicationController
     end 
 
     def create 
+        print action_params
         action = Action.new(action_params)
             if action.save
                 render json: {status: 'action created successfully', action: action}, status: :created
@@ -14,9 +15,11 @@ class ActionsController < ApplicationController
             end
     end 
 
+
     private 
 
     def action_params 
-        params.require(:action).permit(:title, :action_type, :url)
+        params.permit(:title, :action_type, :url, :incident_id)
     end 
+
 end

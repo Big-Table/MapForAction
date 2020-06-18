@@ -11,6 +11,7 @@ class IncidentsController < ApplicationController
     end
 
     def create 
+        print incident_params
         incident = Incident.new(incident_params)
             if incident.save
                 render json: {status: 'Incident created successfully', incident: incident}, status: :created
@@ -22,6 +23,7 @@ class IncidentsController < ApplicationController
     private 
 
     def incident_params 
+        
         params.require(:incident).permit(:title, :description, :date, :image_url, :lat, :lng, :organization, :petition)
     end 
 end

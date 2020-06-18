@@ -15,6 +15,15 @@ export const postIncidents = (data) => fetch(`${baseURL}/incidents`, {
 
 export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData)
     
-
-
 export const getIncidentWithTweets = (id) => fetch(`${baseURL}/incidents/tweets/${id}`).then(parseData)
+
+//post to actions
+export const postActions = (data) => fetch(`${baseURL}/actions`, {
+    method: 'POST', 
+    headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(parseData)
