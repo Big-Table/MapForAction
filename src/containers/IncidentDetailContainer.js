@@ -54,7 +54,11 @@ const IncidentDetailContainer = (props) => {
     setTweetState(!tweetState)
   }
 
- 
+  const [refresh, setRefresh] = useState(false)
+  
+  const handleRefresh = () => {
+    setRefresh(!refresh)
+  }
   return (
     <FlexColumn className={classes.container}>
         {/* back-button */}
@@ -75,7 +79,7 @@ const IncidentDetailContainer = (props) => {
               }
               <TwitterContainer tweetButton={handleTweet} incident={props.incident}  />
             </div>
-          </> : <ActionsContainer incident={props.incident} />}
+          </> : <ActionsContainer refresh={handleRefresh}incident={props.incident} />}
           
           {/* <Actions/> */}
           {/* <ActionsContainer incident={props.incident}/> */}
