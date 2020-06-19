@@ -36,7 +36,7 @@ const TwitterContainer = props => {
     useEffect(() => {
         getIncidentWithTweets(props.incident.id)
         .then(body => setTweets(body.tweets))
-    }, [])
+    }, [props.tweetButton])
 
     const renderTweets = () => {
             return tweets.map(tweet => {

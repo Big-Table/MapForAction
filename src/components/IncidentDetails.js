@@ -6,7 +6,7 @@ import FlexRow from "../Theme/FlexRow";
 import Avatar from '@material-ui/core/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
 import ActionsButtons from '../components/ActionsButton'
-
+import AddTweetButton from '../components/addTweetButton'
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -105,6 +105,8 @@ const IncidentDetails= (props) => {
           <FlexRow>
             {/* Photo Gallery, maybe grid */}
             <ActionsButtons onClick={props.actionButton}/>
+            <AddTweetButton onClick={props.tweetButton}/>
+
           </FlexRow>
         </FlexColumn>
       </Card>

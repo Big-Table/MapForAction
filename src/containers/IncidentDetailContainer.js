@@ -10,6 +10,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import Button from "@material-ui/core/Button"
 import CloseIcon from '@material-ui/icons/Close';
+import TweetForm from '../components/TweetForm'
 const useStyles = makeStyles({
   container: {
     overflowY: "scroll",
@@ -43,12 +44,17 @@ const useStyles = makeStyles({
 const IncidentDetailContainer = (props) => {
   const classes = useStyles();
   const [formState, setFormState] = useState(true)
-
+  const [tweetState, setTweetState] = useState(false)
 
   const handleClick = () => {
     setFormState(!formState)
   }
 
+  const handleTweet = () => {
+    setTweetState(!tweetState)
+  }
+
+ 
   return (
     <FlexColumn className={classes.container}>
         {/* back-button */}
@@ -60,9 +66,14 @@ const IncidentDetailContainer = (props) => {
       <Paper className={classes.paper}>
         <Card>
           {formState ? <>
-            <IncidentDetails key={props.id} {...props} actionButton={handleClick} />
+            <IncidentDetails key={props.id} {...props} tweetButton={handleTweet} actionButton={handleClick} />
             <div className={classes.container}>
-              <TwitterContainer incident={props.incident} tweets={[{ url: "https://twitter.com/gratisteph/status/1272185222499573764" }, { url: "https://twitter.com/coder_blvck/status/1272185231030837250" }]} />
+              {tweetState ? 
+                <TweetForm incident={props.incident} tweetButton={handleTweet}></TweetForm> 
+                : 
+                null
+              }
+              <TwitterContainer tweetButton={handleTweet} incident={props.incident}  />
             </div>
           </> : <ActionsContainer incident={props.incident} />}
           
