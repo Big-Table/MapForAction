@@ -8,6 +8,8 @@ import FlexRow from "./Theme/FlexRow";
 import Map from "./components/Map";
 import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
+import AddQueueButton from "./components/AddQueueButton";
+import IncidentQueueGrid from './components/IncidentQueueGrid'
 import Nav from "./Nav";
 import { getIncidents } from "./requests/requests.js";
 
@@ -21,6 +23,7 @@ class App extends React.Component {
       lat: 40.7278722,
       lng: -73.9572483,
     },
+    grid: false
   };
 
   componentDidMount() {
@@ -75,6 +78,12 @@ class App extends React.Component {
     });
   };
 
+  handleShowGrid = () => {
+    this.setState({
+      grid: !this.state.grid
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -91,6 +100,7 @@ class App extends React.Component {
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
               <AddIncidentButton onClick={this.handleShowForm} />
+              <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton>
             </div>
             {this.state.incidentForm && (
               <IncidentForm
@@ -98,7 +108,10 @@ class App extends React.Component {
                 updateIncidents={this.updateIncidents}
               />
             )}
-            {this.state.incidentForm && <div id="overlay"></div>}
+            {this.state.incidentForm || this.state.grid && <div id="overlay"></div>}
+            {this.state.grid && 
+              <IncidentQueueGrid grid={this.handleShowGrid}></IncidentQueueGrid>
+            }
           </FlexColumn>
           <FlexColumn
             style={{
