@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { getIncidents } from '../requests/requests'
+
 const columns = [
   { id: 'title', label: 'Title', minWidth: 170 },
   { id: 'description', label: 'Description', minWidth: 170 },
@@ -34,7 +35,7 @@ const columns = [
   {
     id: 'image_url',
     label: 'Image_URL',
-    maxWidth: 100,
+    minWidth: 100,
   },
   {
     id: 'approve',
@@ -55,14 +56,33 @@ function createData(title, description, date, location, organization, petition, 
 const rows = [
 
 ];
-
+// #898989
 const useStyles = makeStyles({
   root: {
     width: '100%',
+    backgroundColor: '#898989',
+    color: 'white'
   },
   container: {
     maxHeight: 500,
   },
+  header: {
+      backgroundColor: 'black'
+  }, 
+  button: {
+    backgroundColor: "#000000",
+    color: "#FCC42C",
+    borderStyle: "solid",
+    borderColor: "#FCC42C",
+    borderWidth: 1,
+    height: 40,
+    width: 150,
+    borderRadius: 20,
+    fontFamily: 'Work Sans',
+    fontWeight: 700,
+    cursor: "pointer",
+    outline: "none"
+  }
 });
 
 export default function StickyHeadTable() {
@@ -82,26 +102,25 @@ export default function StickyHeadTable() {
   const [incidents, Setincidents] = React.useState([])
 
   useEffect(() => {
-    getIncidents()
-        .then(body => Setincidents(body))
-}, [])
+        getIncidents()
+            .then(body => Setincidents(body))
+  }, [])
 
    
-    incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url)))
-  
-console.log(incidents)
+  incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url)))
+
   return (
       
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
+          <TableHead >
+            <TableRow >
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth, backgroundColor: 'black', color: 'white' }}
                 >
                   {column.label}
                 </TableCell>
@@ -119,14 +138,14 @@ console.log(incidents)
                         return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number' ? column.format(value) : value}
-                              <button>Approve</button>
+                              <button className={classes.button}>Approve</button>
                             </TableCell>
                           );
                     } else if(column.id === 'reject'){
                         return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number' ? column.format(value) : value}
-                              <button>Reject</button>
+                              <button className={classes.button}>Reject</button>
                             </TableCell>
                           );
                     }

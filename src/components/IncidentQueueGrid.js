@@ -9,7 +9,7 @@ const useStyles = makeStyles({
         /* margin: 2px; */
         width: '75%',
         height: '85%',
-        backgroundColor: 'white',
+        backgroundColor: '#fcc42c',
         padding: '20px',
         top: '60px',
         left: '10%',
