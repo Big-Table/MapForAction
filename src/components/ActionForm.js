@@ -36,7 +36,7 @@ class ActionForm extends React.Component {
         incident_id: ""
     })
     this.props.handleClick()
-
+    this.props.refresh()
   }
   // async handleSubmit(e) {
   //   e.preventDefault();
@@ -122,6 +122,7 @@ class ActionForm extends React.Component {
         </form>
         <CloseIcon
           id="close-button"
+          // onClick={this.props.handleRefresh}
           onClick={this.props.handleClick}
           style={{ cursor: "pointer" }}
         />

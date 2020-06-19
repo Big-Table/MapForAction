@@ -45,7 +45,7 @@ const ActionsContainer = props => {
     useEffect(() => {
         getIncidentWithTweets(props.incident.id)
             .then(body => setActions(body.actions))
-    }, [])
+    }, [props.refresh])
 
     const renderSuggestedActions = () => {
         
@@ -73,7 +73,7 @@ const ActionsContainer = props => {
                 <br></br>
                 {actionButton ?   
                     <div className={classes.actionForm}>
-                        <ActionForm incident={props.incident} handleClick={handleClick}></ActionForm>
+                        <ActionForm incident={props.incident} handleClick={handleClick} refresh={props.refresh}></ActionForm>
                     </div>
                     :
                     null
