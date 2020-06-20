@@ -10,6 +10,8 @@ mongoose
   .catch((err) => console.log(err));
 
 const app = express();
+
+//cookie sessions for auth
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -17,10 +19,16 @@ app.use(
   })
 );
 
+//parses all request to json
 app.use(express.json());
 
+//initializes the passport middleware, middleware has access to req, res objects as well as the next
 app.use(passport.initialize());
 app.use(passport.session());
 
+//routes
+require("./routes/authRoutes")(app);
+
+//starting back-end on port 5000
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
