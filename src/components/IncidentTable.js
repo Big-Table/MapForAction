@@ -111,9 +111,13 @@ export default function StickyHeadTable() {
 
   incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident.approve, incident.reject, incident.id)))
 
-  const approve = (id) => {
+  const approve = (event) => {
     console.log('this was approved')
-    approved(id)
+    console.log(event)    
+    console.log(event.target)
+
+    
+    // approved(id)
   }
 
   const reject = () => {
@@ -127,7 +131,9 @@ export default function StickyHeadTable() {
 //       })
 //       console.log(hash)
 //   }
-  let id = null
+  
+ 
+let id
 
   return (
       
@@ -149,21 +155,23 @@ export default function StickyHeadTable() {
           </TableHead>
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     if(column.id === 'id'){
-                        id = row[column.id]
+                        
+                       id = row[column.id];
                     }
-                    console.log(id)
                     if(column.id === 'approve') {
                         return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number' ? column.format(value) : value}
-                              <button className={classes.button} onClick={()=> approve(id)}>Approve</button>
+                            <button className={classes.button} onClick={(event)=> approve(event)}>Approve,{id}</button>
                             </TableCell>
                           );
+
                     } else if(column.id === 'reject'){
                         return (
                             <TableCell key={column.id} align={column.align}>
@@ -171,6 +179,7 @@ export default function StickyHeadTable() {
                               <button className={classes.button} onClick={reject}>Reject</button>
                             </TableCell>
                           );
+
                     }
                     else {
                         return (
@@ -178,6 +187,7 @@ export default function StickyHeadTable() {
                               {column.format && typeof value === 'number' ? column.format(value) : value}
                             </TableCell>
                           );
+
                     }
                   })}
                 </TableRow>
