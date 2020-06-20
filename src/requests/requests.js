@@ -45,3 +45,15 @@ export const postTweets = (data) => fetch(`${baseURL}/tweets`, {
     body: JSON.stringify(data)
 })
 .then(parseData)
+
+//MOD post to approve incident from queue
+export const approved = (id) => fetch(`${baseURL}/incidents/${id}`, {
+    method: 'POST', 
+    headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+    },
+    body: JSON.stringify({id: id})
+})
+.then(console.log("this was approved"))
+// .then(parseData)

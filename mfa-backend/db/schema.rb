@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_171119) do
+ActiveRecord::Schema.define(version: 2020_06_19_211252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2020_06_14_171119) do
     t.string "lng"
     t.string "organization"
     t.string "petition"
+    t.integer "approve"
+    t.integer "reject"
   end
 
   create_table "tweets", force: :cascade do |t|

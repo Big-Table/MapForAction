@@ -20,10 +20,22 @@ class IncidentsController < ApplicationController
             end
     end 
 
+    def approved 
+        print params
+        incident = Incident.find_by(id: params[:id])
+        incident.update(approve: incident.approve + 1)
+       
+    end 
+
+    def rejected 
+        incident = Incident.find_by(id: params[:id])
+        
+    end 
+
     private 
 
     def incident_params 
         
-        params.require(:incident).permit(:title, :description, :date, :image_url, :lat, :lng, :organization, :petition)
+        params.require(:incident).permit(:title, :description, :date, :image_url, :lat, :lng, :organization, :petition, :approve, :reject, :id)
     end 
 end

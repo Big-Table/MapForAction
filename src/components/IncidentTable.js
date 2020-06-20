@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { getIncidents } from '../requests/requests'
+import { getIncidents, approved } from '../requests/requests'
 
 const columns = [
   { id: 'title', label: 'Title', minWidth: 170 },
@@ -47,10 +47,13 @@ const columns = [
     label: 'Reject',
     minWidth: 100,
   },
+  {id: 'id', label: 'ID', minWidth: 100},
+
+ 
 ];
 
-function createData(title, description, date, location, organization, petition, image_url, approve, reject) {
-  return { title, description, date, location, organization, petition, image_url, approve, reject };
+function createData( title, description, date, location, organization, petition, image_url, approve, reject, id) {
+  return {title, description, date, location, organization, petition, image_url, approve, reject, id};
 }
 
 const rows = [
@@ -106,8 +109,25 @@ export default function StickyHeadTable() {
             .then(body => Setincidents(body))
   }, [])
 
-   
-  incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url)))
+  incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident.approve, incident.reject, incident.id)))
+
+  const approve = (id) => {
+    console.log('this was approved')
+    approved(id)
+  }
+
+  const reject = () => {
+    console.log('this was rejected')
+  }
+
+//   const hashOfIDS = () => {
+//       let hash = {}
+//       incidents.map(incident => {
+//           hash[incident.title] = incident.id
+//       })
+//       console.log(hash)
+//   }
+  let id = null
 
   return (
       
@@ -133,19 +153,22 @@ export default function StickyHeadTable() {
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
-                    console.log(value)
+                    if(column.id === 'id'){
+                        id = row[column.id]
+                    }
+                    console.log(id)
                     if(column.id === 'approve') {
                         return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number' ? column.format(value) : value}
-                              <button className={classes.button}>Approve</button>
+                              <button className={classes.button} onClick={()=> approve(id)}>Approve</button>
                             </TableCell>
                           );
                     } else if(column.id === 'reject'){
                         return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number' ? column.format(value) : value}
-                              <button className={classes.button}>Reject</button>
+                              <button className={classes.button} onClick={reject}>Reject</button>
                             </TableCell>
                           );
                     }
