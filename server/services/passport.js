@@ -3,7 +3,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("../config/keys");
 const mongoose = require("mongoose");
 
-const User = mongoose.model("users");
+const User = mongoose.model("User");
 
 //user is what is pulled out of Mongo database
 passport.serializeUser((user, done) => {

@@ -4,6 +4,13 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
 
+//models
+require("./models/Incident");
+require("./models/User");
+require("./models/Tweet");
+require("./models/Action");
+require("./services/passport");
+
 mongoose
   .connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected"))
@@ -28,6 +35,7 @@ app.use(passport.session());
 
 //routes
 require("./routes/authRoutes")(app);
+require("./routes/incidentRoutes")(app);
 
 //starting back-end on port 5000
 const PORT = process.env.PORT || 5000;
