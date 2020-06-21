@@ -36,6 +36,7 @@ app.use(passport.session());
 //routes
 require("./routes/authRoutes")(app);
 require("./routes/incidentRoutes")(app);
+require("./routes/actionRoutes")(app);
 
 //starting back-end on port 5000
 const PORT = process.env.PORT || 5000;
