@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+mongoose.set("useCreateIndex", true);
+const uniqueValidator = require("mongoose-unique-validator");
 const { Schema } = mongoose;
 
 const IncidentSchema = new Schema(
   {
-    title: String,
+    title: { type: String, unique: true },
     description: String,
     date: String,
     image_url: String,
@@ -17,4 +19,5 @@ const IncidentSchema = new Schema(
   }
 );
 
+IncidentSchema.plugin(uniqueValidator);
 mongoose.model("Incident", IncidentSchema);
