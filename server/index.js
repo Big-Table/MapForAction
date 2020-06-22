@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+var cors = require("cors");
 const keys = require("./config/keys");
 
 //models
@@ -17,6 +18,7 @@ mongoose
   .catch((err) => console.log(err));
 
 const app = express();
+app.use(cors());
 
 //cookie sessions for auth
 app.use(
@@ -34,6 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //routes
+//switch routes to Router
 require("./routes/authRoutes")(app);
 require("./routes/incidentRoutes")(app);
 require("./routes/actionRoutes")(app);
