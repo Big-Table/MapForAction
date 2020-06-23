@@ -39,7 +39,7 @@ const classes = useStyles()
         <div className={classes.root}>
             <h5 className={classes.span}>Pending Incidents for Moderator Approval</h5>
             <br></br>
-            <IncidentTable ></IncidentTable>
+            <IncidentTable incidents={props.incidents} ></IncidentTable>
             <div>
                 <CloseIcon
                     id="close-button"

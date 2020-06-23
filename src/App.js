@@ -110,7 +110,7 @@ class App extends React.Component {
             )}
             {this.state.incidentForm || this.state.grid && <div id="overlay"></div>}
             {this.state.grid && 
-              <IncidentQueueGrid grid={this.handleShowGrid}></IncidentQueueGrid>
+              <IncidentQueueGrid grid={this.handleShowGrid} incidents={this.state.incidents}></IncidentQueueGrid>
             }
           </FlexColumn>
           <FlexColumn

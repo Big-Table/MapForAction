@@ -7,7 +7,7 @@ class Map extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:3000/incidents")
+      .get("http://localhost:5000/incidents")
       .then((resp) => this.props.setIncidents(resp.data))
       .then(() => {
         const googleScript = document.createElement("script");

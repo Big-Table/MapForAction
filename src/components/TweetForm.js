@@ -12,7 +12,7 @@ class TweetForm extends React.Component {
 
   componentDidMount(){
     this.setState({
-        incident_id: this.props.incident.id
+        incident_id: this.props.incident._id
     })
   }
 
