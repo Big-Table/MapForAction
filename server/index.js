@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-var cors = require("cors");
+const cors = require("cors");
 const keys = require("./config/keys");
 
 //models
@@ -17,8 +17,13 @@ mongoose
   .then(() => console.log("Connected"))
   .catch((err) => console.log(err));
 
+//whitelist domains for cors
+const corsOptions = {
+  origin: ["http://localhost:5000", "http://localhost:3000"],
+};
+
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 
 //cookie sessions for auth
 app.use(
@@ -37,10 +42,10 @@ app.use(passport.session());
 
 //routes
 //switch routes to Router
-require("./routes/authRoutes")(app);
-require("./routes/incidentRoutes")(app);
-require("./routes/actionRoutes")(app);
-require("./routes/tweetRoutes")(app);
+app.use("/auth", require("./routes/authRoutes"));
+app.use("/incidents", require("./routes/incidentRoutes"));
+app.use("/actions", require("./routes/actionRoutes"));
+app.use("/tweets", require("./routes/tweetRoutes"));
 
 //starting back-end on port 5000
 const PORT = process.env.PORT || 5000;
