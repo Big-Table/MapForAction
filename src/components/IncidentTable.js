@@ -104,15 +104,15 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
-  const [incidents, Setincidents] = React.useState([])
+//   const [incidents, Setincidents] = React.useState([])
 
-  useEffect(() => {
-        getIncidents()
-            .then(body => Setincidents(body))
-  }, [])
+//   useEffect(() => {
+//         getIncidents()
+//             .then(body => Setincidents(body))
+//   }, [])
 
    
-  incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident._id, "", incident._id)))
+  props.incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident._id, "", incident._id)))
 
   return (
       
@@ -173,7 +173,7 @@ export default function StickyHeadTable(props) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={props.incidents.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
