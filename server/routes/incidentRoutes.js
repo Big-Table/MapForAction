@@ -115,6 +115,42 @@ router.get("/:id", async (req, res) => {
     res.status(400).json("Error:" + err);
   }
 });
+// title: { type: String, unique: true },
+// description: String,
+//   date: String,
+//     image_url: String,
+//       lat: String,
+//         lng: String,
+//           organization: String,
+//             petition: String,
+//               status: String
+
+
+router.patch('/:id', async (req, res) => {
+  const updates = Object.keys(req.body)
+  const allowedUpdates = ['title', 'description', 'date', 'image_url', 'lat', 'lng', 'organization', 'petition']
+  const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'Invalid updates.' })
+  }
+
+  try {
+    const incident = await Incident.findById(req.params.id)
+
+    updates.forEach((update) => incident[update] = req.body[update])
+
+    await incident.save()
+    // const incident = await incident.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+    if (!incident) {
+      return res.status(404).send()
+    }
+    res.send(incident)
+  } catch (e) {
+    res.status(400).send(e)
+  }
+
+})
 
 
 
