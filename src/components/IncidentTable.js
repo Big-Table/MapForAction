@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { getIncidents } from '../requests/requests'
+import { getPendingIncidents, patchApproveIncident, patchDenyIncident } from '../requests/requests'
 
 const columns = [
   { id: 'title', label: 'Title', minWidth: 170 },
@@ -47,15 +47,10 @@ const columns = [
     label: 'Reject',
     minWidth: 100,
   },
-  {
-    id: 'id',
-    label: 'ID',
-    minWidth: 100,
-  },
 ];
 
-function createData(title, description, date, location, organization, petition, image_url, approve, reject, id) {
-  return { title, description, date, location, organization, petition, image_url, approve, reject, id};
+function createData(title, description, date, location, organization, petition, image_url, approve, reject) {
+  return { title, description, date, location, organization, petition, image_url, approve, reject};
 }
 
 const rows = [
@@ -87,6 +82,10 @@ const useStyles = makeStyles({
     fontWeight: 700,
     cursor: "pointer",
     outline: "none"
+  }, 
+  image: {
+      height: 250,
+      width: 250
   }
 });
 
@@ -104,15 +103,22 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
-//   const [incidents, Setincidents] = React.useState([])
+  const [incidents, Setincidents] = React.useState([])
 
-//   useEffect(() => {
-//         getIncidents()
-//             .then(body => Setincidents(body))
-//   }, [])
+  useEffect(() => {
+        getPendingIncidents()
+            .then(body => Setincidents(body))
+  }, [])
 
+  const handleApprove = (id) => {
+    patchApproveIncident({_id: id})
+  }
+
+  const handleDeny = (id) => {
+    patchDenyIncident({_id: id})
+  }
    
-  props.incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident._id, "", incident._id)))
+  incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident._id, incident._id)))
 
   return (
       
@@ -138,21 +144,34 @@ export default function StickyHeadTable(props) {
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
-                    console.log(value)
                     
-                    
+                    if(column.id === 'image_url'){
+                        console.log(value)
+                        return (
+                           
+                            <TableCell key={column.id} align={column.align}>
+                                <img className={classes.image} src={value}></img>
+                            </TableCell>
+                        )
+                    }
                     if(column.id === 'approve') {
                         return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number' ? column.format(value) : value}
-                        <button onClick={() => console.log(value)}className={classes.button}>Approve</button>
+                                <button 
+                                className={classes.button}
+                                onClick={() => handleApprove(value)}
+                                >Approve</button>
                             </TableCell>
                           );
                     } else if(column.id === 'reject'){
                         return (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === 'number' ? column.format(value) : value}
-                              <button className={classes.button}>Reject</button>
+                              <button 
+                              className={classes.button}
+                              onClick={() => handleDeny(value)}
+                              >Reject</button>
                             </TableCell>
                           );
                     }
@@ -173,7 +192,7 @@ export default function StickyHeadTable(props) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={props.incidents.length}
+        count={incidents.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

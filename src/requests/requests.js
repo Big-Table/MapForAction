@@ -7,6 +7,12 @@ const parseData = (response) => response.json();
 //get to incidents
 export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData);
 
+// //get to approved incidents 
+// export const getApprovedIncidents = () => fetch(`${baseURL}/incidents/approved`).then(parseData)
+
+//get to pending incidents 
+export const getPendingIncidents = () => fetch(`${baseURL}/incidents/pending`).then(parseData)
+
 //get to incident with tweets AND actions --> NEED TO RENAME
 export const getIncidentWithTweets = (id) =>
   fetch(`${baseURL}/incidents/${id}`).then(parseData);
@@ -39,6 +45,29 @@ export const postActions = (data) =>
 export const postTweets = (data) =>
   fetch(`${baseURL}/tweets`, {
     method: "POST",
+    headers: {
+      "content-type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then(parseData);
+
+//patch to incidents approve
+
+export const patchApproveIncident = (data) => 
+    fetch(`${baseURL}/incidents/approve`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then(parseData);
+
+  //path to incidents deny
+  export const patchDenyIncident = (data) => 
+    fetch(`${baseURL}/incidents/deny`, {
+    method: "PATCH",
     headers: {
       "content-type": "application/json",
       accept: "application/json",

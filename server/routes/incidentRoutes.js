@@ -55,6 +55,7 @@ router.get("/approved", async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "approved"})
     res.json(incidents)
+    
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
