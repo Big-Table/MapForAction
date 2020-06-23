@@ -52,8 +52,11 @@ module.exports = (app) => {
   app.get("/incidents/:id", async (req, res) => {
     try {
       const incident = await Incident.findById(req.params.id);
-      const tweets = await Tweet.find({ _id: incident._id });
-      const actions = await Action.find({ _id: incident._id });
+      console.log(incident)
+      const tweets = await Tweet.find({ _incident: incident._id });
+      console.log(tweets)
+      const actions = await Action.find({ _incident: incident._id });
+      console.log(actions)
       res.json({ incident, tweets, actions });
     } catch (err) {
       res.status(400).json("Error:" + err);
