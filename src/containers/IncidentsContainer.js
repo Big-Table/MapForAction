@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Incident from "../components/Incident";
 import { makeStyles, Grow } from "@material-ui/core";
-import { getIncidents } from "../requests/requests.js";
 import FlexColumn from "../Theme/FlexColumn";
 import TextField from "@material-ui/core/TextField";
 
