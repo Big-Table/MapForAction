@@ -82,6 +82,7 @@ router.patch("/approve", async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id })
     incident.status = "approved"
+    incident.save()
     res.json(incident);
   } catch (err) {
     res.status(400).json("Error:" + err);
@@ -92,13 +93,12 @@ router.patch("/deny", async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id })
     incident.status = "denied"
+    incident.save()
     res.json(incident);
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
 })
-
-
 
 //incident twitter route, need to add
 //show route that also brings in all the tweets
@@ -108,8 +108,8 @@ router.patch("/deny", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const incident = await Incident.findById(req.params.id);
-    const tweets = await Tweet.find({ _id: incident._id });
-    const actions = await Action.find({ _id: incident._id });
+    const tweets = await Tweet.find({ _incident: incident._id });
+    const actions = await Action.find({ _incident: incident._id });
     res.json({ incident, tweets, actions });
   } catch (err) {
     res.status(400).json("Error:" + err);
