@@ -43,7 +43,7 @@ const ActionsContainer = props => {
     const classes = useStyles(props)
     const [actions, setActions] = useState([])
     useEffect(() => {
-        getIncidentWithTweets(props.incident.id)
+        getIncidentWithTweets(props.incident._id)
             .then(body => setActions(body.actions))
     }, [props.refresh])
 

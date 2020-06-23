@@ -9,7 +9,7 @@ import Map from "./components/Map";
 import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
 import AddQueueButton from "./components/AddQueueButton";
-import IncidentQueueGrid from './components/IncidentQueueGrid'
+import IncidentQueueGrid from "./components/IncidentQueueGrid";
 import Nav from "./Nav";
 import { getIncidents } from "./requests/requests.js";
 
@@ -23,7 +23,8 @@ class App extends React.Component {
       lat: 40.7278722,
       lng: -73.9572483,
     },
-    grid: false
+    currentUser: null,
+    grid: false,
   };
 
   componentDidMount() {
@@ -80,9 +81,9 @@ class App extends React.Component {
 
   handleShowGrid = () => {
     this.setState({
-      grid: !this.state.grid
-    })
-  }
+      grid: !this.state.grid,
+    });
+  };
 
   render() {
     return (
@@ -108,10 +109,14 @@ class App extends React.Component {
                 updateIncidents={this.updateIncidents}
               />
             )}
-            {this.state.incidentForm || this.state.grid && <div id="overlay"></div>}
-            {this.state.grid && 
-              <IncidentQueueGrid grid={this.handleShowGrid}></IncidentQueueGrid>
-            }
+            {this.state.incidentForm ||
+              (this.state.grid && <div id="overlay"></div>)}
+            {this.state.grid && (
+              <IncidentQueueGrid
+                grid={this.handleShowGrid}
+                incidents={this.state.incidents}
+              ></IncidentQueueGrid>
+            )}
           </FlexColumn>
           <FlexColumn
             style={{
@@ -120,7 +125,11 @@ class App extends React.Component {
               backgroundColor: "#000000",
             }}
           >
-            <Nav currentIncident={this.state.currentIncident} search={this.state.searchForm} updateForm={this.updateForm}/>
+            <Nav
+              currentIncident={this.state.currentIncident}
+              search={this.state.searchForm}
+              updateForm={this.updateForm}
+            />
             <br></br>
             <Switch>
               {/* Routes to different side pages go here */}

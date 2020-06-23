@@ -1,23 +1,17 @@
 import React, { Component, createRef } from "react";
 import mapStyles from "../Theme/mapStyles";
-import axios from "axios";
-import { getIncidents } from "../requests/requests";
 
 class Map extends Component {
   googleMapRef = createRef();
 
   componentDidMount() {
-    getIncidents()
-      .then((resp) => this.props.setIncidents(resp))
-      .then(() => {
-        const googleScript = document.createElement("script");
-        googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
-        window.document.body.appendChild(googleScript);
+    const googleScript = document.createElement("script");
+    googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
+    window.document.body.appendChild(googleScript);
 
-        googleScript.addEventListener("load", () => {
-          this.googleMap = this.createGoogleMap();
-        });
-      });
+    googleScript.addEventListener("load", () => {
+      this.googleMap = this.createGoogleMap();
+    });
   }
 
   componentDidUpdate(prevProps) {
