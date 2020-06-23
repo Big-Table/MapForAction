@@ -13,6 +13,7 @@ const IncidentSchema = new Schema(
     lng: String,
     organization: String,
     petition: String,
+    status: String
   },
   {
     timestamps: true,

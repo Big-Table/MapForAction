@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 router.post("/", async (req, res) => {
   const {
     title,
@@ -24,7 +25,7 @@ router.post("/", async (req, res) => {
     lat,
     lng,
     organization,
-    petition,
+    petition
   } = req.body;
 
   const newIncident = new Incident({
@@ -36,6 +37,7 @@ router.post("/", async (req, res) => {
     lng,
     organization,
     petition,
+    status: "pending"
   });
 
   try {
@@ -46,9 +48,62 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+
+// Approval
+router.get("/approved", async (req, res) => {
+  try {
+    const incidents = await Incident.find({ status: "approved"})
+    res.json(incidents)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.get("/pending", async (req, res) => {
+  try {
+    const incidents = await Incident.find({ status: "pending" })
+    res.json(incidents)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.get("/denied", async (req, res) => {
+  try {
+    const incidents = await Incident.find({ status: "denied" })
+    res.json(incidents)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.patch("/approve", async (req, res) => {
+  try {
+    let incident = await Incident.findOne({ _id: req.body._id })
+    incident.status = "approved"
+    res.json(incident);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.patch("/deny", async (req, res) => {
+  try {
+    let incident = await Incident.findOne({ _id: req.body._id })
+    incident.status = "denied"
+    res.json(incident);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+
+
 //incident twitter route, need to add
 //show route that also brings in all the tweets
 //and the actions related to incident
+
 
 router.get("/:id", async (req, res) => {
   try {
@@ -60,5 +115,7 @@ router.get("/:id", async (req, res) => {
     res.status(400).json("Error:" + err);
   }
 });
+
+
 
 module.exports = router;
