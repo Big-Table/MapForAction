@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import EditForm from './EditForm'
 import { getPendingIncidents, patchApproveIncident, patchDenyIncident } from '../requests/requests'
 
 const columns = [
@@ -47,13 +48,18 @@ const columns = [
     label: 'Reject',
     minWidth: 100,
   },
+  {
+    id: 'edit',
+    label: 'Edit',
+    minWidth: 100,
+  },
 ];
 
-function createData(title, description, date, location, organization, petition, image_url, approve, reject) {
-  return { title, description, date, location, organization, petition, image_url, approve, reject};
+function createData(title, description, date, location, organization, petition, image_url, approve, reject, edit) {
+  return { title, description, date, location, organization, petition, image_url, approve, reject, edit};
 }
 
-const rows = [
+let rows2 = [
 
 ];
 // #898989
@@ -103,12 +109,25 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
-  const [incidents, Setincidents] = React.useState([])
+  const [incidents, setIncidents] = React.useState([])
 
   useEffect(() => {
-        getPendingIncidents()
-            .then(body => Setincidents(body))
+      console.log('hi')
+    
+       getPendingIncidents()
+            .then(body => {
+                setIncidents(body)
+                let rows2 = []
+                body.forEach(incident => {
+                    console.log(incident)
+                    
+                    rows2.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident._id, incident._id, incident._id))
+                })
+                setRows(rows2)
+            })
+           
   }, [])
+
 
   const handleApprove = (id) => {
     patchApproveIncident({_id: id})
@@ -119,11 +138,20 @@ export default function StickyHeadTable(props) {
     patchDenyIncident({_id: id})
 
   }
-   
-  incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident._id, incident._id)))
 
+  const [editForm, setEditForm] = useState(false)
+
+  const handleEditForm = () => {
+    setEditForm(!editForm)
+  }
+
+  const [rows, setRows] = useState([])
+   
+
+  
   return (
-      
+      <>
+      {editForm && <EditForm edit={handleEditForm}></EditForm>}
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
@@ -141,16 +169,25 @@ export default function StickyHeadTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.length > 0 && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
+
+                    if(column.id === 'edit'){
+                        return (
+                            <TableCell key={column.id} align={column.align}>
+                                <button 
+                                 className={classes.button}
+                                 onClick={handleEditForm}>
+                                Edit</button>
+                            </TableCell>
+                        )
+                    }
                     
                     if(column.id === 'image_url'){
-                        console.log(value)
                         return (
-                           
                             <TableCell key={column.id} align={column.align}>
                                 <img className={classes.image} src={value}></img>
                             </TableCell>
@@ -201,5 +238,6 @@ export default function StickyHeadTable(props) {
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Paper>
+    </>
   );
 }
