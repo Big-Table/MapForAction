@@ -6,6 +6,7 @@ const ActionSchema = new Schema(
     title: String,
     action_type: String,
     url: String,
+    status: String,
     _incident: { type: Schema.Types.ObjectId, ref: "Incident" },
   },
   {
