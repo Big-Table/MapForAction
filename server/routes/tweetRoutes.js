@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
 
   const newTweet = new Tweet({
     url,
+    status: "pending",
     _incident: incident_id,
   });
 
@@ -29,4 +30,53 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Approval
+router.get("/approved", async (req, res) => {
+  try {
+    const tweets = await Tweet.find({ status: "approved" })
+    res.json(tweets)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.get("/pending", async (req, res) => {
+  try {
+    const tweets = await Tweet.find({ status: "pending" })
+    res.json(tweets)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.get("/denied", async (req, res) => {
+  try {
+    const tweets = await Tweet.find({ status: "denied" })
+    res.json(tweets)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.patch("/approve", async (req, res) => {
+  try {
+    let tweet = await Tweet.findOne({ _id: req.body._id })
+    tweet.status = "approved"
+    tweet.save()
+    res.json(tweet);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.patch("/deny", async (req, res) => {
+  try {
+    let tweet = await Tweet.findOne({ _id: req.body._id })
+    tweet.status = "denied"
+    tweet.save()
+    res.json(tweet);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
 module.exports = router;
