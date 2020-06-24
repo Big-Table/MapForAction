@@ -115,15 +115,6 @@ router.get("/:id", async (req, res) => {
     res.status(400).json("Error:" + err);
   }
 });
-// title: { type: String, unique: true },
-// description: String,
-//   date: String,
-//     image_url: String,
-//       lat: String,
-//         lng: String,
-//           organization: String,
-//             petition: String,
-//               status: String
 
 
 router.patch('/:id', async (req, res) => {
