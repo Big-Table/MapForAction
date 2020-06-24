@@ -5,10 +5,10 @@ const parseData = (response) => response.json();
 //GET REQUESTS
 
 //get to incidents
-export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData);
+// export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData);
 
-// //get to approved incidents 
-// export const getApprovedIncidents = () => fetch(`${baseURL}/incidents/approved`).then(parseData)
+//get to approved incidents 
+export const getApprovedIncidents = () => fetch(`${baseURL}/incidents/approved`).then(parseData)
 
 //get to pending incidents 
 export const getPendingIncidents = () => fetch(`${baseURL}/incidents/pending`).then(parseData)
@@ -64,7 +64,7 @@ export const patchApproveIncident = (data) =>
     body: JSON.stringify(data),
   }).then(parseData);
 
-  //path to incidents deny
+  //patch to incidents deny
   export const patchDenyIncident = (data) => 
     fetch(`${baseURL}/incidents/deny`, {
     method: "PATCH",

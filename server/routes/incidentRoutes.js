@@ -6,14 +6,14 @@ const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
 const Action = mongoose.model("Action");
 
-router.get("/", async (req, res) => {
-  try {
-    const incidents = await Incident.find();
-    res.json(incidents);
-  } catch (err) {
-    res.status(400).json("Error:" + err);
-  }
-});
+// router.get("/", async (req, res) => {
+//   try {
+//     const incidents = await Incident.find();
+//     res.json(incidents);
+//   } catch (err) {
+//     res.status(400).json("Error:" + err);
+//   }
+// });
 
 
 router.post("/", async (req, res) => {
@@ -100,6 +100,7 @@ router.patch("/deny", async (req, res) => {
     res.status(400).json("Error:" + err);
   }
 })
+
 
 //incident twitter route, need to add
 //show route that also brings in all the tweets

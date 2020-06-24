@@ -72,20 +72,19 @@ const IncidentDetailContainer = (props) => {
         
       <Paper className={classes.paper}>
         <Card>
-          {formState ? <>
+          {formState ?
+          <>
             <IncidentDetails key={props.id} {...props} tweetButton={handleTweet} actionButton={handleClick} />
             <div className={classes.container}>
-              {tweetState ? 
+              {tweetState &&
                 <TweetForm incident={props.incident} tweetButton={handleTweet}></TweetForm> 
-                : 
-                null
               }
               <TwitterContainer tweetButton={handleTweet} incident={props.incident}  />
             </div>
-          </> : <ActionsContainer refresh={handleRefresh} incident={props.incident} />}
-          
-          {/* <Actions/> */}
-          {/* <ActionsContainer incident={props.incident}/> */}
+          </> 
+          : 
+          <ActionsContainer refresh={handleRefresh} incident={props.incident} />
+          }
         </Card>
       </Paper>
     </FlexColumn>

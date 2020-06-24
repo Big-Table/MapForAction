@@ -11,7 +11,7 @@ import AddIncidentButton from "./components/AddIncidentButton";
 import AddQueueButton from "./components/AddQueueButton";
 import IncidentQueueGrid from './components/IncidentQueueGrid'
 import Nav from "./Nav";
-import { getIncidents } from "./requests/requests.js";
+import { getApprovedIncidents } from "./requests/requests.js";
 
 class App extends React.Component {
   state = {
@@ -30,9 +30,9 @@ class App extends React.Component {
     this.updateIncidents();
   }
 
-  updateIncidents = () =>
-    getIncidents().then((incidents) => this.setIncidents(incidents));
-
+  updateIncidents = () => {
+    getApprovedIncidents().then((incidents) => this.setIncidents(incidents));
+  }
   handleShowForm = () => {
     this.setState({ incidentForm: !this.state.incidentForm });
   };
@@ -84,7 +84,10 @@ class App extends React.Component {
     })
   }
 
+ 
+
   render() {
+    console.log(this.state.incidents)
     return (
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>

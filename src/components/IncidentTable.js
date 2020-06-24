@@ -112,10 +112,12 @@ export default function StickyHeadTable(props) {
 
   const handleApprove = (id) => {
     patchApproveIncident({_id: id})
+  
   }
 
   const handleDeny = (id) => {
     patchDenyIncident({_id: id})
+
   }
    
   incidents.map(incident => rows.push(createData(incident.title, incident.description, incident.date, incident.location, incident.organization, incident.petition, incident.image_url, incident._id, incident._id)))

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {makeStyles} from '@material-ui/core'
 import CloseIcon from "@material-ui/icons/Close";
 import IncidentTable from './IncidentTable'
@@ -33,6 +33,7 @@ const useStyles = makeStyles({
 function IncidentQueueGrid(props){
 
 const classes = useStyles()
+
 
 
     return(
