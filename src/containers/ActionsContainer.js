@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core'
 import TakeActionIcon from '../svgs/TakeActionIcon'
-import { getIncidentWithTweets } from '../requests/requests'
+import { getApprovedActions } from '../requests/requests'
 import ActionForm from '../components/ActionForm'
 import AddActionButton from '../components/AddActionButton'
 const useStyles = makeStyles({
@@ -43,8 +43,11 @@ const ActionsContainer = props => {
     const classes = useStyles(props)
     const [actions, setActions] = useState([])
     useEffect(() => {
-        getIncidentWithTweets(props.incident._id)
-            .then(body => setActions(body.actions))
+        getApprovedActions(props.incident._id)
+            .then(body => {
+                let filter = body.filter(action => action._incident === props.incident._id)
+                setActions(filter)
+            })
     }, [props.refresh])
 
     const renderSuggestedActions = () => {
