@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import EditForm from './EditForm'
-import { getPendingIncidents, patchApproveIncident, patchDenyIncident } from '../requests/requests'
+import { getPendingIncidents, patchApproveIncident, patchDenyIncident, patchDenyTweet } from '../requests/requests'
 
 const columns = [
   { id: 'title', label: 'Title', minWidth: 170 },
@@ -126,16 +126,18 @@ export default function StickyHeadTable(props) {
                 setRows(rows2)
             })
            
-  }, [props.update])
-
+  }, [props.update, props.approve])
 
   const handleApprove = (id) => {
     patchApproveIncident({_id: id})
-  
+    props.approve()
+    alert("this has been approved")
   }
 
   const handleDeny = (id) => {
     patchDenyIncident({_id: id})
+    props.approve()
+    alert("this has been denied")
 
   }
 

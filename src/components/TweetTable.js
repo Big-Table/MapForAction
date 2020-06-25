@@ -99,16 +99,18 @@ export default function StickyHeadTable(props) {
                     })
                     setRows(rows2)
                 })
-            }, [props.update])
+            }, [props.update, props.approve])
   
 
   const handleApprove = (id) => {
     patchApproveTweet({_id: id})
+    props.approve()
     alert("This has been approved")
   }
 
   const handleDeny = (id) => {
     patchDenyTweet({_id: id})
+    props.approve()
     alert("This has been rejected")
   }
 
