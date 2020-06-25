@@ -34,8 +34,12 @@ const TwitterContainer = props => {
     const [tweets, setTweets] = useState([])
  
     useEffect(() => {
-        getIncidentWithTweets(props.incident.id)
-        .then(body => setTweets(body.tweets))
+        getIncidentWithTweets(props.incident._id)
+        .then(body => {
+            console.log(body)
+            setTweets(body.tweets)
+            
+        })
     }, [props.tweetButton])
 
     const renderTweets = () => {
@@ -46,7 +50,7 @@ const TwitterContainer = props => {
             })
         }
     
-    
+    console.log(tweets)
     return(
         <div className={classes.root}>
             <span className={classes.logo}><TwitterIcon /></span> Tweets
