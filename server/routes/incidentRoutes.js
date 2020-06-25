@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const { Router } = require("react-router-dom");
+
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
@@ -143,6 +146,67 @@ router.patch('/:id', async (req, res) => {
 
 })
 
+//multer options
+//dest = destination folder for file upload
+const upload = multer({
+  limits: {
+    fileSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    //uses regex to only allow png, jpg, jpeg
+    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
+      cb(new Error('Please upload an image.'))
+    } 
+    
+    //accepts the upload
+    cb(undefined, true)
+  }
+})
+//multer upload image route
+//will have to add our auth middleware to this right before the multer middleware
+//provide id in body. 
+router.post('/upload', upload.single('upload'), async (req, res) => {
+  try {
+    const incident = await Incident.findById(req.body.id)
+    incident.image = req.file.buffer
+    incident.save()
+    res.send()
+  } catch (e){
+    res.status(400).send(e)
+  }
+}, (error, req, res, next) => {
+  res.status(400).send({error: error.message})
+})
+
+router.delete('/upload', async (req, res) => {
+  try {
+    const incident = await Incident.findById(req.body.id)
+    incident.image = undefined
+    incident.save()
+    res.send()
+  } catch (e) {
+    res.status(400).send(e)
+  }
+})
+
+//serve up the image
+router.get('/:id/image', async (req, res) => {
+
+  try{ 
+    const incident = await Incident.findById(req.params.id)
+
+    if (!incident || !incident.image) {
+      throw new Error()
+    }
+
+    //tell them it is a png or jpg or jpeg
+    //response header, use set
+    res.set('Content-Type', 'image/png')
+    res.send(incident.image)
+  } catch(e) {
+    res.status(404).send()
+  }
+})
 
 
 module.exports = router;
