@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { Router } = require("react-router-dom");
+const sharp = require("sharp");
 
 
 const Incident = mongoose.model("Incident");
@@ -11,7 +11,7 @@ const Action = mongoose.model("Action");
 
 router.get("/", async (req, res) => {
   try {
-    const incidents = await Incident.find();
+    const incidents = await Incident.find({}, {image: 0});
     res.json(incidents);
   } catch (err) {
     res.status(400).json("Error:" + err);
@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
 // Approval
 router.get("/approved", async (req, res) => {
   try {
-    const incidents = await Incident.find({ status: "approved"})
+    const incidents = await Incident.find({ status: "approved" }, { image: 0 })
     res.json(incidents)
   } catch (err) {
     res.status(400).json("Error:" + err);
@@ -65,7 +65,7 @@ router.get("/approved", async (req, res) => {
 
 router.get("/pending", async (req, res) => {
   try {
-    const incidents = await Incident.find({ status: "pending" })
+    const incidents = await Incident.find({ status: "pending" }, { image: 0 })
     res.json(incidents)
   } catch (err) {
     res.status(400).json("Error:" + err);
@@ -74,7 +74,7 @@ router.get("/pending", async (req, res) => {
 
 router.get("/denied", async (req, res) => {
   try {
-    const incidents = await Incident.find({ status: "denied" })
+    const incidents = await Incident.find({ status: "denied" }, { image: 0 })
     res.json(incidents)
   } catch (err) {
     res.status(400).json("Error:" + err);
@@ -86,6 +86,7 @@ router.patch("/approve", async (req, res) => {
     let incident = await Incident.findOne({ _id: req.body._id })
     incident.status = "approved"
     incident.save()
+    delete incidents.image
     res.json(incident);
   } catch (err) {
     res.status(400).json("Error:" + err);
@@ -110,7 +111,7 @@ router.patch("/deny", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const incident = await Incident.findById(req.params.id);
+    const incident = await Incident.findById(req.params.id, { image: 0 });
     const tweets = await Tweet.find({ _incident: incident._id });
     const actions = await Action.find({ _incident: incident._id });
     res.json({ incident, tweets, actions });
@@ -150,7 +151,7 @@ router.patch('/:id', async (req, res) => {
 //dest = destination folder for file upload
 const upload = multer({
   limits: {
-    fileSize: 1000000,
+    fileSize: 3000000,
   },
   fileFilter(req, file, cb) {
     //uses regex to only allow png, jpg, jpeg
@@ -165,10 +166,12 @@ const upload = multer({
 //multer upload image route
 //will have to add our auth middleware to this right before the multer middleware
 //provide id in body. 
+//uses sharp to resize image and change it into a png
 router.post('/upload', upload.single('upload'), async (req, res) => {
   try {
     const incident = await Incident.findById(req.body.id)
-    incident.image = req.file.buffer
+    const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500}).png().toBuffer()
+    incident.image = buffer
     incident.save()
     res.send()
   } catch (e){
