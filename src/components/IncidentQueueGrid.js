@@ -9,6 +9,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TweetTable from './TweetTable'
+import ActionTable from './ActionTable'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,6 +67,12 @@ const handleUpdateTweets = () => {
     setUpdateTweets(!updateTweets)
 }
 
+//updating whats been edited on the action upon submit
+const [updateActions, setUpdateActions] = useState(false)
+
+const handleUpdateActions = () => {
+    setUpdateActions(!updateActions)
+}
 
 //setting the type shown; incidents, tweets, or actions
 const [type, setType] = React.useState('');
@@ -79,7 +87,7 @@ console.log(type)
         <div className={classes.root}>
             {type === 'incidents' &&  <IncidentTable update={handleUpdate} ></IncidentTable>}
            
-            {type === 'actions' }
+            {type === 'actions' && <ActionTable update={handleUpdateActions}></ActionTable>}
 
             {type === 'tweets' && <TweetTable update={handleUpdateTweets}></TweetTable>}
 

@@ -19,6 +19,12 @@ export const getApprovedTweets = () => fetch(`${baseURL}/tweets/approved`).then(
 //get to pending tweets 
 export const getPendingTweets = () => fetch(`${baseURL}/tweets/pending`).then(parseData)
 
+//get to approved actions
+export const getApprovedActions = () => fetch(`${baseURL}/actions/approved`).then(parseData) 
+
+//get to pending actions
+export const getPendingActions = () => fetch(`${baseURL}/actions/pending`).then(parseData)
+
 //get to incident with tweets AND actions --> NEED TO RENAME
 export const getIncidentWithTweets = (id) =>
   fetch(`${baseURL}/incidents/${id}`).then(parseData);
@@ -57,6 +63,9 @@ export const postTweets = (data) =>
     },
     body: JSON.stringify(data),
   }).then(parseData);
+
+
+//PATCH REQUESTS 
 
 //patch to incidents approve
 
@@ -117,6 +126,39 @@ export const patchApproveIncident = (data) =>
   //patch to tweets 
   export const patchTweet = (data, id) => 
   fetch(`${baseURL}/tweets/${id}`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then(parseData);
+
+   //patch to actions approve 
+   export const patchApproveAction = (data) => 
+   fetch(`${baseURL}/actions/approve`, {
+   method: "PATCH",
+   headers: {
+     "content-type": "application/json",
+     accept: "application/json",
+   },
+   body: JSON.stringify(data),
+ }).then(parseData);
+
+  //patch to actions deny
+  export const patchDenyAction = (data) => 
+    fetch(`${baseURL}/actions/deny`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then(parseData);
+
+  //patch to actions 
+  export const patchAction = (data, id) => 
+  fetch(`${baseURL}/actions/${id}`, {
     method: "PATCH",
     headers: {
       "content-type": "application/json",

@@ -3,15 +3,7 @@ import "./IncidentForm.css";
 import { patchTweet } from "../requests/requests";
 import CloseIcon from "@material-ui/icons/Close";
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
-// const incidentFormInitialState = {
-//   title: "",
-//   description: "",
-//   lat: "",
-//   lng: "",
-//   organization: "",
-//   petition: "",
-//   image_url: "",
-// };
+
 
 class IncidentForm extends React.Component {
  
@@ -49,26 +41,6 @@ class IncidentForm extends React.Component {
         alert("you updated this tweet")
       })
   }
-
-//   async handleSubmit(e){
-//       e.preventDefault()
-//       await patchIncident(
-//           {
-//           title: this.state.title, 
-//           description: this.state.description,
-//           date: this.state.date, 
-//           organization: this.state.organization,
-//           petition: this.state.petition, 
-//           image_url: this.state.image_url
-//           }, 
-//           this.state.id)
-//           .then(() => {
-//             this.props.update()
-//             alert("you updated this incident")
-//           })
-
-     
-//   }
 
   render() {
     console.log(this.props)
