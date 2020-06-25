@@ -58,6 +58,7 @@ router.get("/approved", async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "approved" }, { image: 0 })
     res.json(incidents)
+    
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
@@ -103,6 +104,7 @@ router.patch("/deny", async (req, res) => {
     res.status(400).json("Error:" + err);
   }
 })
+
 
 //incident twitter route, need to add
 //show route that also brings in all the tweets

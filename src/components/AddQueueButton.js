@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core'
- 
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles({
     root: {
         position: "absolute",
@@ -25,8 +25,8 @@ const AddQueueButton = props => {
     const classes = useStyles(props)
 
     return (
-        <button className={classes.root} onClick={props.onClick}>
-            + Approve Incidents
+        <button className={classes.root}>
+            <Link to='/moderator'>Go to approval page</Link>
         </button>
     )
 }
