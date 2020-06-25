@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core'
 import Tweet from '../components/Tweet'
 import "./TwitterContainer.css";
 import TwitterIcon from '@material-ui/icons/Twitter';
-import { getIncidentWithTweets } from '../requests/requests'
+import { getIncidentWithTweets, getApprovedTweets } from '../requests/requests'
 
 const useStyles = makeStyles({
     root: {
@@ -34,10 +34,12 @@ const TwitterContainer = props => {
     const [tweets, setTweets] = useState([])
  
     useEffect(() => {
-        getIncidentWithTweets(props.incident._id)
+        console.log(props.incident)
+        getApprovedTweets(props.incident._id)
         .then(body => {
             console.log(body)
-            setTweets(body.tweets)
+            let filter = body.filter(tweet => tweet._incident === props.incident._id)
+            setTweets(filter)
             
         })
     }, [props.tweetButton])

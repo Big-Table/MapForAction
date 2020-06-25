@@ -83,4 +83,31 @@ router.patch("/deny", async (req, res) => {
   }
 })
 
+router.patch('/:id', async (req, res) => {
+  const updates = Object.keys(req.body)
+  const allowedUpdates = ['title', 'action_type', 'url']
+  const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'Invalid updates.' })
+  }
+
+  try {
+    const action = await Action.findById(req.params.id)
+
+    updates.forEach((update) => action[update] = req.body[update])
+
+    await action.save()
+   
+    if (!action) {
+      return res.status(404).send()
+    }
+    res.send(action)
+  } catch (e) {
+    res.status(400).send(e)
+  }
+
+})
+
 module.exports = router;
+

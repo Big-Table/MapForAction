@@ -80,6 +80,20 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
+          <label htmlFor="date">
+            Date<span className="required">*</span>
+          </label>
+          <input
+            id="dateInput"
+            name="date"
+            type="date"
+            rows="5"
+            placeholder="Date"
+            aria-describedby="required-date"
+            value={this.state.date}
+            onChange={this.handleChange}
+          />
+
           <label htmlFor="lat">
             Location<span className="required">*</span>
           </label>
