@@ -61,6 +61,14 @@ class IncidentForm extends React.Component {
           image_url: this.state.image_url
           }, 
           this.state.id)
+          .then(() => {
+            this.props.update()
+            alert("you updated this incident")
+          })
+          
+          
+    
+      
      
   }
 

@@ -70,7 +70,7 @@ const useStyles = makeStyles({
     color: 'white'
   },
   container: {
-    maxHeight: 700,
+    maxHeight: 650,
   },
   header: {
       backgroundColor: 'black'
@@ -126,7 +126,7 @@ export default function StickyHeadTable(props) {
                 setRows(rows2)
             })
            
-  }, [])
+  }, [props.update])
 
 
   const handleApprove = (id) => {
@@ -151,11 +151,15 @@ export default function StickyHeadTable(props) {
 
   const [rows, setRows] = useState([])
    
+//   const [update, setUpdate] = useState(false)
 
+//   const handleUpdate = () => {
+//       setUpdate(!update)
+//   }
   
   return (
       <>
-      {editForm && <EditForm edit={handleEditForm} incident={incident}></EditForm>}
+      {editForm && <EditForm update={props.update} edit={handleEditForm} incident={incident}></EditForm>}
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">

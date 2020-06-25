@@ -3,7 +3,14 @@ import {Link} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core'
 import CloseIcon from "@material-ui/icons/Close";
 import IncidentTable from './IncidentTable'
-const useStyles = makeStyles({
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import TweetTable from './TweetTable'
+
+const useStyles = makeStyles((theme) => ({
     root: {
         position: 'absolute',
         textAlign: 'left',
@@ -26,22 +33,74 @@ const useStyles = makeStyles({
     span: {
         fontSize: '20px', 
         textAlign: 'center'
-    }
-})
+    }, 
+    inline: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+      },
+      selectEmpty: {
+        marginTop: theme.spacing(2),
+      },
+}))
 
 function IncidentQueueGrid(props){
 
 const classes = useStyles()
 
+//updating whats been edited on the incident upon submit
+const [update, setUpdate] = useState(false)
 
+const handleUpdate = () => {
+    setUpdate(!update)
+}
+
+//updating whats been edited on the tweet upon submit
+const [updateTweets, setUpdateTweets] = useState(false)
+
+const handleUpdateTweets = () => {
+    setUpdateTweets(!updateTweets)
+}
+
+
+//setting the type shown; incidents, tweets, or actions
+const [type, setType] = React.useState('');
+
+const handleChange = (event) => {
+  setType(event.target.value);
+};
+
+console.log(type)
 
     return(
         <div className={classes.root}>
-            <IncidentTable incidents={props.incidents} ></IncidentTable>
+            {type === 'incidents' &&  <IncidentTable update={handleUpdate} ></IncidentTable>}
+           
+            {type === 'actions' }
+
+            {type === 'tweets' && <TweetTable update={handleUpdateTweets}></TweetTable>}
+
             <div>
-             
-            <button className={classes.closeButton}><Link to='/'>Back to Main Page</Link></button>
-            
+             <div className={classes.inline}>
+                <button className={classes.closeButton}><Link to='/'>Back to Main Page</Link>
+                </button>
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="selectionType">Type to Approve</InputLabel>
+                    <Select
+                    labelId="selectionType"
+                    id="selectionType"
+                    value={type}
+                    onChange={handleChange}
+                    >
+                    <MenuItem value={"incidents"}>Incidents</MenuItem>
+                    <MenuItem value={"tweets"}>Tweets</MenuItem>
+                    <MenuItem value={"actions"}>Actions</MenuItem>
+                    </Select>
+                </FormControl>
+             </div>
             </div>
 
         </div>
