@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
     title,
     action_type,
     url,
+    status: "pending",
     _incident: incident_id,
   });
 
@@ -31,4 +32,82 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+// Approval
+router.get("/approved", async (req, res) => {
+  try {
+    const actions = await Action.find({ status: "approved" })
+    res.json(actions)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.get("/pending", async (req, res) => {
+  try {
+    const actions = await Action.find({ status: "pending" })
+    res.json(actions)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.get("/denied", async (req, res) => {
+  try {
+    const actions = await Action.find({ status: "denied" })
+    res.json(actions)
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.patch("/approve", async (req, res) => {
+  try {
+    let action = await Action.findOne({ _id: req.body._id })
+    action.status = "approved"
+    action.save()
+    res.json(action);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.patch("/deny", async (req, res) => {
+  try {
+    let action = await Action.findOne({ _id: req.body._id })
+    action.status = "denied"
+    action.save()
+    res.json(action);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+})
+
+router.patch('/:id', async (req, res) => {
+  const updates = Object.keys(req.body)
+  const allowedUpdates = ['title', 'action_type', 'url']
+  const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'Invalid updates.' })
+  }
+
+  try {
+    const action = await Action.findById(req.params.id)
+
+    updates.forEach((update) => action[update] = req.body[update])
+
+    await action.save()
+   
+    if (!action) {
+      return res.status(404).send()
+    }
+    res.send(action)
+  } catch (e) {
+    res.status(400).send(e)
+  }
+
+})
+
 module.exports = router;
+

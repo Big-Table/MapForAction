@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import React from "react";
 import Incident from "../components/Incident";
-import { makeStyles, Grow } from "@material-ui/core";
-import FlexColumn from "../Theme/FlexColumn";
-import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles({
   container: {
