@@ -19,7 +19,7 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/currentUser", (req, res) => {
-  res.send(req.user);
+  res.json(req.user);
 });
 
 module.exports = router;

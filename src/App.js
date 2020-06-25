@@ -11,7 +11,9 @@ import AddIncidentButton from "./components/AddIncidentButton";
 import AddQueueButton from "./components/AddQueueButton";
 import IncidentQueueGrid from "./components/IncidentQueueGrid";
 import Nav from "./Nav";
-import { getIncidents } from "./requests/requests.js";
+import { getIncidents, getCurrentUser } from "./requests/requests.js";
+
+import axios from "axios";
 
 class App extends React.Component {
   state = {
@@ -29,7 +31,25 @@ class App extends React.Component {
 
   componentDidMount() {
     this.updateIncidents();
+    this.updateCurrentUser();
   }
+
+  updateCurrentUser = async () => {
+    let user = await axios.get("/auth/currentUser", {
+      withCredentials: true,
+    });
+
+    this.setState({
+      ...this.state,
+      currentUser: user.data,
+    });
+  };
+
+  // updateCurrentUser = () => {
+  //   getCurrentUser().then((user) => {
+  //     console.log(user);
+  //   });
+  // };
 
   updateIncidents = () =>
     getIncidents().then((incidents) => this.setIncidents(incidents));
@@ -129,6 +149,7 @@ class App extends React.Component {
               currentIncident={this.state.currentIncident}
               search={this.state.searchForm}
               updateForm={this.updateForm}
+              currentUser={this.state.currentUser}
             />
             <br></br>
             <Switch>

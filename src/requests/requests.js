@@ -7,9 +7,13 @@ const parseData = (response) => response.json();
 //get to incidents
 export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData);
 
-//get to incident with tweets AND actions --> NEED TO RENAME
+//get to incident (with actions and tweets)
 export const getIncidentWithTweets = (id) =>
   fetch(`${baseURL}/incidents/${id}`).then(parseData);
+
+//get to current user
+export const getCurrentUser = () =>
+  fetch(`${baseURL}/auth/currentUser`).then(parseData);
 
 //POST REQUESTS
 

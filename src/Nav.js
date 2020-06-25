@@ -58,7 +58,7 @@ const NavBar = (props) => {
           </div>
           <div className={classes.right}>
             <span>
-              <PopperMenu />
+              <PopperMenu currentUser={props.currentUser} />
             </span>
           </div>
         </div>
