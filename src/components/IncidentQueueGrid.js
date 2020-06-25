@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core'
 import CloseIcon from "@material-ui/icons/Close";
 import IncidentTable from './IncidentTable'
@@ -7,22 +8,20 @@ const useStyles = makeStyles({
         position: 'absolute',
         textAlign: 'left',
         /* margin: 2px; */
-        width: '75%',
-        height: '85%',
+        width: '100%',
+        height: '100%',
         backgroundColor: '#fcc42c',
-        padding: '20px',
-        top: '60px',
-        left: '10%',
+        // padding: '20px',
+        left: '0%',
         zIndex: 10
         /* max-width: 50vh; */
         /* top: 25%;
         bottom: 25% */
     }, 
     closeButton: {
-        position: 'absolute',
-        top: '20px',
-        right: '30px',
-        zIndex: 15
+      
+        color: 'black',
+       backgroundColor: 'black'
     }, 
     span: {
         fontSize: '20px', 
@@ -38,15 +37,11 @@ const classes = useStyles()
 
     return(
         <div className={classes.root}>
-            <h5 className={classes.span}>Pending Incidents for Moderator Approval</h5>
-            <br></br>
             <IncidentTable incidents={props.incidents} ></IncidentTable>
             <div>
-                <CloseIcon
-                    id="close-button"
-                    onClick={props.grid}
-                    style={{ cursor: "pointer" }}
-                />
+             
+            <button className={classes.closeButton}><Link to='/'>Back to Main Page</Link></button>
+            
             </div>
 
         </div>

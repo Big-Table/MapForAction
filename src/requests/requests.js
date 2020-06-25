@@ -74,3 +74,14 @@ export const patchApproveIncident = (data) =>
     },
     body: JSON.stringify(data),
   }).then(parseData);
+
+  //patch to incidents 
+  export const patchIncident = (data, id) => 
+  fetch(`${baseURL}/incidents/${id}`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then(parseData);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import IncidentsContainer from "./containers/IncidentsContainer";
 import IncidentDetailContainer from "./containers/IncidentDetailContainer";
@@ -90,6 +90,7 @@ class App extends React.Component {
     console.log(this.state.incidents)
     return (
       <Router>
+        
         <FlexRow style={{ backgroundColor: "black" }}>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
             {/* Map goes here */}
@@ -103,7 +104,8 @@ class App extends React.Component {
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
               <AddIncidentButton onClick={this.handleShowForm} />
-              <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton>
+              <AddQueueButton></AddQueueButton>
+              {/* <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton> */}
             </div>
             {this.state.incidentForm && (
               <IncidentForm
@@ -111,10 +113,10 @@ class App extends React.Component {
                 updateIncidents={this.updateIncidents}
               />
             )}
-            {this.state.incidentForm || this.state.grid && <div id="overlay"></div>}
-            {this.state.grid && 
+            {this.state.incidentForm && <div id="overlay"></div>}
+            {/* {this.state.grid && 
               <IncidentQueueGrid grid={this.handleShowGrid} incidents={this.state.incidents}></IncidentQueueGrid>
-            }
+            } */}
           </FlexColumn>
           <FlexColumn
             style={{
@@ -128,7 +130,7 @@ class App extends React.Component {
             <Switch>
               {/* Routes to different side pages go here */}
               <Route
-                path="/"
+                exact path="/"
                 render={(routerProps) =>
                   this.state.currentIncident ? (
                     <IncidentDetailContainer
@@ -147,7 +149,21 @@ class App extends React.Component {
                   )
                 }
               />
+
+              <Route 
+                path="/moderator"
+                render={(routerProps) => 
+                  <IncidentQueueGrid 
+                    {...routerProps}
+                    incidents={this.state.incidents}
+                  />
+                 
+                }
+              />
+                
+            
             </Switch>
+
           </FlexColumn>
         </FlexRow>
       </Router>
