@@ -4,20 +4,18 @@ const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
 
-
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
 const Action = mongoose.model("Action");
 
 router.get("/", async (req, res) => {
   try {
-    const incidents = await Incident.find({}, {image: 0});
+    const incidents = await Incident.find({}, { image: 0 });
     res.json(incidents);
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
 });
-
 
 router.post("/", async (req, res) => {
   const {
@@ -28,7 +26,7 @@ router.post("/", async (req, res) => {
     lat,
     lng,
     organization,
-    petition
+    petition,
   } = req.body;
 
   const newIncident = new Incident({
@@ -40,7 +38,7 @@ router.post("/", async (req, res) => {
     lng,
     organization,
     petition,
-    status: "pending"
+    status: "pending",
   });
 
   try {
@@ -51,65 +49,60 @@ router.post("/", async (req, res) => {
   }
 });
 
-
-
 // Approval
 router.get("/approved", async (req, res) => {
   try {
-    const incidents = await Incident.find({ status: "approved" }, { image: 0 })
-    res.json(incidents)
-    
+    const incidents = await Incident.find({ status: "approved" }, { image: 0 });
+    res.json(incidents);
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
-})
+});
 
 router.get("/pending", async (req, res) => {
   try {
-    const incidents = await Incident.find({ status: "pending" }, { image: 0 })
-    res.json(incidents)
+    const incidents = await Incident.find({ status: "pending" }, { image: 0 });
+    res.json(incidents);
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
-})
+});
 
 router.get("/denied", async (req, res) => {
   try {
-    const incidents = await Incident.find({ status: "denied" }, { image: 0 })
-    res.json(incidents)
+    const incidents = await Incident.find({ status: "denied" }, { image: 0 });
+    res.json(incidents);
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
-})
+});
 
 router.patch("/approve", async (req, res) => {
   try {
-    let incident = await Incident.findOne({ _id: req.body._id })
-    incident.status = "approved"
-    incident.save()
-    delete incidents.image
+    let incident = await Incident.findOne({ _id: req.body._id });
+    incident.status = "approved";
+    incident.save();
+    delete incident.image;
     res.json(incident);
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
-})
+});
 
 router.patch("/deny", async (req, res) => {
   try {
-    let incident = await Incident.findOne({ _id: req.body._id })
-    incident.status = "denied"
-    incident.save()
+    let incident = await Incident.findOne({ _id: req.body._id });
+    incident.status = "denied";
+    incident.save();
     res.json(incident);
   } catch (err) {
     res.status(400).json("Error:" + err);
   }
-})
-
+});
 
 //incident twitter route, need to add
 //show route that also brings in all the tweets
 //and the actions related to incident
-
 
 router.get("/:id", async (req, res) => {
   try {
@@ -122,32 +115,41 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-
-router.patch('/:id', async (req, res) => {
-  const updates = Object.keys(req.body)
-  const allowedUpdates = ['title', 'description', 'date', 'image_url', 'lat', 'lng', 'organization', 'petition']
-  const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+router.patch("/:id", async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    "title",
+    "description",
+    "date",
+    "image_url",
+    "lat",
+    "lng",
+    "organization",
+    "petition",
+  ];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
 
   if (!isValidOperation) {
-    return res.status(400).send({ error: 'Invalid updates.' })
+    return res.status(400).send({ error: "Invalid updates." });
   }
 
   try {
-    const incident = await Incident.findById(req.params.id)
+    const incident = await Incident.findById(req.params.id);
 
-    updates.forEach((update) => incident[update] = req.body[update])
+    updates.forEach((update) => (incident[update] = req.body[update]));
 
-    await incident.save()
+    await incident.save();
     // const incident = await incident.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
     if (!incident) {
-      return res.status(404).send()
+      return res.status(404).send();
     }
-    res.send(incident)
+    res.send(incident);
   } catch (e) {
-    res.status(400).send(e)
+    res.status(400).send(e);
   }
-
-})
+});
 
 //multer options
 //dest = destination folder for file upload
@@ -158,60 +160,66 @@ const upload = multer({
   fileFilter(req, file, cb) {
     //uses regex to only allow png, jpg, jpeg
     if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-      cb(new Error('Please upload an image.'))
-    } 
-    
+      cb(new Error("Please upload an image."));
+    }
+
     //accepts the upload
-    cb(undefined, true)
-  }
-})
+    cb(undefined, true);
+  },
+});
 //multer upload image route
 //will have to add our auth middleware to this right before the multer middleware
-//provide id in body. 
+//provide id in body.
 //uses sharp to resize image and change it into a png
-router.post('/upload', upload.single('upload'), async (req, res) => {
-  try {
-    const incident = await Incident.findById(req.body.id)
-    const buffer = await sharp(req.file.buffer).resize({ width: 500, height: 500}).png().toBuffer()
-    incident.image = buffer
-    incident.save()
-    res.send()
-  } catch (e){
-    res.status(400).send(e)
+router.post(
+  "/upload",
+  upload.single("upload"),
+  async (req, res) => {
+    try {
+      const incident = await Incident.findById(req.body.id);
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 500, height: 500 })
+        .png()
+        .toBuffer();
+      incident.image = buffer;
+      incident.save();
+      res.send();
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
   }
-}, (error, req, res, next) => {
-  res.status(400).send({error: error.message})
-})
+);
 
-router.delete('/upload', async (req, res) => {
+router.delete("/upload", async (req, res) => {
   try {
-    const incident = await Incident.findById(req.body.id)
-    incident.image = undefined
-    incident.save()
-    res.send()
+    const incident = await Incident.findById(req.body.id);
+    incident.image = undefined;
+    incident.save();
+    res.send();
   } catch (e) {
-    res.status(400).send(e)
+    res.status(400).send(e);
   }
-})
+});
 
 //serve up the image
-router.get('/:id/image', async (req, res) => {
-
-  try{ 
-    const incident = await Incident.findById(req.params.id)
+router.get("/:id/image", async (req, res) => {
+  try {
+    const incident = await Incident.findById(req.params.id);
 
     if (!incident || !incident.image) {
-      throw new Error()
+      throw new Error();
     }
 
     //tell them it is a png or jpg or jpeg
     //response header, use set
-    res.set('Content-Type', 'image/png')
-    res.send(incident.image)
-  } catch(e) {
-    res.status(404).send()
+    res.set("Content-Type", "image/png");
+    res.send(incident.image);
+  } catch (e) {
+    res.status(404).send();
   }
-})
-
+});
 
 module.exports = router;
