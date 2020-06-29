@@ -12,6 +12,7 @@ require("./models/Tweet");
 require("./models/Action");
 require("./services/passport");
 
+
 mongoose
   .connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected"))
@@ -46,6 +47,7 @@ app.use("/auth", require("./routes/authRoutes"));
 app.use("/incidents", require("./routes/incidentRoutes"));
 app.use("/actions", require("./routes/actionRoutes"));
 app.use("/tweets", require("./routes/tweetRoutes"));
+app.use("/stats", require("./routes/statsRoutes"));
 
 
 //starting back-end on port 5000

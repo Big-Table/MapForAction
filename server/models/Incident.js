@@ -3,6 +3,9 @@ mongoose.set("useCreateIndex", true);
 const uniqueValidator = require("mongoose-unique-validator");
 const { Schema } = mongoose;
 
+const Tweet = require("../models/Tweet");
+const Action = require("../models/Action");
+
 const IncidentSchema = new Schema(
   {
     title: { type: String, unique: true },

@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
+const requireLogin = require("../middleware/requireLogin")
+const requireModerator = require("../middleware/requireModerator")
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
@@ -17,7 +19,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+//requireLogin,
+router.post("/",  async (req, res) => {
   const {
     title,
     description,
@@ -59,7 +62,7 @@ router.get("/approved", async (req, res) => {
   }
 });
 
-router.get("/pending", async (req, res) => {
+router.get("/pending", requireLogin, requireModerator, async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "pending" }, { image: 0 });
     res.json(incidents);
@@ -68,7 +71,7 @@ router.get("/pending", async (req, res) => {
   }
 });
 
-router.get("/denied", async (req, res) => {
+router.get("/denied", requireLogin, requireModerator, async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "denied" }, { image: 0 });
     res.json(incidents);
@@ -77,7 +80,7 @@ router.get("/denied", async (req, res) => {
   }
 });
 
-router.patch("/approve", async (req, res) => {
+router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
     incident.status = "approved";
@@ -89,7 +92,7 @@ router.patch("/approve", async (req, res) => {
   }
 });
 
-router.patch("/deny", async (req, res) => {
+router.patch("/deny", requireLogin, requireModerator, async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
     incident.status = "denied";
@@ -115,7 +118,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", requireLogin, requireModerator, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "title",
@@ -221,5 +224,20 @@ router.get("/:id/image", async (req, res) => {
     res.status(404).send();
   }
 });
+
+// requireLogin, requireModerator,
+router.delete('/:id',  async (req, res) => {
+  try {
+    //remove the user from database
+    const incident = await Incident.findOne({ _id: req.params.id })
+    await Action.deleteMany({ _incident: incident._id })
+    await Tweet.deleteMany({ _incident: incident._id })
+
+    await incident.remove()
+    res.send(incident)
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
 
 module.exports = router;

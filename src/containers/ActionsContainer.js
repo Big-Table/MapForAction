@@ -44,7 +44,7 @@ const ActionsContainer = (props) => {
   const [actions, setActions] = useState([]);
   useEffect(() => {
     getApprovedActions(props.incident._id).then((body) => {
-      let filter = body.filter(
+      let filter = body.data.filter(
         (action) => action._incident === props.incident._id
       );
       setActions(filter);
@@ -69,6 +69,9 @@ const ActionsContainer = (props) => {
     setActionButton(!actionButton);
   };
 
+  const userNotLoggedIn = () => {
+      alert('You must login in order to submit an action!')
+  }
   return (
     <div className={classes.root}>
       <div className={classes.title2}>{props.incident.title}</div>
@@ -79,7 +82,7 @@ const ActionsContainer = (props) => {
         </div>
         <h3 className={classes.title}>Suggested Actions: </h3>
         <br></br>
-        {actionButton ? (
+        {actionButton && (
           <div className={classes.actionForm}>
             <ActionForm
               incident={props.incident}
@@ -87,7 +90,8 @@ const ActionsContainer = (props) => {
               refresh={props.refresh}
             ></ActionForm>
           </div>
-        ) : null}
+        ) 
+        }
 
         <div className={classes.spacing}>
           {actions.length > 0 ? (
@@ -96,9 +100,16 @@ const ActionsContainer = (props) => {
             <span>No actions have been suggested for this incident yet. </span>
           )}
           <br></br>
-          <AddActionButton onClick={handleClick}>
+          { props.currentUser ? 
+            <AddActionButton onClick={handleClick}>
+                Suggest an action.
+            </AddActionButton>
+           :
+           <AddActionButton onClick={userNotLoggedIn}>
             Suggest an action.
-          </AddActionButton>
+           </AddActionButton>
+          }
+
         </div>
         <br></br>
         <div className={classes.iconHolder}>

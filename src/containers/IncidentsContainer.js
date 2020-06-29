@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import React from "react";
 import Incident from "../components/Incident";
+import _ from 'lodash';
 
 const useStyles = makeStyles({
   container: {
@@ -18,6 +19,8 @@ const IncidentsContainer = (props) => {
   const text = props.search;
 
   const classes = useStyles();
+
+ 
 
   const renderIncidentsGrid = () => {
     if (text === "") {

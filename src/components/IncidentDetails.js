@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     paddingBottom: '5px'
   },
   avatar: {
-    height: 300,
-    width: 430,
+    height: "400px",
+    width: '100%',
     borderRadius: 50,
     margin: 5,
     alignSelf: 'start',
@@ -73,6 +73,10 @@ const IncidentDetails= (props) => {
   const classes = useStyles();
   console.log("details",props)
   let incident = props.incident
+
+  const userNotLoggedIn = () => {
+    alert('You must login in order to submit a tweet!')
+  }
   return (
     <Paper>
       <Card className={classes.root}>
@@ -105,7 +109,11 @@ const IncidentDetails= (props) => {
           <FlexRow>
             {/* Photo Gallery, maybe grid */}
             <ActionsButtons onClick={props.actionButton}/>
-            <AddTweetButton onClick={props.tweetButton}/>
+            { props.currentUser ?
+              <AddTweetButton onClick={props.tweetButton}/>
+             : 
+             <AddTweetButton onClick={userNotLoggedIn}/>
+            }
 
           </FlexRow>
         </FlexColumn>

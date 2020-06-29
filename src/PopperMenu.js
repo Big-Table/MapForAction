@@ -89,6 +89,10 @@ export default function MenuListComposition(props) {
             aria-controls={open ? "menu-list-grow" : undefined}
             aria-haspopup="true"
             onClick={handleToggle}
+            style={{
+              width: "200px",
+              height: "50px"
+            }}
           />
         )}
         <Popper
@@ -114,8 +118,6 @@ export default function MenuListComposition(props) {
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My Account</MenuItem>
                     <MenuItem>
                       <a href="/auth/logout">Log Out</a>
                     </MenuItem>

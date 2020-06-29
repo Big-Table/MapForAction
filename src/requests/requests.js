@@ -1,4 +1,7 @@
+import axios from 'axios'
+
 export const baseURL = "http://localhost:5000";
+
 
 const parseData = (response) => response.json();
 
@@ -8,26 +11,29 @@ const parseData = (response) => response.json();
 // export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData);
 
 //get to approved incidents 
-export const getApprovedIncidents = () => fetch(`${baseURL}/incidents/approved`).then(parseData)
+export const getApprovedIncidents = () => axios.get(`/incidents/approved`)
 
 //get to pending incidents 
-export const getPendingIncidents = () => fetch(`${baseURL}/incidents/pending`).then(parseData)
+export const getPendingIncidents = () => axios.get(`/incidents/pending`)
 
 //get to approved tweets
-export const getApprovedTweets = () => fetch(`${baseURL}/tweets/approved`).then(parseData) 
-
-//get to pending tweets 
-export const getPendingTweets = () => fetch(`${baseURL}/tweets/pending`).then(parseData)
+export const getApprovedTweets = () => axios.get(`/tweets/approved`) 
 
 //get to approved actions
-export const getApprovedActions = () => fetch(`${baseURL}/actions/approved`).then(parseData) 
+export const getApprovedActions = () => axios.get(`/actions/approved`) 
+
+
+//get to pending tweets 
+export const getPendingTweets = () => axios.get(`/tweets/pending`)
+// export const getPendingTweets = () => fetch(`${baseURL}/tweets/pending`).then(parseData())
+
 
 //get to pending actions
-export const getPendingActions = () => fetch(`${baseURL}/actions/pending`).then(parseData)
+export const getPendingActions = () => axios.get(`/actions/pending`)
 
 //get to incident (with actions and tweets)
 export const getIncidentWithTweets = (id) =>
-  fetch(`${baseURL}/incidents/${id}`).then(parseData);
+  axios.get(`/incidents/${id}`)
 
 //get to current user
 export const getCurrentUser = () =>
@@ -37,136 +43,51 @@ export const getCurrentUser = () =>
 
 //post to incidents
 export const postIncidents = (data) =>
-  fetch(`${baseURL}/incidents`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+  axios.post(`/incidents`, data)
 
 //post to actions
 export const postActions = (data) =>
-  fetch(`${baseURL}/actions`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+  axios.post(`/actions`, data)
 
 //post to tweets
 export const postTweets = (data) =>
-  fetch(`${baseURL}/tweets`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
-
+  axios.post(`/tweets`, data)
 
 //PATCH REQUESTS 
 
 //patch to incidents approve
 
 export const patchApproveIncident = (data) => 
-    fetch(`${baseURL}/incidents/approve`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+  axios.patch(`/incidents/approve`, data)
 
   //patch to incidents deny
-  export const patchDenyIncident = (data) => 
-    fetch(`${baseURL}/incidents/deny`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+export const patchDenyIncident = (data) => 
+  axios.patch(`/incidents/deny`, data)
 
   //patch to incidents 
-  export const patchIncident = (data, id) => 
-  fetch(`${baseURL}/incidents/${id}`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+export const patchIncident = (data, id) => 
+  axios.patch(`/incidents/${id}`, data)
 
   //patch to tweets approve 
   export const patchApproveTweet = (data) => 
-    fetch(`${baseURL}/tweets/approve`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+    axios.patch(`/tweets/approve`, data)
 
   //patch to tweets deny
   export const patchDenyTweet = (data) => 
-    fetch(`${baseURL}/tweets/deny`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+    axios.patch(`/tweets/deny`, data)
 
   //patch to tweets 
   export const patchTweet = (data, id) => 
-  fetch(`${baseURL}/tweets/${id}`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+  axios.patch(`/tweets/${id}`, data)
 
    //patch to actions approve 
    export const patchApproveAction = (data) => 
-   fetch(`${baseURL}/actions/approve`, {
-   method: "PATCH",
-   headers: {
-     "content-type": "application/json",
-     accept: "application/json",
-   },
-   body: JSON.stringify(data),
- }).then(parseData);
+   axios.patch(`/actions/approve`, data)
 
   //patch to actions deny
   export const patchDenyAction = (data) => 
-    fetch(`${baseURL}/actions/deny`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+    axios.patch(`/actions/deny`, data)
 
   //patch to actions 
   export const patchAction = (data, id) => 
-  fetch(`${baseURL}/actions/${id}`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+  axios.patch(`${baseURL}/actions/${id}`, data)

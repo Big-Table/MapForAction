@@ -101,9 +101,9 @@ export default function StickyHeadTable(props) {
   useEffect(() => {
     console.log("hi");
     getPendingActions().then((body) => {
-      setActions(body);
+      setActions(body.data);
       let rows2 = [];
-      body.forEach((action) => {
+      body.data.forEach((action) => {
         console.log(action);
         rows2.push(
           createData(
