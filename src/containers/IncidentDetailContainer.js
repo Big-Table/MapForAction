@@ -84,6 +84,7 @@ const IncidentDetailContainer = (props) => {
                 {...props}
                 tweetButton={handleTweet}
                 actionButton={handleClick}
+                currentUser={props.currentUser}
               />
               <div className={classes.container}>
                 {tweetState && (
@@ -95,6 +96,7 @@ const IncidentDetailContainer = (props) => {
                 <TwitterContainer
                   tweetButton={handleTweet}
                   incident={props.incident}
+                  currentUser={props.currentUser}
                 />
               </div>
             </>
@@ -102,6 +104,7 @@ const IncidentDetailContainer = (props) => {
             <ActionsContainer
               refresh={handleRefresh}
               incident={props.incident}
+              currentUser={props.currentUser}
             />
           )}
         </Card>
