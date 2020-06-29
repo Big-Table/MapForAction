@@ -99,7 +99,7 @@ class App extends React.Component {
   };
 
   handleUserNotLoggedIn = () => {
-    alert('You must login before submitting an incident!')
+    alert('Sign in through Google to submit an incident!')
   }
   render() {
     console.log(this.state.currentUser)

@@ -70,7 +70,7 @@ const ActionsContainer = (props) => {
   };
 
   const userNotLoggedIn = () => {
-      alert('You must login in order to submit an action!')
+      alert('Sign in through Google to submit an action!')
   }
   return (
     <div className={classes.root}>

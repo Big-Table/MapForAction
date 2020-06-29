@@ -96,7 +96,7 @@ const refreshApproveAction = () => {
 }
 
 //setting the type shown; incidents, tweets, or actions
-const [type, setType] = React.useState('');
+const [type, setType] = React.useState('incidents');
 
 const handleChange = (event) => {
   setType(event.target.value);

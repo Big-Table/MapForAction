@@ -165,14 +165,20 @@ export default function StickyHeadTable(props) {
   }, [props.update, props.approve]);
 
   const handleApprove = (id) => {
-    patchApproveIncident({ _id: id });
-    props.approve();
+    patchApproveIncident({ _id: id })
+    .then(() => {
+        props.approve()
+      })
+    
     alert("this has been approved");
   };
 
   const handleDeny = (id) => {
-    patchDenyIncident({ _id: id });
-    props.approve();
+    patchDenyIncident({ _id: id })
+    .then(() => {
+        props.approve()
+      })
+    
     alert("this has been denied");
   };
 

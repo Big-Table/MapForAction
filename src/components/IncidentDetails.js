@@ -75,7 +75,7 @@ const IncidentDetails= (props) => {
   let incident = props.incident
 
   const userNotLoggedIn = () => {
-    alert('You must login in order to submit a tweet!')
+    alert('Sign in through Google to submit a tweet!')
   }
   return (
     <Paper>
