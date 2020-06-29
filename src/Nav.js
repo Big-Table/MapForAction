@@ -6,6 +6,11 @@ import PopperMenu from "./PopperMenu";
 import TextField from "@material-ui/core/TextField";
 import logo from "./logo.png";
 import zIndex from "@material-ui/core/styles/zIndex";
+import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import _ from 'lodash';
+
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -17,12 +22,12 @@ const useStyles = makeStyles({
   },
   wrapper: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
 
     // display: 'inline-block'
   },
   left: {
-    paddingRight: "125px",
+    // paddingRight: "125px",
     // position: 'absolute',
     // display: 'flex',
     // justifyContent: 'space-between',
@@ -31,7 +36,7 @@ const useStyles = makeStyles({
     // right: 10,
   },
   right: {
-    paddingTop: "40px",
+    // paddingTop: "40px",
     zIndex: 10,
     // display: "inline-block",
   },
@@ -47,6 +52,10 @@ const useStyles = makeStyles({
 const NavBar = (props) => {
   const history = useHistory();
   const classes = useStyles(props);
+
+//   const debounceSearch = () => {
+//       _.debounce(props.updateForm, 400)
+//   }
 
   console.log(props.search);
   return (
@@ -68,13 +77,21 @@ const NavBar = (props) => {
         <>
           <br></br>
           <TextField
-            onChange={props.updateForm}
+            onChange={(event) => props.updateForm(event)}
             value={props.search}
             className={classes.search}
-            placeholder="Search incidents..."
+            placeholder="Search Incidents..."
             id="outlined-basic"
             variant="outlined"
-          />
+            InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                 )
+                }}
+          >
+          </TextField>
           <br></br>
           <br></br>
           <span className={classes.span}>Incidents you should know about!</span>
