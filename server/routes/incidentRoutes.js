@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
+const requireLogin = require("../middleware/requireLogin")
+const requireModerator = require("../middleware/requireModerator")
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
@@ -17,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", requireLogin, async (req, res) => {
   const {
     title,
     description,
@@ -59,7 +61,7 @@ router.get("/approved", async (req, res) => {
   }
 });
 
-router.get("/pending", async (req, res) => {
+router.get("/pending", requireLogin, requireModerator, async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "pending" }, { image: 0 });
     res.json(incidents);
@@ -68,7 +70,7 @@ router.get("/pending", async (req, res) => {
   }
 });
 
-router.get("/denied", async (req, res) => {
+router.get("/denied", requireLogin, requireModerator, async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "denied" }, { image: 0 });
     res.json(incidents);
@@ -77,7 +79,7 @@ router.get("/denied", async (req, res) => {
   }
 });
 
-router.patch("/approve", async (req, res) => {
+router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
     incident.status = "approved";
@@ -89,7 +91,7 @@ router.patch("/approve", async (req, res) => {
   }
 });
 
-router.patch("/deny", async (req, res) => {
+router.patch("/deny", requireLogin, requireModerator, async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
     incident.status = "denied";
@@ -115,7 +117,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", requireLogin, requireModerator, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "title",

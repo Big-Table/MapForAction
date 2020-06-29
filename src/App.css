@@ -52,5 +52,6 @@
 }
 
 a {
-  color: #FCC42C
+  color: #FCC42C;
+  text-decoration: none;
 }

@@ -6,6 +6,10 @@ const UserSchema = new Schema(
     googleID: String,
     name: String,
     email: String,
+    moderator: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,
