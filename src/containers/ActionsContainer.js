@@ -44,7 +44,7 @@ const ActionsContainer = (props) => {
   const [actions, setActions] = useState([]);
   useEffect(() => {
     getApprovedActions(props.incident._id).then((body) => {
-      let filter = body.filter(
+      let filter = body.data.filter(
         (action) => action._incident === props.incident._id
       );
       setActions(filter);
