@@ -18,7 +18,8 @@ import {
 } from "./requests/requests.js";
 import axios from "axios";
 import _ from 'lodash';
-
+import NoAccess from './NoAccess'
+import NotFound from './NotFound'
 class App extends React.Component {
   state = {
     incidents: [],
@@ -101,6 +102,8 @@ class App extends React.Component {
   handleUserNotLoggedIn = () => {
     alert('Sign in through Google to submit an incident!')
   }
+
+
   render() {
     console.log(this.state.currentUser)
     console.log(this.state.incidents);
@@ -181,7 +184,7 @@ class App extends React.Component {
                   )
                 }
               />
-
+              { this.state.currentUser && 
               <Route
                 path="/moderator"
                 render={(routerProps) => (
@@ -191,6 +194,26 @@ class App extends React.Component {
                   />
                 )}
               />
+              }
+              { !this.state.currentUser && 
+                <Route
+                  path="/moderator"
+                  render={(routerProps) => (
+                    <NoAccess
+                      {...routerProps}
+                    />
+                  )}
+               />
+              }
+              <Route
+               path='*'
+               render={(routerProps) => (
+                <NotFound
+                  {...routerProps}
+                />
+              )}
+              status={404}
+           />
             </Switch>
           </FlexColumn>
         </FlexRow>

@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     cursor: "pointer",
+    // paddingRight: 50
   },
+ 
   paper: {
     marginRight: theme.spacing(2),
   },
@@ -23,10 +25,11 @@ const useStyles = makeStyles((theme) => ({
     height: "35px",
     width: "35px",
     borderRadius: "50%",
-    color: "white",
+    color: "#FCC42C",
     border: "solid",
-    borderColor: "grey",
-    borderWidth: 1,
+    borderColor: "#FCC42C",
+    borderWidth: 5,
+    backgroundColor: 'black',
   },
 }));
 
@@ -64,7 +67,7 @@ export default function MenuListComposition(props) {
 
     prevOpen.current = open;
   }, [open]);
-
+  console.log(props.currentUser)
   return (
     <div className={classes.root}>
       <div>
@@ -83,18 +86,31 @@ export default function MenuListComposition(props) {
             />
           </a>
         ) : (
-          <PersonIcon
-            className={classes.smallPic}
-            ref={anchorRef}
-            aria-controls={open ? "menu-list-grow" : undefined}
-            aria-haspopup="true"
-            onClick={handleToggle}
-            style={{
-              width: "200px",
-              height: "50px"
-            }}
-          />
-        )}
+            <Avatar
+                className={classes.smallPic}
+                ref={anchorRef}
+                aria-controls={open ? "menu-list-grow" : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+                style={{
+                  width: "100px",
+                  height: "100px"
+                }}
+        >{props.currentUser.moderator ? "Big Mod" : "Logged In"}</Avatar>
+        //   <PersonIcon
+        //     className={classes.smallPic}
+        //     ref={anchorRef}
+        //     aria-controls={open ? "menu-list-grow" : undefined}
+        //     aria-haspopup="true"
+        //     onClick={handleToggle}
+        //     style={{
+        //       width: "200px",
+        //       height: "50px"
+        //     }}
+        //   />
+        )
+        }
+        
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -111,7 +127,7 @@ export default function MenuListComposition(props) {
                   placement === "bottom" ? "center top" : "center bottom",
               }}
             >
-              <Paper>
+              <Paper style={{backgroundColor: 'black'}}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
@@ -119,7 +135,7 @@ export default function MenuListComposition(props) {
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem>
-                      <a href="/auth/logout">Log Out</a>
+                      <a href="/auth/logout">Logout</a>
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>

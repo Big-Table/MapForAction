@@ -9,6 +9,7 @@ import zIndex from "@material-ui/core/styles/zIndex";
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import _ from 'lodash';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 
 const useStyles = makeStyles({
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
     // display: "inline-block",
   },
   search: {
-    width: "100%",
+    width: "32vw",
     background: "grey",
   },
   span: {
@@ -73,8 +74,9 @@ const NavBar = (props) => {
         </div>
       </div>
 
-      {!props.currentIncident ? (
+      {!props.currentIncident && (
         <>
+        <div>
           <br></br>
           <TextField
             onChange={(event) => props.updateForm(event)}
@@ -95,8 +97,10 @@ const NavBar = (props) => {
           <br></br>
           <br></br>
           <span className={classes.span}>Incidents you should know about!</span>
+          </div>
         </>
-      ) : null}
+
+      )}
     </div>
   );
 };

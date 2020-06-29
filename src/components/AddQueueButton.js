@@ -26,7 +26,7 @@ const AddQueueButton = props => {
 
     return (
         <button className={classes.root}>
-            <Link to='/moderator'>Go to approval page</Link>
+            <Link to='/moderator'>Approval Page -></Link>
         </button>
     )
 }
