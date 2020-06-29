@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
+const requireLogin = require("../middleware/requireLogin")
+const requireModerator = require("../middleware/requireModerator")
+
 const Tweet = mongoose.model("Tweet");
 
-router.get("/", async (req, res) => {
+router.get("/", requireLogin, requireModerator, async (req, res) => {
   try {
     const tweets = await Tweet.find();
     res.json(tweets);
@@ -13,16 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const tweet = await Tweet.findOne({ _id: req.params.id });
-    res.send(tweet);
-  } catch (err) {
-    res.status(400).json("Error:" + err);
-  }
-});
-
-router.post("/", async (req, res) => {
+router.post("/", requireLogin, async (req, res) => {
   const { url, _incident } = req.body;
 
   const newTweet = new Tweet({
@@ -49,7 +43,7 @@ router.get("/approved", async (req, res) => {
   }
 })
 
-router.get("/pending", async (req, res) => {
+router.get("/pending", requireLogin, requireModerator, async (req, res) => {
   try {
     const tweets = await Tweet.find({ status: "pending" })
     res.json(tweets)
@@ -58,7 +52,7 @@ router.get("/pending", async (req, res) => {
   }
 })
 
-router.get("/denied", async (req, res) => {
+router.get("/denied", requireLogin, requireModerator, async (req, res) => {
   try {
     const tweets = await Tweet.find({ status: "denied" })
     res.json(tweets)
@@ -67,7 +61,7 @@ router.get("/denied", async (req, res) => {
   }
 })
 
-router.patch("/approve", async (req, res) => {
+router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
   try {
     let tweet = await Tweet.findOne({ _id: req.body._id })
     tweet.status = "approved"
@@ -78,7 +72,7 @@ router.patch("/approve", async (req, res) => {
   }
 })
 
-router.patch("/deny", async (req, res) => {
+router.patch("/deny", requireLogin, requireModerator, async (req, res) => {
   try {
     let tweet = await Tweet.findOne({ _id: req.body._id })
     tweet.status = "denied"
@@ -90,7 +84,7 @@ router.patch("/deny", async (req, res) => {
 })
 
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', requireLogin, requireModerator, async (req, res) => {
   const updates = Object.keys(req.body)
   const allowedUpdates = ['url']
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -115,4 +109,14 @@ router.patch('/:id', async (req, res) => {
   }
 
 })
+
+
+router.get("/:id", async (req, res) => {
+  try {
+    const tweet = await Tweet.findOne({ _id: req.params.id });
+    res.send(tweet);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+});
 module.exports = router;

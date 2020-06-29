@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
+const requireLogin = require("../middleware/requireLogin")
+const requireModerator = require("../middleware/requireModerator")
+
 const Action = mongoose.model("Action");
 
-router.get("/", async (req, res) => {
+router.get("/", requireLogin, requireModerator, async (req, res) => {
   try {
     const actions = await Action.find();
     res.json(actions);
@@ -13,7 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", requireLogin, async (req, res) => {
   const { title, action_type, url, _incident } = req.body;
 
   const newAction = new Action({
@@ -43,7 +46,7 @@ router.get("/approved", async (req, res) => {
   }
 })
 
-router.get("/pending", async (req, res) => {
+router.get("/pending", requireLogin, requireModerator, async (req, res) => {
   try {
     const actions = await Action.find({ status: "pending" })
     res.json(actions)
@@ -52,7 +55,7 @@ router.get("/pending", async (req, res) => {
   }
 })
 
-router.get("/denied", async (req, res) => {
+router.get("/denied", requireLogin, requireModerator, async (req, res) => {
   try {
     const actions = await Action.find({ status: "denied" })
     res.json(actions)
@@ -61,7 +64,7 @@ router.get("/denied", async (req, res) => {
   }
 })
 
-router.patch("/approve", async (req, res) => {
+router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
   try {
     let action = await Action.findOne({ _id: req.body._id })
     action.status = "approved"
@@ -72,7 +75,7 @@ router.patch("/approve", async (req, res) => {
   }
 })
 
-router.patch("/deny", async (req, res) => {
+router.patch("/deny", requireLogin, requireModerator, async (req, res) => {
   try {
     let action = await Action.findOne({ _id: req.body._id })
     action.status = "denied"
@@ -83,7 +86,7 @@ router.patch("/deny", async (req, res) => {
   }
 })
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', requireLogin, requireModerator, async (req, res) => {
   const updates = Object.keys(req.body)
   const allowedUpdates = ['title', 'action_type', 'url']
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update))

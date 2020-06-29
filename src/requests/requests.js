@@ -19,11 +19,14 @@ export const getPendingIncidents = () => axios.get(`/incidents/pending`)
 //get to approved tweets
 export const getApprovedTweets = () => axios.get(`/tweets/approved`) 
 
-//get to pending tweets 
-export const getPendingTweets = () => axios.get(`/tweets/pending`)
-
 //get to approved actions
 export const getApprovedActions = () => axios.get(`/actions/approved`) 
+
+
+//get to pending tweets 
+export const getPendingTweets = () => axios.get(`/tweets/pending`)
+// export const getPendingTweets = () => fetch(`${baseURL}/tweets/pending`).then(parseData())
+
 
 //get to pending actions
 export const getPendingActions = () => axios.get(`/actions/pending`)
