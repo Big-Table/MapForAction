@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     paddingBottom: '5px'
   },
   avatar: {
-    height: 300,
-    width: 430,
+    height: "400px",
+    width: '100%',
     borderRadius: 50,
     margin: 5,
     alignSelf: 'start',

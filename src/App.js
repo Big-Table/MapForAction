@@ -17,6 +17,7 @@ import {
   getApprovedIncidents,
 } from "./requests/requests.js";
 import axios from "axios";
+import _ from 'lodash';
 
 class App extends React.Component {
   state = {
@@ -86,20 +87,9 @@ class App extends React.Component {
   };
 
   updateForm = (event) => {
-    console.log("here");
     this.setState({
-      searchForm: event.target.value,
-    });
-  };
-
-  search = () => {
-    let searchedIncidents = this.state.incidents;
-    searchedIncidents.filter((incident) => {
-      incident.title.includes(this.state.search);
-    });
-    this.setState({
-      incidents: searchedIncidents,
-    });
+      searchForm: event.target.value
+    })
   };
 
   handleShowGrid = () => {
@@ -145,7 +135,7 @@ class App extends React.Component {
           </FlexColumn>
           <FlexColumn
             style={{
-              width: "30vw",
+              width: "35vw",
               height: "100vh",
               backgroundColor: "#000000",
             }}
@@ -199,3 +189,6 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+
