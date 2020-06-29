@@ -91,7 +91,7 @@ export default function MenuListComposition(props) {
             onClick={handleToggle}
           />
         )}
-        <Popper
+        {/* <Popper
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
@@ -124,7 +124,7 @@ export default function MenuListComposition(props) {
               </Paper>
             </Grow>
           )}
-        </Popper>
+        </Popper> */}
       </div>
     </div>
   );
