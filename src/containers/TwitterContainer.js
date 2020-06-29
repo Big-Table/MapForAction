@@ -36,8 +36,7 @@ const TwitterContainer = (props) => {
   useEffect(() => {
     console.log(props.incident);
     getApprovedTweets(props.incident._id).then((body) => {
-      console.log(body);
-      let filter = body.filter(
+      let filter = body.data.filter(
         (tweet) => tweet._incident === props.incident._id
       );
       setTweets(filter);

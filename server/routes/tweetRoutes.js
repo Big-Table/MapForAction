@@ -13,13 +13,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const tweet = await Tweet.findOne({ _id: req.params.id });
+    res.send(tweet);
+  } catch (err) {
+    res.status(400).json("Error:" + err);
+  }
+});
+
 router.post("/", async (req, res) => {
-  const { url, incident_id } = req.body;
+  const { url, _incident } = req.body;
 
   const newTweet = new Tweet({
     url,
     status: "pending",
-    _incident: incident_id,
+    _incident: _incident,
   });
 
   try {

@@ -56,7 +56,7 @@ class App extends React.Component {
   // };
 
   updateIncidents = () => {
-    getApprovedIncidents().then((incidents) => this.setIncidents(incidents));
+    getApprovedIncidents().then((incidents) => this.setIncidents(incidents.data));
   };
   handleShowForm = () => {
     this.setState({ incidentForm: !this.state.incidentForm });

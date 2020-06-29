@@ -90,9 +90,9 @@ export default function StickyHeadTable(props) {
       console.log('hi')
           getPendingTweets()
                 .then(body => {
-                    setTweets(body)
+                    setTweets(body.data)
                     let rows2 = []
-                    body.forEach(tweet => {
+                    body.data.forEach(tweet => {
                         console.log(tweet)
 
                         rows2.push(createData(tweet.url, tweet._id, tweet._id, tweet._id))

@@ -14,14 +14,14 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, action_type, url, incident_id } = req.body;
+  const { title, action_type, url, _incident } = req.body;
 
   const newAction = new Action({
     title,
     action_type,
     url,
     status: "pending",
-    _incident: incident_id,
+    _incident: _incident,
   });
 
   try {

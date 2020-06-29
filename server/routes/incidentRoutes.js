@@ -19,7 +19,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", requireLogin, async (req, res) => {
+//requireLogin,
+router.post("/",  async (req, res) => {
   const {
     title,
     description,
@@ -223,5 +224,20 @@ router.get("/:id/image", async (req, res) => {
     res.status(404).send();
   }
 });
+
+// requireLogin, requireModerator,
+router.delete('/:id',  async (req, res) => {
+  try {
+    //remove the user from database
+    const incident = await Incident.findOne({ _id: req.params.id })
+    await Action.deleteMany({ _incident: incident._id })
+    await Tweet.deleteMany({ _incident: incident._id })
+
+    await incident.remove()
+    res.send(incident)
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
 
 module.exports = router;
