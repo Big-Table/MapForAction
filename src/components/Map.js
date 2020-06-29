@@ -44,38 +44,6 @@ class Map extends Component {
     }
   }
 
-  //  Possibly replacing button on the map with a
-
-  // CenterControl = (controlDiv, map, center) => {
-  //   // Set CSS for the control border.
-  //   var controlUI = document.createElement("div");
-  //   controlUI.style.backgroundColor = "#fff";
-  //   controlUI.style.border = "2px solid #fff";
-  //   controlUI.style.borderRadius = "3px";
-  //   controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-  //   controlUI.style.cursor = "pointer";
-  //   controlUI.style.marginBottom = "22px";
-  //   controlUI.style.textAlign = "center";
-  //   controlUI.title = "Click to recenter the map";
-  //   controlDiv.appendChild(controlUI);
-
-  //   // Set CSS for the control interior.
-  //   var controlText = document.createElement("div");
-  //   controlText.style.color = "rgb(25,25,25)";
-  //   controlText.style.fontFamily = "Roboto,Arial,sans-serif";
-  //   controlText.style.fontSize = "16px";
-  //   controlText.style.lineHeight = "38px";
-  //   controlText.style.paddingLeft = "5px";
-  //   controlText.style.paddingRight = "5px";
-  //   controlText.textContent = "Center Map";
-  //   controlUI.appendChild(controlText);
-
-  //   // Setup the click event listeners: simply set the map to Chicago.
-  //   controlUI.addEventListener("click", function () {
-  //     map.setCenter(center);
-  //   });
-  // };
-
   createGoogleMap = () => {
     let map = new window.google.maps.Map(this.googleMapRef.current, {
       zoom: 11,
@@ -92,18 +60,6 @@ class Map extends Component {
       this.props.deleteCurrentIncident();
     });
 
-    // const centerControlDiv = document.createElement("div");
-    // const centerControl = this.CenterControl(
-    //   centerControlDiv,
-    //   map,
-    //   this.state.current
-    // );
-
-    // centerControlDiv.index = 1;
-    // map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(
-    //   centerControlDiv
-    // );
-
     this.createMarker(map);
   };
 
@@ -111,7 +67,6 @@ class Map extends Component {
     let incidents = this.props.incidents.length;
     for (let i = 0; i < incidents; i++) {
       let incident = this.props.incidents[i];
-      // console.log(incident);
       let marker = new window.google.maps.Marker({
         position: {
           lat: parseFloat(incident.lat),
@@ -130,13 +85,25 @@ class Map extends Component {
         data: this.props.incidents[i],
       });
 
-      //currently have an onClick on marker displaying its own data
-      //how are we going to switch between recent incidents view and
-      //specific incident view, a toggle in state?
       marker.addListener("click", () => {
         this.props.setCurrentIncident(marker.data);
       });
     }
+  };
+
+  getBounds = (map) => {
+    let bounds = map.getBounds();
+    let ne = bounds.getNorthEast();
+    let sw = bounds.getSouthWest();
+
+    return {ne, switch (key) {
+      case value:
+        
+        break;
+    
+      default:
+        break;
+    }}
   };
 
   render() {
