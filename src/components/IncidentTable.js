@@ -140,9 +140,9 @@ export default function StickyHeadTable(props) {
     console.log("hi");
 
     getPendingIncidents().then((body) => {
-      setIncidents(body);
+      setIncidents(body.data);
       let rows2 = [];
-      body.forEach((incident) => {
+      body.data.forEach((incident) => {
         console.log(incident);
 
         rows2.push(

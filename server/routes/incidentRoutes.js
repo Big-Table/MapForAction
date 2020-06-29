@@ -3,8 +3,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
-const auth = require("../middleware/requireLogin")
-const authModerator = require("../middleware/requireModerator")
+const requireLogin = require("../middleware/requireLogin")
+const requireModerator = require("../middleware/requireModerator")
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", auth,  async (req, res) => {
+router.post("/", requireLogin, async (req, res) => {
   const {
     title,
     description,
@@ -61,7 +61,7 @@ router.get("/approved", async (req, res) => {
   }
 });
 
-router.get("/pending", authModerator, async (req, res) => {
+router.get("/pending", requireLogin, requireModerator, async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "pending" }, { image: 0 });
     res.json(incidents);
@@ -70,7 +70,7 @@ router.get("/pending", authModerator, async (req, res) => {
   }
 });
 
-router.get("/denied", authModerator, async (req, res) => {
+router.get("/denied", requireLogin, requireModerator, async (req, res) => {
   try {
     const incidents = await Incident.find({ status: "denied" }, { image: 0 });
     res.json(incidents);
@@ -79,7 +79,7 @@ router.get("/denied", authModerator, async (req, res) => {
   }
 });
 
-router.patch("/approve", authModerator, async (req, res) => {
+router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
     incident.status = "approved";
@@ -91,7 +91,7 @@ router.patch("/approve", authModerator, async (req, res) => {
   }
 });
 
-router.patch("/deny", authModerator, async (req, res) => {
+router.patch("/deny", requireLogin, requireModerator, async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
     incident.status = "denied";
@@ -117,7 +117,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.patch("/:id", authModerator, async (req, res) => {
+router.patch("/:id", requireLogin, requireModerator, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "title",

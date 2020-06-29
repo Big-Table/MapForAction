@@ -1,4 +1,7 @@
+import axios from 'axios'
+
 export const baseURL = "http://localhost:5000";
+
 
 const parseData = (response) => response.json();
 
@@ -11,7 +14,7 @@ const parseData = (response) => response.json();
 export const getApprovedIncidents = () => fetch(`${baseURL}/incidents/approved`).then(parseData)
 
 //get to pending incidents 
-export const getPendingIncidents = () => fetch(`${baseURL}/incidents/pending`).then(parseData)
+export const getPendingIncidents = () => axios.get(`/incidents/pending`)
 
 //get to approved tweets
 export const getApprovedTweets = () => fetch(`${baseURL}/tweets/approved`).then(parseData) 
@@ -37,14 +40,7 @@ export const getCurrentUser = () =>
 
 //post to incidents
 export const postIncidents = (data) =>
-  fetch(`${baseURL}/incidents`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      accept: "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(parseData);
+  axios.post(`/incidents`, data, { withCredentials: true })
 
 //post to actions
 export const postActions = (data) =>
