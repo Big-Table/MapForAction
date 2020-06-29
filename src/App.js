@@ -98,7 +98,11 @@ class App extends React.Component {
     });
   };
 
+  handleUserNotLoggedIn = () => {
+    alert('You must login before submitting an incident!')
+  }
   render() {
+    console.log(this.state.currentUser)
     console.log(this.state.incidents);
     return (
       <Router>
@@ -114,8 +118,14 @@ class App extends React.Component {
               setMapCenter={this.setMapCenter}
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
-              <AddIncidentButton onClick={this.handleShowForm} />
-              <AddQueueButton></AddQueueButton>
+              { this.state.currentUser ?
+               <AddIncidentButton onClick={this.handleShowForm} />
+               : 
+               <AddIncidentButton onClick={this.handleUserNotLoggedIn}/>
+              } 
+              { this.state.currentUser && this.state.currentUser.moderator && 
+                <AddQueueButton></AddQueueButton>
+              }
               {/* <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton> */}
             </div>
             {this.state.incidentForm && (
@@ -158,6 +168,7 @@ class App extends React.Component {
                       {...routerProps}
                       incident={this.state.currentIncident}
                       deleteCurrentIncident={this.deleteCurrentIncident}
+                      currentUser={this.state.currentUser}
                     />
                   ) : (
                     <IncidentsContainer

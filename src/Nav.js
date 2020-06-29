@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
   wrapper: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
 
     // display: 'inline-block'
   },
