@@ -49,14 +49,18 @@ const useStyles = makeStyles({
     color: "white",
     fontSize: "20px",
   },
+  test: {
+      width: 100
+  }
 });
 const NavBar = (props) => {
   const history = useHistory();
   const classes = useStyles(props);
 
-//   const debounceSearch = () => {
-//       _.debounce(props.updateForm, 400)
-//   }
+//   const debounceSearch = _.debounce((event) => {
+//       event.persist()
+//       props.updateForm(event.persist())
+//   }, 1000)
 
   console.log(props.search);
   return (
@@ -74,6 +78,7 @@ const NavBar = (props) => {
         </div>
       </div>
 
+   
       {!props.currentIncident && (
         <>
         <div>
@@ -99,8 +104,8 @@ const NavBar = (props) => {
           <span className={classes.span}>Incidents you should know about!</span>
           </div>
         </>
-
-      )}
+      )
+      }
     </div>
   );
 };

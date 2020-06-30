@@ -5,8 +5,7 @@ import FlexColumn from './Theme/FlexColumn'
 
 const getStyles = makeStyles({
     root: {
-        
-        fontSize: 100,
+        fontSize: 30,
         position: 'absolute',
         textAlign: 'left',
         width: '100%',
@@ -26,7 +25,16 @@ function NoAccess(){
    
     return (
         <div className={classes.root}>
-            
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
                 <div style={{textAlign: 'center'}}>
                     You do not have permission to access this. Please go back to the home screen.
                 </div>

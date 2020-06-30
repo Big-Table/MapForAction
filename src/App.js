@@ -88,10 +88,14 @@ class App extends React.Component {
   };
 
   updateForm = (event) => {
-    this.setState({
-      searchForm: event.target.value
-    })
-  };
+      console.log(event.target.value)
+      
+      this.setState({
+        searchForm: event.target.value
+      })
+    
+   
+  }
 
   handleShowGrid = () => {
     this.setState({

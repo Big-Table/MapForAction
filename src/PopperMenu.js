@@ -86,6 +86,7 @@ export default function MenuListComposition(props) {
             />
           </a>
         ) : (
+            <div style={{paddingRight: '50px', paddingLeft: '50px'}}>
             <Avatar
                 className={classes.smallPic}
                 ref={anchorRef}
@@ -97,17 +98,7 @@ export default function MenuListComposition(props) {
                   height: "100px"
                 }}
         >{props.currentUser.moderator ? "Big Mod" : "Logged In"}</Avatar>
-        //   <PersonIcon
-        //     className={classes.smallPic}
-        //     ref={anchorRef}
-        //     aria-controls={open ? "menu-list-grow" : undefined}
-        //     aria-haspopup="true"
-        //     onClick={handleToggle}
-        //     style={{
-        //       width: "200px",
-        //       height: "50px"
-        //     }}
-        //   />
+        </div>
         )
         }
         

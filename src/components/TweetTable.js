@@ -93,8 +93,6 @@ export default function StickyHeadTable(props) {
                     setTweets(body.data)
                     let rows2 = []
                     body.data.forEach(tweet => {
-                        console.log(tweet)
-
                         rows2.push(createData(tweet.url, tweet._id, tweet._id, tweet._id))
                     })
                     setRows(rows2)

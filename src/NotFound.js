@@ -6,7 +6,7 @@ import FlexColumn from './Theme/FlexColumn'
 const getStyles = makeStyles({
     root: {
         
-        fontSize: 100,
+        fontSize: 30,
         position: 'absolute',
         textAlign: 'left',
         width: '100%',
@@ -26,7 +26,16 @@ function NotFound(){
    
     return (
         <div className={classes.root}>
-            
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
                 <div style={{textAlign: 'center'}}>
                     This Page Does Not Exist!
                 </div>
