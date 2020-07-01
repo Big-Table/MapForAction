@@ -32,12 +32,42 @@ class IncidentForm extends React.Component {
     e.preventDefault();
     console.log("Hello World");
     console.log(this.state)
-    await postIncidents(this.state);
+    await postIncidents(this.state)
+    .then(resp => {
+      console.log(resp)
+      this.props.lastIncident(resp.data._id)
+    })
     this.setState(incidentFormInitialState);
     this.props.updateIncidents();
-    this.props.onClick()
-    alert("This incidence has been reported, thank you for being proactive!");
+    this.props.showForm()
+    this.props.submitted()
+    // alert("This incidence has been reported, thank you for being proactive!");
   }
+
+  // handleImageChange(e){
+  //   // console.log(e)
+  //   console.log(e)
+  //   console.log(e.target)
+  //   console.log(e.target.value)
+  //   console.log(e.target.files)
+
+  //   console.log(this.props.lastIncidentID)
+  //   let formData = new FormData()
+  //   formData.append("upload", e.target.files[0])
+  //   formData.append("id", this.props.lastIncidentID)
+    
+  //   for (var key of formData.entries()) {
+  //     console.log(key[0] + ', ' + key[1]);
+  //   }
+  //   console.log(formData)
+  //   fetch('http://localhost:5000/incidents/upload', {
+  //     method: "POST",
+  //     // headers: {
+  //     //   'Content-Type': 'application/json'
+  //     // },
+  //     body: formData
+  //   })
+  // }
 
   handleAddress(address) {
     geocodeByAddress(address)
@@ -52,7 +82,7 @@ class IncidentForm extends React.Component {
     return (
       <div id="incidentForm">
         <h2>Report an Incident</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} id="form">
           <label htmlFor="title">
             Title<span className="required">*</span>
           </label>
@@ -121,23 +151,23 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <label htmlFor="image_url">Image</label>
+          {/* <label htmlFor="image_url">Image</label>
           <input
             name="image_url"
             type="text"
             placeholder="Paste an Image URL"
             value={this.state.image_url}
             onChange={this.handleChange}
-          />
+          /> */}
 
 
-          {/* <label htmlFor="image_url">Upload Photos</label>
+          {/* <label htmlFor="image_url">Upload Photo</label>
           <input
             name="image_url"
             type="file"
             id="imageUpload"
             value={this.state.image_url}
-            onChange={this.handleChange}
+            onChange={this.handleImageChange}
             accept=".png, .jpg, .jpeg"
           /> */}
 
@@ -148,7 +178,7 @@ class IncidentForm extends React.Component {
         </form>
         <CloseIcon
           id="close-button"
-          onClick={this.props.onClick}
+          onClick={this.props.showForm}
           style={{ cursor: "pointer" }}
         />
       </div>

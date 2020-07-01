@@ -10,6 +10,7 @@ import IncidentForm from "./components/IncidentForm";
 import AddIncidentButton from "./components/AddIncidentButton";
 import AddQueueButton from "./components/AddQueueButton";
 import IncidentQueueGrid from "./components/IncidentQueueGrid";
+import ImageForm from "./components/ImageForm"
 import Nav from "./Nav";
 import {
   getIncidents,
@@ -32,6 +33,8 @@ class App extends React.Component {
     },
     currentUser: null,
     grid: false,
+    lastIncidentPostedID: '', 
+    submitted: false,
   };
 
   componentDidMount() {
@@ -107,10 +110,24 @@ class App extends React.Component {
     alert('Sign in through Google to submit an incident!')
   }
 
+  handleLastIncidentID = (id) => {
+    this.setState({
+      lastIncidentPostedID: id
+    })
+  }
+
+  handleSubmittedIncident = () => {
+    this.setState({
+      submitted: !this.state.submitted
+    })
+  }
+
+ 
 
   render() {
     console.log(this.state.currentUser)
     console.log(this.state.incidents);
+    console.log(this.state.lastIncidentPostedID)
     return (
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
@@ -135,9 +152,16 @@ class App extends React.Component {
               }
               {/* <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton> */}
             </div>
+            {this.state.submitted && 
+            <ImageForm 
+              lastIncidentID={this.state.lastIncidentPostedID}
+              submitted={this.handleSubmittedIncident}
+            ></ImageForm>}
             {this.state.incidentForm && (
               <IncidentForm
-                onClick={this.handleShowForm}
+                submitted={this.handleSubmittedIncident}
+                lastIncident={this.handleLastIncidentID}
+                showForm={this.handleShowForm}
                 updateIncidents={this.updateIncidents}
               />
             )}
