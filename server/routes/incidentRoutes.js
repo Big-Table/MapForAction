@@ -186,12 +186,14 @@ router.post(
         .toBuffer();
       incident.image = buffer;
       incident.save();
+      console.log("CREATED")
       res.send();
     } catch (e) {
       res.status(400).send(e);
     }
   },
   (error, req, res, next) => {
+    console.log(error.message)
     res.status(400).send({ error: error.message });
   }
 );

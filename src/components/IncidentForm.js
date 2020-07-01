@@ -39,6 +39,17 @@ class IncidentForm extends React.Component {
     alert("This incidence has been reported, thank you for being proactive!");
   }
 
+  handleImageChange(e){
+    // console.log(e)
+    let formData = new FormData()
+    formData.append("upload", e.target.files[0])
+    formData.append("id", "5efa496036dbb9425177ba1b")
+    fetch('http://localhost:5000/incidents/upload', {
+      method: "POST",
+      body: formData
+    })
+  }
+
   handleAddress(address) {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
@@ -52,7 +63,7 @@ class IncidentForm extends React.Component {
     return (
       <div id="incidentForm">
         <h2>Report an Incident</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} id="form">
           <label htmlFor="title">
             Title<span className="required">*</span>
           </label>
@@ -121,25 +132,25 @@ class IncidentForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <label htmlFor="image_url">Image</label>
+          {/* <label htmlFor="image_url">Image</label>
           <input
             name="image_url"
             type="text"
             placeholder="Paste an Image URL"
             value={this.state.image_url}
             onChange={this.handleChange}
-          />
+          /> */}
 
 
-          {/* <label htmlFor="image_url">Upload Photos</label>
+          <label htmlFor="image_url">Upload Photo</label>
           <input
             name="image_url"
             type="file"
             id="imageUpload"
             value={this.state.image_url}
-            onChange={this.handleChange}
+            onChange={this.handleImageChange}
             accept=".png, .jpg, .jpeg"
-          /> */}
+          />
 
           <input type="submit" value="Submit" id="submitButton" />
           {/* <p aria-hidden="true" id="required-description">
