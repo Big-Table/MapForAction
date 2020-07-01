@@ -9,6 +9,8 @@ const parseData = (response) => response.json();
 
 //get to incidents
 // export const getIncidents = () => fetch(`${baseURL}/incidents`).then(parseData);
+//get to incident image 
+export const getIncidentImage = (id) => axios.get(`./incidents/${id}/image`)
 
 //get to approved incidents 
 export const getApprovedIncidents = () => axios.get(`/incidents/approved`)

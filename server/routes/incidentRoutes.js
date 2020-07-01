@@ -43,9 +43,16 @@ router.post("/",  async (req, res) => {
     petition,
     status: "pending",
   });
-
-  try {
+   
+  //  newIncident.image_url = `/incidents/${_id}/image`
+   console.log(newIncident)
+  
+   try {
     await newIncident.save();
+    newIncident.image_url = `/incidents/${newIncident._id}/image`
+    newIncident.save()
+    console.log(newIncident)
+
     res.json(newIncident);
   } catch (err) {
     res.status(400).json("Error:" + err);
