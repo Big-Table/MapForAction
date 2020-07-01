@@ -4,6 +4,8 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const cors = require("cors");
 const keys = require("./config/keys");
+const bodyParser = require("body-parser");
+
 
 //models
 require("./models/Incident");
@@ -34,6 +36,9 @@ app.use(
   })
 );
 
+//??? fixes payload too large issue
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //parses all request to json
 app.use(express.json());
 

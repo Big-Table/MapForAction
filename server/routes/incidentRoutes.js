@@ -161,8 +161,9 @@ const upload = multer({
     fileSize: 3000000,
   },
   fileFilter(req, file, cb) {
+    console.log(file )
     //uses regex to only allow png, jpg, jpeg
-    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
+    if (!file.originalname.match(/\.(png|jpg|jpeg|JPEG|JPG|PNG)$/)) {
       cb(new Error("Please upload an image."));
     }
 
@@ -178,8 +179,11 @@ router.post(
   "/upload",
   upload.single("upload"),
   async (req, res) => {
+    console.log(req.body)
+    console.log(req.file.buffer)
     try {
       const incident = await Incident.findById(req.body.id);
+      console.log(incident)
       const buffer = await sharp(req.file.buffer)
         .resize({ width: 500, height: 500 })
         .png()
