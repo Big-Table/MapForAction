@@ -32,10 +32,14 @@ class IncidentForm extends React.Component {
     e.preventDefault();
     console.log("Hello World");
     console.log(this.state)
-    await postIncidents(this.state);
+    await postIncidents(this.state)
+    .then(resp => {
+      console.log(resp)
+      this.props.lastIncident(resp.data._id)
+    })
     this.setState(incidentFormInitialState);
     this.props.updateIncidents();
-    this.props.onClick()
+    this.props.showForm()
     alert("This incidence has been reported, thank you for being proactive!");
   }
 
@@ -156,7 +160,7 @@ class IncidentForm extends React.Component {
           /> */}
 
 
-          <label htmlFor="image_url">Upload Photo</label>
+          {/* <label htmlFor="image_url">Upload Photo</label>
           <input
             name="image_url"
             type="file"
@@ -164,7 +168,7 @@ class IncidentForm extends React.Component {
             value={this.state.image_url}
             onChange={this.handleImageChange}
             accept=".png, .jpg, .jpeg"
-          />
+          /> */}
 
           <input type="submit" value="Submit" id="submitButton" />
           {/* <p aria-hidden="true" id="required-description">
@@ -173,7 +177,7 @@ class IncidentForm extends React.Component {
         </form>
         <CloseIcon
           id="close-button"
-          onClick={this.props.onClick}
+          onClick={this.props.showForm}
           style={{ cursor: "pointer" }}
         />
       </div>

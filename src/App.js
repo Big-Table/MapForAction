@@ -31,6 +31,7 @@ class App extends React.Component {
     },
     currentUser: null,
     grid: false,
+    lastIncidentPostedID: ''
   };
 
   componentDidMount() {
@@ -101,9 +102,18 @@ class App extends React.Component {
   handleUserNotLoggedIn = () => {
     alert('You must login before submitting an incident!')
   }
+
+  handleLastIncidentID = (id) => {
+    this.setState({
+      lastIncidentPostedID: id
+    })
+  }
+
+
   render() {
     console.log(this.state.currentUser)
     console.log(this.state.incidents);
+    console.log(this.state.lastIncidentPostedID)
     return (
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
@@ -130,7 +140,8 @@ class App extends React.Component {
             </div>
             {this.state.incidentForm && (
               <IncidentForm
-                onClick={this.handleShowForm}
+                lastIncident={this.handleLastIncidentID}
+                showForm={this.handleShowForm}
                 updateIncidents={this.updateIncidents}
               />
             )}
