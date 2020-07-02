@@ -101,7 +101,7 @@ const NavBar = (props) => {
           <br></br>
           <br></br>
               <span className={classes.span}> 
-              {/* {props.currentUser.moderator} */}
+              {props.currentUser && props.currentUser.firstName}
               </span>
           </div>
         </>
