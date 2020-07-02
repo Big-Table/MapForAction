@@ -4,6 +4,7 @@ import { postIncidents } from "../../requests/requests";
 import CloseIcon from "@material-ui/icons/Close";
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import Grid from '@material-ui/core/Grid'
+import { Checkbox } from "@material-ui/core";
 
 const incidentFormInitialState = {
   title: "",
@@ -14,7 +15,8 @@ const incidentFormInitialState = {
   petition: "",
   image_url: "",
   profilePicture: "", 
-  firstName: ""
+  firstName: "", 
+  checked: false
 };
 
 class IncidentForm extends React.Component {
@@ -89,6 +91,41 @@ class IncidentForm extends React.Component {
       );
   }
 
+  handleCheckBox = (event) => {
+    console.log('here i am')
+    this.setState({
+      checked: event.target.checked
+    }, () => {
+      if(this.state.checked === true){
+        this.setState({
+              firstName: '', 
+              profilePicture: ''
+            })
+      } 
+      if(this.state.checked === false){
+        this.setState({
+              firstName: this.props.currentUser.firstName, 
+              profilePicture: this.props.currentUser.profilePicture
+      })
+    }
+    })
+    
+  }
+
+    
+    // if(this.state.firstName !== ''){
+    //   this.setState({
+    //     firstName: '', 
+    //     profilePicture: ''
+    //   })
+    // } else {
+    //   this.setState({
+    //     firstName: this.props.currentUser.firstName, 
+    //     profilePicture: this.props.currentUser.profilePicture
+    //   })
+    // }
+  
+
   render() {
     console.log(this.state)
 
@@ -154,23 +191,31 @@ class IncidentForm extends React.Component {
               placeholder="Address or nearby location"
             />
 
-              <label htmlFor="organization">Organization</label>
-              <input
-                name="organization"
-                type="text"
-                placeholder="Add a link to related organization"
-                value={this.state.organization}
-                onChange={this.handleChange}
-              />
+            <label htmlFor="organization">Organization</label>
+            <input
+              name="organization"
+              type="text"
+              placeholder="Add a link to related organization"
+              value={this.state.organization}
+              onChange={this.handleChange}
+            />
 
-              <label htmlFor="petition">Petition</label>
-              <input
-                name="petition"
-                type="text"
-                placeholder="Add a link to related petition"
-                value={this.state.petition}
-                onChange={this.handleChange}
-              />
+            <label htmlFor="petition">Petition</label>
+            <input
+              name="petition"
+              type="text"
+              placeholder="Add a link to related petition"
+              value={this.state.petition}
+              onChange={this.handleChange}
+            />
+          
+            <label style={{display: 'flex', justifyContent: 'center', paddingRight: '30px'}}htmlFor="petition">
+            <Checkbox
+            type="checkbox"
+            checked={this.state.checked}
+            onChange={this.handleCheckBox}
+            />
+            Submit Anonymously</label>
 
             {/* <label htmlFor="image_url">Image</label>
             <input
@@ -193,6 +238,10 @@ class IncidentForm extends React.Component {
             /> */}
             </Grid>
           </Grid>
+        
+          <br></br>
+          <br></br>
+          <br></br>
 
             <input type="submit" value="Submit" id="submitButton" style={{borderStyle: "solid", borderColor: "black"}}/>
 
