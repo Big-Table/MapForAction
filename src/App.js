@@ -1,28 +1,23 @@
+import axios from "axios";
 import React from "react";
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import IncidentsContainer from "./containers/IncidentsContainer";
+import AddIncidentButton from "./components/buttons/AddIncidentButton";
+import AddQueueButton from "./components/buttons/AddQueueButton";
+import AddWhatsNextButton from "./components/buttons/AddWhatsNextButton";
+import ImageForm from "./components/forms/ImageForm";
+import IncidentForm from "./components/forms/IncidentForm";
+import Map from "./components/incidentDetails/Map";
+import IncidentQueueGrid from "./components/pendingEvents/IncidentQueueGrid";
+import WhatsNext from "./components/pendingEvents/WhatsNext";
 import IncidentDetailContainer from "./containers/IncidentDetailContainer";
+import IncidentsContainer from "./containers/IncidentsContainer";
+import Nav from "./navigation/Nav";
+import NoAccess from './navigation/NoAccess';
+import NotFound from './navigation/NotFound';
+import { getApprovedIncidents } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
-import Map from "./components/Map";
-import IncidentForm from "./components/IncidentForm";
-import AddIncidentButton from "./components/AddIncidentButton";
-import AddQueueButton from "./components/AddQueueButton";
-import IncidentQueueGrid from "./components/IncidentQueueGrid";
-import ImageForm from "./components/ImageForm"
-import Nav from "./Nav";
-import {
-  getIncidents,
-  getCurrentUser,
-  getApprovedIncidents,
-} from "./requests/requests.js";
-import axios from "axios";
-import _ from 'lodash';
-import NoAccess from './NoAccess'
-import NotFound from './NotFound'
-import WhatsNext from "./components/WhatsNext";
-import AddWhatsNextButton from "./components/AddWhatsNextButton";
 
 class App extends React.Component {
   state = {

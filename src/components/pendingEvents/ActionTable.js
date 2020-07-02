@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,39 +7,24 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import EditForm from "./EditForm";
+import React, { useEffect, useState } from "react";
 import {
-  getPendingIncidents,
-  patchApproveIncident,
-  patchDenyIncident,
-  patchDenyTweet,
-} from "../requests/requests";
+  getPendingActions,
+  patchApproveAction,
+  patchDenyAction,
+} from "../../requests/requests";
+import EditActionForm from "../forms/EditActionForm";
 
 const columns = [
   { id: "title", label: "Title", minWidth: 170 },
-  { id: "description", label: "Description", minWidth: 170 },
-  { id: "date", label: "Date", minWidth: 100 },
-
   {
-    id: "location",
-    label: "Location",
-    minWidth: 100,
-    // align: 'right',
-  },
-  {
-    id: "organization",
-    label: "Organization",
-    minWidth: 100,
-    // align: 'right',
-  },
-  {
-    id: "petition",
-    label: "Petition",
+    id: "actionType",
+    label: "ActionType",
     minWidth: 100,
   },
   {
-    id: "image_url",
-    label: "Image_URL",
+    id: "url",
+    label: "URL",
     minWidth: 100,
   },
   {
@@ -60,30 +44,8 @@ const columns = [
   },
 ];
 
-function createData(
-  title,
-  description,
-  date,
-  location,
-  organization,
-  petition,
-  image_url,
-  approve,
-  reject,
-  edit
-) {
-  return {
-    title,
-    description,
-    date,
-    location,
-    organization,
-    petition,
-    image_url,
-    approve,
-    reject,
-    edit,
-  };
+function createData(title, actionType, url, approve, reject, edit) {
+  return { title, actionType, url, approve, reject, edit };
 }
 
 let rows2 = [];
@@ -134,29 +96,23 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
-  const [incidents, setIncidents] = React.useState([]);
+  const [actions, setActions] = React.useState([]);
 
   useEffect(() => {
     console.log("hi");
-
-    getPendingIncidents().then((body) => {
-      setIncidents(body.data);
+    getPendingActions().then((body) => {
+      setActions(body.data);
       let rows2 = [];
-      body.data.forEach((incident) => {
-        console.log(incident);
-
+      body.data.forEach((action) => {
+        console.log(action);
         rows2.push(
           createData(
-            incident.title,
-            incident.description,
-            incident.date,
-            incident.location,
-            incident.organization,
-            incident.petition,
-            incident.image_url,
-            incident._id,
-            incident._id,
-            incident._id
+            action.title,
+            action.action_type,
+            action.url,
+            action._id,
+            action._id,
+            action._id
           )
         );
       });
@@ -165,50 +121,46 @@ export default function StickyHeadTable(props) {
   }, [props.update, props.approve]);
 
   const handleApprove = (id) => {
-    patchApproveIncident({ _id: id })
+    patchApproveAction({ _id: id })
     .then(() => {
-        props.approve()
-      })
-    
-    alert("this has been approved");
+      props.approve()
+    })
+    alert("This has been approved");
   };
 
   const handleDeny = (id) => {
-    patchDenyIncident({ _id: id })
+    patchDenyAction({ _id: id })
     .then(() => {
-        props.approve()
-      })
-    
-    alert("this has been denied");
+      props.approve()
+    })
+    alert("This has been rejected");
   };
 
-  const [editForm, setEditForm] = useState(false);
+  const [editActionForm, setEditForm] = useState(false);
 
-  const [incident, setIncident] = useState();
+  const [action, setAction] = useState();
 
-  const handleEditForm = (id) => {
-    let incident = incidents.filter((incident) => incident._id === id);
-    setIncident(incident);
-    setEditForm(!editForm);
+  const handleEditActionForm = (id) => {
+    console.log(actions);
+    console.log(id);
+    let action = actions.filter((action) => action._id === id);
+    console.log(action);
+    setAction(action);
+    setEditForm(!editActionForm);
   };
 
   const [rows, setRows] = useState([]);
 
-  //   const [update, setUpdate] = useState(false)
-
-  //   const handleUpdate = () => {
-  //       setUpdate(!update)
-  //   }
-
   return (
     <>
-      {editForm && (
-        <EditForm
+      {editActionForm && (
+        <EditActionForm
+          action={action}
+          edit={handleEditActionForm}
           update={props.update}
-          edit={handleEditForm}
-          incident={incident}
-        ></EditForm>
+        ></EditActionForm>
       )}
+      {/* {editTweetForm && <EditTweetForm update={props.update} tweet={tweet} edit={handleEditTweetForm} ></EditTweetForm>} */}
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
@@ -252,7 +204,7 @@ export default function StickyHeadTable(props) {
                                   : value}
                                 <button
                                   className={classes.button}
-                                  onClick={() => handleEditForm(value)}
+                                  onClick={() => handleEditActionForm(value)}
                                 >
                                   Edit
                                 </button>
@@ -260,17 +212,6 @@ export default function StickyHeadTable(props) {
                             );
                           }
 
-                          if (column.id === "image_url") {
-                            return (
-                              <TableCell key={column.id} align={column.align}>
-                                <img
-                                  className={classes.image}
-                                  src={value}
-                                  alt="incident-img"
-                                ></img>
-                              </TableCell>
-                            );
-                          }
                           if (column.id === "approve") {
                             return (
                               <TableCell key={column.id} align={column.align}>
@@ -318,7 +259,7 @@ export default function StickyHeadTable(props) {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={incidents.length}
+          count={actions.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

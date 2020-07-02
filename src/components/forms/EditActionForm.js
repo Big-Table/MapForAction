@@ -1,6 +1,6 @@
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
-import { patchAction } from "../requests/requests";
+import { patchAction } from "../../requests/requests";
 import "./IncidentForm.css";
 
 class EditActionForm extends React.Component {

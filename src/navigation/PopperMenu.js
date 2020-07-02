@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
-import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
 import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import PersonIcon from "@material-ui/icons/Person";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,7 +77,7 @@ export default function MenuListComposition(props) {
         {!props.currentUser ? (
           <a href="/auth/google">
             <img
-              src={require("./svgs/btn_google_signin_dark_normal_web@2x.png")}
+              src={require("../svgs/btn_google_signin_dark_normal_web@2x.png")}
               alt="google-login"
               width="200px"
               height="50px"

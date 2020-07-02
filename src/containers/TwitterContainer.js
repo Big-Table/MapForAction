@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import React, { useEffect, useState } from "react";
-import Tweet from "../components/Tweet";
+import Tweet from "../components/incidentDetails/Tweet";
 import { getApprovedTweets } from "../requests/requests";
 import "./TwitterContainer.css";
 

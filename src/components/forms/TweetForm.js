@@ -1,7 +1,7 @@
 import React from "react";
 import "./actionForm.css";
 import CloseIcon from "@material-ui/icons/Close";
-import { postTweets } from "../requests/requests";
+import { postTweets } from "../../requests/requests";
 
 class TweetForm extends React.Component {
 

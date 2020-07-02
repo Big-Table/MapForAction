@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import React, { useEffect } from "react";
-import Incident from "../components/Incident";
+import Incident from "../components/incidentDetails/Incident";
 import _ from 'lodash';
 
 const useStyles = makeStyles({
