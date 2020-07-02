@@ -38,7 +38,7 @@ function WhatsNext(){
                     we can make this information actionable. 
                 </li>
                 <li>It uses a moderator system to make sure not just any information can be uploaded.</li>
-                <li>Contributors can help by suggesting incidents, actions and tweets.</li>
+                <li>Contributors can help by suggesting incidents, actions and tweets by signing in through Google</li>
             </ul>
 
             <p>
@@ -55,9 +55,8 @@ function WhatsNext(){
                 <li>Expand our moderator system.</li>
             </ul>
             <h5>
-                If you are a software engineer and would like to contribute please visit our Github.
+                If you are a software engineer and would like to contribute please visit our <a href="https://github.com/Big-Table/MapForAction" style={{textDecoration: "underline"}}>Github</a> and read our Readme. 
                 <br></br>
-                Thanks for checking us out! Feel free to contribute via this donation to keep the site running... and if you want to contribute to the code let us know! 
                 <br></br>Black Lives Matter, we remember and honor all victims depicted on this site. 
             </h5>
            
