@@ -91,20 +91,20 @@ class Map extends Component {
     }
   };
 
-  getBounds = (map) => {
-    let bounds = map.getBounds();
-    let ne = bounds.getNorthEast();
-    let sw = bounds.getSouthWest();
+  // getBounds = (map) => {
+  //   let bounds = map.getBounds();
+  //   let ne = bounds.getNorthEast();
+  //   let sw = bounds.getSouthWest();
 
-    return {ne, switch (key) {
-      case value:
-        
-        break;
-    
-      default:
-        break;
-    }}
-  };
+  //   return {ne, switch (key) {
+  //     case value:
+
+  //       break;
+
+  //     default:
+  //       break;
+  //   }}
+  // };
 
   render() {
     return (

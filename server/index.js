@@ -6,14 +6,12 @@ const cors = require("cors");
 const keys = require("./config/keys");
 const bodyParser = require("body-parser");
 
-
 //models
 require("./models/Incident");
 require("./models/User");
 require("./models/Tweet");
 require("./models/Action");
 require("./services/passport");
-
 
 mongoose
   .connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -37,8 +35,8 @@ app.use(
 );
 
 //??? fixes payload too large issue
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 //parses all request to json
 app.use(express.json());
 
@@ -54,8 +52,19 @@ app.use("/actions", require("./routes/actionRoutes"));
 app.use("/tweets", require("./routes/tweetRoutes"));
 app.use("/stats", require("./routes/statsRoutes"));
 
+if (process.env.NODE_ENV === "production") {
+  // Express will serve up production assets
+  // like our main.js file, or main.css file!
+  app.use(express.static("build"));
+
+  // Express will serve up the index.html file
+  // if it doesn't recognize the route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 //starting back-end on port 5000
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
-
