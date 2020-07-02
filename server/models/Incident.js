@@ -19,7 +19,9 @@ const IncidentSchema = new Schema(
     status: String,
     image: {
       type: Buffer
-    }
+    }, 
+    profilePicture: String, 
+    firstName: String
   },
   {
     timestamps: true,

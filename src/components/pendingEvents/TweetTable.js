@@ -161,7 +161,7 @@ export default function StickyHeadTable(props) {
                   if(column.id === 'edit'){
                       return (
                           <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === 'number' ? column.format(value) : value}
+                              {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
                               <button 
                                className={classes.button}
                                onClick={() => handleEditTweetForm(value)}>
@@ -173,7 +173,7 @@ export default function StickyHeadTable(props) {
                   if(column.id === 'approve') {
                       return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                            {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
                               <button 
                               className={classes.button}
                               onClick={() => handleApprove(value)}
@@ -183,7 +183,7 @@ export default function StickyHeadTable(props) {
                   } else if(column.id === 'reject'){
                       return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                            {/* {column.format && typeof value === 'number' ? column.format(value) : value} */}
                             <button 
                             className={classes.button}
                             onClick={() => handleDeny(value)}

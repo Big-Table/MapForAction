@@ -9,12 +9,12 @@ class ActionForm extends React.Component {
     title: "",
     action_type: "",
     url: "",
-    incident_id: ""
+    _incident: ""
   }
 
   componentDidMount(){
     this.setState({
-      incident_id: this.props.incident._id
+      _incident: this.props.incident._id
     })
   }
 
@@ -33,7 +33,7 @@ class ActionForm extends React.Component {
         title: "",
         action_type: "",
         url: "",
-        incident_id: ""
+        _incident: ""
     })
     this.props.handleClick()
     this.props.refresh()

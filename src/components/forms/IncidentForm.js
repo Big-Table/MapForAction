@@ -3,6 +3,8 @@ import "./IncidentForm.css";
 import { postIncidents } from "../../requests/requests";
 import CloseIcon from "@material-ui/icons/Close";
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import Grid from '@material-ui/core/Grid'
+import { Checkbox } from "@material-ui/core";
 
 const incidentFormInitialState = {
   title: "",
@@ -12,6 +14,9 @@ const incidentFormInitialState = {
   organization: "",
   petition: "",
   image_url: "",
+  profilePicture: "", 
+  firstName: "", 
+  checked: false
 };
 
 class IncidentForm extends React.Component {
@@ -21,6 +26,15 @@ class IncidentForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount(){
+    this.setState({
+      profilePicture: this.props.currentUser.profilePicture,
+      firstName: this.props.currentUser.firstName
+    })
+  }
+
+  
 
   handleChange(event) {
     this.setState({
@@ -77,101 +91,161 @@ class IncidentForm extends React.Component {
       );
   }
 
+  handleCheckBox = (event) => {
+    console.log('here i am')
+    this.setState({
+      checked: event.target.checked
+    }, () => {
+      if(this.state.checked === true){
+        this.setState({
+              firstName: '', 
+              profilePicture: ''
+            })
+      } 
+      if(this.state.checked === false){
+        this.setState({
+              firstName: this.props.currentUser.firstName, 
+              profilePicture: this.props.currentUser.profilePicture
+      })
+    }
+    })
+    
+  }
+
+    
+    // if(this.state.firstName !== ''){
+    //   this.setState({
+    //     firstName: '', 
+    //     profilePicture: ''
+    //   })
+    // } else {
+    //   this.setState({
+    //     firstName: this.props.currentUser.firstName, 
+    //     profilePicture: this.props.currentUser.profilePicture
+    //   })
+    // }
+  
 
   render() {
+    console.log(this.state)
+
     return (
       <div id="incidentForm">
         <h2>Report an Incident</h2>
         <form onSubmit={this.handleSubmit} id="form">
-          <label htmlFor="title">
-            Title<span className="required">*</span>
-          </label>
-          <input
-            name="title"
-            type="text"
-            maxlength="90"
-            placeholder="Write the incident title"
-            aria-describedby="required-description"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <label htmlFor="title">
+                Title<span className="required">*</span>
+              </label>
+              
+              <input
+                name="title"
+                type="text"
+                maxlength="90"
+                placeholder="Write the incident title"
+                aria-describedby="required-description"
+                value={this.state.title}
+                onChange={this.handleChange}
+              />
 
-          <label htmlFor="description">
-            Explain what you saw<span className="required">*</span>
-          </label>
-          <textarea
-            id="descriptionInput"
-            name="description"
-            type="text"
-            rows="5"
-            placeholder="The more details, the better!"
-            aria-describedby="required-description"
-            value={this.state.description}
-            onChange={this.handleChange}
-          />
+              <label htmlFor="description">
+                Explain what you saw<span className="required">*</span>
+              </label>
+              <textarea
+                id="descriptionInput"
+                name="description"
+                type="text"
+                rows="5"
+                placeholder="The more details, the better!"
+                aria-describedby="required-description"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
+            
+              <label htmlFor="date">
+                Date<span className="required">*</span>
+              </label>
+              <input
+                id="dateInput"
+                name="date"
+                type="date"
+                rows="5"
+                placeholder="Date"
+                aria-describedby="required-date"
+                value={this.state.date}
+                onChange={this.handleChange}
+                /> 
+              </Grid>
+              {/* <Grid item md={1}>
 
-          <label htmlFor="date">
-            Date<span className="required">*</span>
-          </label>
-          <input
-            id="dateInput"
-            name="date"
-            type="date"
-            rows="5"
-            placeholder="Date"
-            aria-describedby="required-date"
-            value={this.state.date}
-            onChange={this.handleChange}
-          />
+              </Grid> */}
 
-          <label htmlFor="lat">
-            Location<span className="required">*</span>
-          </label>
+            <Grid item md={6}>
+              <label htmlFor="lat">
+                Location<span className="required">*</span>
+              </label>
 
-          <GooglePlacesAutocomplete
-            onSelect={(description) => this.handleAddress(description.description)}
-            placeholder="Address or nearby location"
-          />
+            <GooglePlacesAutocomplete
+              onSelect={(description) => this.handleAddress(description.description)}
+              placeholder="Address or nearby location"
+            />
 
-          <label htmlFor="organization">Organization</label>
-          <input
-            name="organization"
-            type="text"
-            placeholder="Add a link to related organization"
-            value={this.state.organization}
-            onChange={this.handleChange}
-          />
+            <label htmlFor="organization">Organization</label>
+            <input
+              name="organization"
+              type="text"
+              placeholder="Add a link to related organization"
+              value={this.state.organization}
+              onChange={this.handleChange}
+            />
 
-          <label htmlFor="petition">Petition</label>
-          <input
-            name="petition"
-            type="text"
-            placeholder="Add a link to related petition"
-            value={this.state.petition}
-            onChange={this.handleChange}
-          />
+            <label htmlFor="petition">Petition</label>
+            <input
+              name="petition"
+              type="text"
+              placeholder="Add a link to related petition"
+              value={this.state.petition}
+              onChange={this.handleChange}
+            />
+          
+            <label style={{display: 'flex', justifyContent: 'center', paddingRight: '30px'}}htmlFor="petition">
+            <Checkbox
+            type="checkbox"
+            checked={this.state.checked}
+            onChange={this.handleCheckBox}
+            style={{ color: "black" }}
+            />
+            Submit Anonymously</label>
 
-          {/* <label htmlFor="image_url">Image</label>
-          <input
-            name="image_url"
-            type="text"
-            placeholder="Paste an Image URL"
-            value={this.state.image_url}
-            onChange={this.handleChange}
-          /> */}
+            {/* <label htmlFor="image_url">Image</label>
+            <input
+              name="image_url"
+              type="text"
+              placeholder="Paste an Image URL"
+              value={this.state.image_url}
+              onChange={this.handleChange}
+            /> */}
 
 
-          {/* <label htmlFor="image_url">Upload Photo</label>
-          <input
-            name="image_url"
-            type="file"
-            id="imageUpload"
-            value={this.state.image_url}
-            onChange={this.handleImageChange}
-            accept=".png, .jpg, .jpeg"
-          /> */}
+            {/* <label htmlFor="image_url">Upload Photo</label>
+            <input
+              name="image_url"
+              type="file"
+              id="imageUpload"
+              value={this.state.image_url}
+              onChange={this.handleImageChange}
+              accept=".png, .jpg, .jpeg"
+            /> */}
+            </Grid>
+          </Grid>
+        
+          <br></br>
+          <br></br>
+          <br></br>
 
-          <input type="submit" value="Submit" id="submitButton" />
+            <input type="submit" value="Submit" id="submitButton" style={{borderStyle: "solid", borderColor: "black"}}/>
+
           {/* <p aria-hidden="true" id="required-description">
             <span className="required">*</span>Required field
           </p> */}

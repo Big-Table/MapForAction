@@ -88,6 +88,7 @@ export default function MenuListComposition(props) {
             <Avatar
                 className={classes.smallPic}
                 ref={anchorRef}
+                src={props.currentUser.profilePicture}
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
@@ -95,7 +96,8 @@ export default function MenuListComposition(props) {
                   width: "100px",
                   height: "100px"
                 }}
-        >{props.currentUser.moderator ? "Big Mod" : "Logged In"}</Avatar>
+              >
+              </Avatar>
         </div>
         )
         }
