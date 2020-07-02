@@ -1,10 +1,11 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core'
-import FlexColumn from './Theme/FlexColumn'
+import FlexColumn from '../Theme/FlexColumn'
 
 
 const getStyles = makeStyles({
     root: {
+        
         fontSize: 30,
         position: 'absolute',
         textAlign: 'left',
@@ -19,7 +20,7 @@ const getStyles = makeStyles({
 
 
 
-function NoAccess(){
+function NotFound(){
 
     const classes = getStyles()
    
@@ -36,7 +37,7 @@ function NoAccess(){
                 <br></br>
 
                 <div style={{textAlign: 'center'}}>
-                    You do not have permission to access this. Please go back to the home screen.
+                    This Page Does Not Exist!
                 </div>
               
           
@@ -49,4 +50,4 @@ function NoAccess(){
     )
 }
 
-export default NoAccess
+export default NotFound

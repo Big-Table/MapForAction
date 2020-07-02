@@ -1,6 +1,6 @@
 import React from "react";
 import "./IncidentForm.css";
-import { postIncidents } from "../requests/requests";
+import { postIncidents } from "../../requests/requests";
 import CloseIcon from "@material-ui/icons/Close";
 import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 

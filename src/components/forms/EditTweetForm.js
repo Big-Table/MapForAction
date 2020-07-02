@@ -1,6 +1,6 @@
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
-import { patchTweet } from "../requests/requests";
+import { patchTweet } from "../../requests/requests";
 import "./IncidentForm.css";
 
 class IncidentForm extends React.Component {

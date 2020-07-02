@@ -1,15 +1,11 @@
-import React from "react";
-import { useHistory, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import PopperMenu from "./PopperMenu";
-import TextField from "@material-ui/core/TextField";
-import logo from "./logo.png";
-import zIndex from "@material-ui/core/styles/zIndex";
-import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import _ from 'lodash';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextField from "@material-ui/core/TextField";
+import SearchIcon from '@material-ui/icons/Search';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import logo from "./logo.png";
+import PopperMenu from "./PopperMenu";
 
 
 const useStyles = makeStyles({

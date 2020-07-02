@@ -8,8 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import EditTweetForm from './EditTweetForm'
-import { getPendingTweets, patchApproveTweet, patchDenyTweet } from '../requests/requests'
+import EditTweetForm from '../forms/EditTweetForm'
+import { getPendingTweets, patchApproveTweet, patchDenyTweet } from '../../requests/requests'
 
 const columns = [
   { id: 'url', label: 'URL', minWidth: 170 },

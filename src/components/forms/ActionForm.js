@@ -1,7 +1,7 @@
 import React from "react";
 import "./actionForm.css";
 import CloseIcon from "@material-ui/icons/Close";
-import { postActions } from "../requests/requests";
+import { postActions } from "../../requests/requests";
 
 class ActionForm extends React.Component {
 

@@ -1,6 +1,6 @@
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
-import { patchIncident } from "../requests/requests";
+import { patchIncident } from "../../requests/requests";
 import "./IncidentForm.css";
 // const incidentFormInitialState = {
 //   title: "",
