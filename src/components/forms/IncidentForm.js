@@ -84,81 +84,81 @@ class IncidentForm extends React.Component {
       <div id="incidentForm">
         <h2>Report an Incident</h2>
         <form onSubmit={this.handleSubmit} id="form">
-          <Grid container>
-            <Grid item md={5}>
-            <label htmlFor="title">
-              Title<span className="required">*</span>
-            </label>
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <label htmlFor="title">
+                Title<span className="required">*</span>
+              </label>
+              
+              <input
+                name="title"
+                type="text"
+                maxlength="90"
+                placeholder="Write the incident title"
+                aria-describedby="required-description"
+                value={this.state.title}
+                onChange={this.handleChange}
+              />
+
+              <label htmlFor="description">
+                Explain what you saw<span className="required">*</span>
+              </label>
+              <textarea
+                id="descriptionInput"
+                name="description"
+                type="text"
+                rows="5"
+                placeholder="The more details, the better!"
+                aria-describedby="required-description"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
             
-            <input
-              name="title"
-              type="text"
-              maxlength="90"
-              placeholder="Write the incident title"
-              aria-describedby="required-description"
-              value={this.state.title}
-              onChange={this.handleChange}
-            />
-
-            <label htmlFor="description">
-              Explain what you saw<span className="required">*</span>
-            </label>
-            <textarea
-              id="descriptionInput"
-              name="description"
-              type="text"
-              rows="5"
-              placeholder="The more details, the better!"
-              aria-describedby="required-description"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-           
-            <label htmlFor="date">
-              Date<span className="required">*</span>
-            </label>
-            <input
-              id="dateInput"
-              name="date"
-              type="date"
-              rows="5"
-              placeholder="Date"
-              aria-describedby="required-date"
-              value={this.state.date}
-              onChange={this.handleChange}
-              /> 
+              <label htmlFor="date">
+                Date<span className="required">*</span>
+              </label>
+              <input
+                id="dateInput"
+                name="date"
+                type="date"
+                rows="5"
+                placeholder="Date"
+                aria-describedby="required-date"
+                value={this.state.date}
+                onChange={this.handleChange}
+                /> 
               </Grid>
-              <Grid item md={1}>
+              {/* <Grid item md={1}>
 
-              </Grid>
+              </Grid> */}
 
-            <Grid item md={5}>
-            <label htmlFor="lat">
-              Location<span className="required">*</span>
-            </label>
+            <Grid item md={6}>
+              <label htmlFor="lat">
+                Location<span className="required">*</span>
+              </label>
 
             <GooglePlacesAutocomplete
               onSelect={(description) => this.handleAddress(description.description)}
               placeholder="Address or nearby location"
             />
 
-            <label htmlFor="organization">Organization</label>
-            <input
-              name="organization"
-              type="text"
-              placeholder="Add a link to related organization"
-              value={this.state.organization}
-              onChange={this.handleChange}
-            />
+              <label htmlFor="organization">Organization</label>
+              <input
+                name="organization"
+                type="text"
+                placeholder="Add a link to related organization"
+                value={this.state.organization}
+                onChange={this.handleChange}
+              />
 
-            <label htmlFor="petition">Petition</label>
-            <input
-              name="petition"
-              type="text"
-              placeholder="Add a link to related petition"
-              value={this.state.petition}
-              onChange={this.handleChange}
-            />
+              <label htmlFor="petition">Petition</label>
+              <input
+                name="petition"
+                type="text"
+                placeholder="Add a link to related petition"
+                value={this.state.petition}
+                onChange={this.handleChange}
+              />
 
             {/* <label htmlFor="image_url">Image</label>
             <input
@@ -182,7 +182,7 @@ class IncidentForm extends React.Component {
             </Grid>
           </Grid>
 
-          <input type="submit" value="Submit" id="submitButton" style={{borderStyle: "solid", borderColor: "black"}}/>
+            <input type="submit" value="Submit" id="submitButton" style={{borderStyle: "solid", borderColor: "black"}}/>
 
           {/* <p aria-hidden="true" id="required-description">
             <span className="required">*</span>Required field
