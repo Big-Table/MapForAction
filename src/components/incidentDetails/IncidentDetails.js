@@ -89,11 +89,13 @@ const IncidentDetails= (props) => {
           <FlexRow style={{paddingLeft: '20px'}}>
             {/* tiny avatar, reported by: anonymous */}
             
-            <PersonIcon className={classes.smallPic}></PersonIcon>
-            <div className={classes.reporter}>Reported by: Anonymous</div>
+            <Avatar 
+            src={incident.profilePicture}
+            className={classes.smallPic}></Avatar>
+          <div className={classes.reporter}>Reported by: {incident.firstName}</div>
             <div className={classes.reporter}>-</div>
 
-            <div className={classes.reporter}>{incident? incident.date : "Date Unknown"} </div>
+            <div className={classes.reporter}>{incident.date? incident.date : "Date Unknown"} </div>
             {/* Locaiton: */}
             {/* {incident.Lat} { incident.lng} */}
           </FlexRow>

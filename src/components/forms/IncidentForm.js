@@ -12,6 +12,8 @@ const incidentFormInitialState = {
   organization: "",
   petition: "",
   image_url: "",
+  profilePicture: "", 
+  firstName: ""
 };
 
 class IncidentForm extends React.Component {
@@ -21,6 +23,15 @@ class IncidentForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount(){
+    this.setState({
+      profilePicture: this.props.currentUser.profilePicture,
+      firstName: this.props.currentUser.firstName
+    })
+  }
+
+  
 
   handleChange(event) {
     this.setState({
@@ -77,8 +88,9 @@ class IncidentForm extends React.Component {
       );
   }
 
-
   render() {
+    console.log(this.state)
+
     return (
       <div id="incidentForm">
         <h2>Report an Incident</h2>
