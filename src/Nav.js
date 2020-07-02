@@ -48,6 +48,8 @@ const useStyles = makeStyles({
   span: {
     color: "white",
     fontSize: "20px",
+    display: 'flex', 
+    justifyContent: 'center'
   },
   test: {
       width: 100

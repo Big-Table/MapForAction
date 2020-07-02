@@ -8,7 +8,7 @@ const Action = require("../models/Action");
 
 const IncidentSchema = new Schema(
   {
-    title: { type: String, unique: true },
+    title: String,
     description: String,
     date: String,
     image_url: String,

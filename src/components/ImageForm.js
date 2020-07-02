@@ -22,6 +22,22 @@ const getStyles = makeStyles({
         display: 'flex', 
         justifyContent: 'center',
         alignItems: 'center',
+    }, 
+    button: {
+        backgroundColor: "#000000",
+        color: "#FCC42C",
+        borderStyle: "solid",
+        borderColor: "#FCC42C",
+        borderWidth: 1,
+        height: 40,
+        width: 150,
+        borderRadius: 20,
+        fontFamily: 'Work Sans',
+        fontWeight: 700,
+        cursor: "pointer",
+        outline: "none",
+        display: 'flex', 
+        justifyContent: 'center',
     }
 })
 function ImageForm(props){
@@ -51,8 +67,7 @@ function ImageForm(props){
           body: formData
         })
         
-        props.submitted()
-        alert("Thank you for effort! Your incident is pending review!")
+        // props.submitted()
       }
 
 
@@ -62,16 +77,21 @@ function ImageForm(props){
             <h2>Your Incident has been reported! </h2>
             <h3>Please upload an image for your incident</h3>
             <div className={classes.center}>
-            <form  style={{paddingLeft: '110px'}}>
+            <form  className={classes.center}>
                 <label htmlFor="image">Upload Photo</label>
                 <input
+                    style={{paddingLeft: '320px'}}
                     name="image"
                     type="file"
                     id="imageUpload"
                     // value={this.state.image_url}
                     onChange={handleImageChange}
                     accept=".png, .jpg, .jpeg"
+                
                 />
+                <br></br>
+                <br></br>
+                <button className={classes.button} onClick={() => props.submitted(true)}>Finished!</button>
             </form>
             </div>
             <CloseIcon

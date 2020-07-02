@@ -21,6 +21,9 @@ import axios from "axios";
 import _ from 'lodash';
 import NoAccess from './NoAccess'
 import NotFound from './NotFound'
+import WhatsNext from "./components/WhatsNext";
+import AddWhatsNextButton from "./components/AddWhatsNextButton";
+
 class App extends React.Component {
   state = {
     incidents: [],
@@ -35,6 +38,7 @@ class App extends React.Component {
     grid: false,
     lastIncidentPostedID: '', 
     submitted: false,
+    FAQ: false, 
   };
 
   componentDidMount() {
@@ -116,9 +120,18 @@ class App extends React.Component {
     })
   }
 
-  handleSubmittedIncident = () => {
+  handleSubmittedIncident = (present) => {
     this.setState({
       submitted: !this.state.submitted
+    })
+    if(this.state.submitted === true && present){
+      alert("Thank you for effort! Your incident is pending review!")
+    }
+  }
+
+  handleFAQ = () => {
+    this.setState({
+      FAQ: !this.state.FAQ
     })
   }
 
@@ -142,6 +155,8 @@ class App extends React.Component {
               setMapCenter={this.setMapCenter}
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
+              <AddWhatsNextButton onClick={this.handleFAQ}></AddWhatsNextButton>
+              {this.state.FAQ && <WhatsNext></WhatsNext>}
               { this.state.currentUser ?
                <AddIncidentButton onClick={this.handleShowForm} />
                : 
