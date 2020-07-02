@@ -53,11 +53,12 @@ function WhatsNext(){
             <ul>
                 <li>Give users the ability to request edits to incidents and actions.</li>
                 <li>Expand our moderator system.</li>
+                <li>Mobile and tablet integration.</li>
             </ul>
             <h5>
                 If you are a software engineer and would like to contribute please visit our <a href="https://github.com/Big-Table/MapForAction" style={{textDecoration: "underline"}}>Github</a> and read our Readme. 
                 <br></br>
-                <br></br>Black Lives Matter, we remember and honor all victims depicted on this site. 
+                <br></br>Black Lives Matter. We remember and honor all victims depicted on this site. 
             </h5>
            
         </div>
