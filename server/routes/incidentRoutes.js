@@ -30,6 +30,8 @@ router.post("/",  async (req, res) => {
     lng,
     organization,
     petition,
+    profilePicture, 
+    firstName
   } = req.body;
 
   const newIncident = new Incident({
@@ -42,9 +44,10 @@ router.post("/",  async (req, res) => {
     organization,
     petition,
     status: "pending",
+    profilePicture,
+    firstName
   });
    
-  //  newIncident.image_url = `/incidents/${_id}/image`
    console.log(newIncident)
   
    try {

@@ -173,6 +173,7 @@ class App extends React.Component {
                 lastIncident={this.handleLastIncidentID}
                 showForm={this.handleShowForm}
                 updateIncidents={this.updateIncidents}
+                currentUser={this.state.currentUser}
               />
             )}
             {this.state.incidentForm ||

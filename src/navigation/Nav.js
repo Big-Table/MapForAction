@@ -45,7 +45,8 @@ const useStyles = makeStyles({
     color: "white",
     fontSize: "20px",
     display: 'flex', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    // paddingLeft: '20px'
   },
   test: {
       width: 100
@@ -101,7 +102,7 @@ const NavBar = (props) => {
           <br></br>
           <br></br>
               <span className={classes.span}> 
-              {props.currentUser && props.currentUser.firstName}
+              {props.currentUser && props.currentUser.firstName.toUpperCase()}, view current injustices!
               </span>
           </div>
         </>
