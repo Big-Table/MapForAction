@@ -25,20 +25,40 @@ function WhatsNext(){
 
     return(
         <div className={classes.root}>
-            <h3>This is what we have planned for the future...</h3>
+            <h3>About this app...</h3>
+
+            <p>MapForAction was created to map out instances of police brutality and racial injustice while giving
+            users the tools to help take action.
+            </p>
+            
             <ul>
-                <li>blah</li>
-                <li>blah</li>
-                <li>blah</li>
+                <li>The app attempts to clarify incidents of police violence which adversely effect Black people and 
+                    People of Color.</li>
+                <li>By bringing together information about these incidents and coupling that information with action items 
+                    we can make this information actionable. 
+                </li>
+                <li>It uses a moderator system to make sure not just any information can be uploaded.</li>
+                <li>Contributors can help by suggesting incidents, actions and tweets.</li>
             </ul>
-            <h4>This was created by...</h4>
+
+            <p>
+                We need you to help crowdsource this information in a way that makes it clear and concise.
+                With ways to take action on what we see happening.
+                </p>
+
+            <p>MapForAction was created by a team of software engineers,
+            one designer and one product manager for the NYC Coders: Hack for #BlackLivesMatter.</p>
+
+            <h4>This is what we have planned for the future...</h4>
             <ul>
-                <li>blah</li>
-                <li>blah</li>
-                <li>blah</li>
+                <li>Give users the ability to request edits to incidents and actions.</li>
+                <li>Expand our moderator system.</li>
             </ul>
             <h5>
+                If you are a software engineer and would like to contribute please visit our Github.
+                <br></br>
                 Thanks for checking us out! Feel free to contribute via this donation to keep the site running... and if you want to contribute to the code let us know! 
+                <br></br>Black Lives Matter, we remember and honor all victims depicted on this site. 
             </h5>
            
         </div>

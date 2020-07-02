@@ -2,11 +2,11 @@
   position: absolute;
   text-align: left;
   /* margin: 2px; */
-  width: 45%;
-  height: 100%;
+  width: 50%;
+  height: 66%;
   background-color: #FCC42C;
   padding: 20px;
-  top: 1px;
+  top: 10%;
   left: 25%;
   z-index: 10;
   /* max-width: 50vh; */
@@ -76,6 +76,7 @@ input#submitButton {
   outline: none;
   display: flex;
   justify-content: center;
+  
 }
 
 #descriptionInput {
