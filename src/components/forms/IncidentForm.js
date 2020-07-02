@@ -214,6 +214,7 @@ class IncidentForm extends React.Component {
             type="checkbox"
             checked={this.state.checked}
             onChange={this.handleCheckBox}
+            style={{ color: "black" }}
             />
             Submit Anonymously</label>
 
