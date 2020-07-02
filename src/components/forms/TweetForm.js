@@ -7,12 +7,12 @@ class TweetForm extends React.Component {
 
   state = {
     url: "",
-    incident_id: ""
+    _incident: ""
   }
 
   componentDidMount(){
     this.setState({
-        incident_id: this.props.incident._id
+        _incident: this.props.incident._id
     })
   }
 
@@ -29,7 +29,7 @@ class TweetForm extends React.Component {
     postTweets(this.state)
     this.setState({
         url: "",
-        incident_id: ""
+        _incident: ""
     })
     this.props.tweetButton()
 

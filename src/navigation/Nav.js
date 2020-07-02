@@ -38,14 +38,16 @@ const useStyles = makeStyles({
     // display: "inline-block",
   },
   search: {
-    width: "32vw",
+    minWidth: '20px',
+    width: "100%",
     background: "grey",
   },
   span: {
     color: "white",
     fontSize: "20px",
     display: 'flex', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingLeft: '10px'
   },
   test: {
       width: 100
@@ -61,12 +63,13 @@ const NavBar = (props) => {
 //   }, 1000)
 
   console.log(props.search);
+  console.log(props.currentUser)
   return (
     <div>
       <div className={classes.root}>
         <div className={classes.wrapper}>
           <div className={classes.left}>
-            <img style={{ height: "100px", width: "250px" }} src={logo}></img>
+            <img style={{ height: "100px", width: "250px", paddingLeft: '10px'}} src={logo}></img>
           </div>
           <div className={classes.right}>
             <span>
@@ -79,7 +82,7 @@ const NavBar = (props) => {
    
       {!props.currentIncident && (
         <>
-        <div>
+        <div style={{position: 'relative'}}>
           <br></br>
           <TextField
             onChange={(event) => props.updateForm(event)}
@@ -99,7 +102,9 @@ const NavBar = (props) => {
           </TextField>
           <br></br>
           <br></br>
-          <span className={classes.span}>Incidents you should know about!</span>
+              <span className={classes.span}> 
+              {props.currentUser ? `${props.currentUser.firstName.toUpperCase()}, Here are some Incidents you should know about!` : 'Incidents you should know about!'}
+              </span>
           </div>
         </>
       )

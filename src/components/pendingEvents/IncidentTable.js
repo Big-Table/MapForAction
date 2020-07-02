@@ -247,9 +247,9 @@ export default function StickyHeadTable(props) {
                           if (column.id === "edit") {
                             return (
                               <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === "number"
+                                {/* {column.format && typeof value === "number"
                                   ? column.format(value)
-                                  : value}
+                                  : value} */}
                                 <button
                                   className={classes.button}
                                   onClick={() => handleEditForm(value)}
@@ -274,9 +274,9 @@ export default function StickyHeadTable(props) {
                           if (column.id === "approve") {
                             return (
                               <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === "number"
+                                {/* {column.format && typeof value === "number"
                                   ? column.format(value)
-                                  : value}
+                                  : value} */}
                                 <button
                                   className={classes.button}
                                   onClick={() => handleApprove(value)}
@@ -288,9 +288,9 @@ export default function StickyHeadTable(props) {
                           } else if (column.id === "reject") {
                             return (
                               <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === "number"
+                                {/* {column.format && typeof value === "number"
                                   ? column.format(value)
-                                  : value}
+                                  : value} */}
                                 <button
                                   className={classes.button}
                                   onClick={() => handleDeny(value)}

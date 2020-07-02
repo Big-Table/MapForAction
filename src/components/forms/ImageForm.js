@@ -24,11 +24,11 @@ const getStyles = makeStyles({
         alignItems: 'center',
     }, 
     button: {
-        backgroundColor: "#000000",
-        color: "#FCC42C",
+        backgroundColor: "#FCC42C",
+        color: "#000000",
         borderStyle: "solid",
-        borderColor: "#FCC42C",
-        borderWidth: 1,
+        borderColor: "black",
+        borderWidth: 2,
         height: 40,
         width: 150,
         borderRadius: 20,
@@ -38,6 +38,7 @@ const getStyles = makeStyles({
         outline: "none",
         display: 'flex', 
         justifyContent: 'center',
+        paddingTop: 2
     }
 })
 function ImageForm(props){
