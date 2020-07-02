@@ -61,6 +61,7 @@ const NavBar = (props) => {
 //   }, 1000)
 
   console.log(props.search);
+  console.log(props.currentUser)
   return (
     <div>
       <div className={classes.root}>
@@ -99,7 +100,9 @@ const NavBar = (props) => {
           </TextField>
           <br></br>
           <br></br>
-          <span className={classes.span}>Incidents you should know about!</span>
+              <span className={classes.span}> 
+              {/* {props.currentUser.moderator} */}
+              </span>
           </div>
         </>
       )
