@@ -9,7 +9,10 @@ const UserSchema = new Schema(
     moderator: {
       type: Boolean,
       default: false
-    }
+    }, 
+    profilePicture: String, 
+    firstName: String, 
+    lastName: String
   },
   {
     timestamps: true,

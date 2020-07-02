@@ -1,10 +1,10 @@
-import React from "react";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles, Card } from "@material-ui/core";
-import FlexColumn from "../Theme/FlexColumn";
-import FlexRow from "../Theme/FlexRow";
+import { Card, makeStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
+import Paper from "@material-ui/core/Paper";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import React from "react";
+import FlexColumn from "../../Theme/FlexColumn";
+import FlexRow from "../../Theme/FlexRow";
 
 const useStyles = makeStyles({
   root: {

@@ -1,15 +1,13 @@
-import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
-import {makeStyles} from '@material-ui/core'
-import CloseIcon from "@material-ui/icons/Close";
-import IncidentTable from './IncidentTable'
+import { makeStyles } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import TweetTable from './TweetTable'
-import ActionTable from './ActionTable'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import ActionTable from './ActionTable';
+import IncidentTable from './IncidentTable';
+import TweetTable from './TweetTable';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -96,7 +94,7 @@ const refreshApproveAction = () => {
 }
 
 //setting the type shown; incidents, tweets, or actions
-const [type, setType] = React.useState('');
+const [type, setType] = React.useState('incidents');
 
 const handleChange = (event) => {
   setType(event.target.value);

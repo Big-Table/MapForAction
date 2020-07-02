@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import ActionForm from "../components/ActionForm";
-import AddActionButton from "../components/AddActionButton";
+import AddActionButton from "../components/buttons/AddActionButton";
+import ActionForm from "../components/forms/ActionForm";
 import { getApprovedActions } from "../requests/requests";
 import TakeActionIcon from "../svgs/TakeActionIcon";
 const useStyles = makeStyles({
@@ -70,7 +70,7 @@ const ActionsContainer = (props) => {
   };
 
   const userNotLoggedIn = () => {
-      alert('You must login in order to submit an action!')
+      alert('Sign in through Google to submit an action!')
   }
   return (
     <div className={classes.root}>

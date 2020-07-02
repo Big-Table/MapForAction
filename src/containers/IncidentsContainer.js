@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import React from "react";
-import Incident from "../components/Incident";
+import React, { useEffect } from "react";
+import Incident from "../components/incidentDetails/Incident";
 import _ from 'lodash';
 
 const useStyles = makeStyles({
@@ -16,8 +16,8 @@ const useStyles = makeStyles({
 });
 
 const IncidentsContainer = (props) => {
-  const text = props.search;
-
+    let text = props.search
+  
   const classes = useStyles();
 
  

@@ -43,9 +43,16 @@ router.post("/",  async (req, res) => {
     petition,
     status: "pending",
   });
-
-  try {
+   
+  //  newIncident.image_url = `/incidents/${_id}/image`
+   console.log(newIncident)
+  
+   try {
     await newIncident.save();
+    newIncident.image_url = `/incidents/${newIncident._id}/image`
+    newIncident.save()
+    console.log(newIncident)
+
     res.json(newIncident);
   } catch (err) {
     res.status(400).json("Error:" + err);
@@ -161,8 +168,9 @@ const upload = multer({
     fileSize: 3000000,
   },
   fileFilter(req, file, cb) {
+    console.log(file )
     //uses regex to only allow png, jpg, jpeg
-    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
+    if (!file.originalname.match(/\.(png|jpg|jpeg|JPEG|JPG|PNG)$/)) {
       cb(new Error("Please upload an image."));
     }
 
@@ -178,20 +186,25 @@ router.post(
   "/upload",
   upload.single("upload"),
   async (req, res) => {
+    console.log(req.body)
+    console.log(req.file.buffer)
     try {
       const incident = await Incident.findById(req.body.id);
+      console.log(incident)
       const buffer = await sharp(req.file.buffer)
         .resize({ width: 500, height: 500 })
         .png()
         .toBuffer();
       incident.image = buffer;
       incident.save();
+      console.log("CREATED")
       res.send();
     } catch (e) {
       res.status(400).send(e);
     }
   },
   (error, req, res, next) => {
+    console.log(error.message)
     res.status(400).send({ error: error.message });
   }
 );

@@ -1,23 +1,23 @@
+import axios from "axios";
 import React from "react";
-import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import IncidentsContainer from "./containers/IncidentsContainer";
+import AddIncidentButton from "./components/buttons/AddIncidentButton";
+import AddQueueButton from "./components/buttons/AddQueueButton";
+import AddWhatsNextButton from "./components/buttons/AddWhatsNextButton";
+import ImageForm from "./components/forms/ImageForm";
+import IncidentForm from "./components/forms/IncidentForm";
+import Map from "./components/incidentDetails/Map";
+import IncidentQueueGrid from "./components/pendingEvents/IncidentQueueGrid";
+import WhatsNext from "./components/pendingEvents/WhatsNext";
 import IncidentDetailContainer from "./containers/IncidentDetailContainer";
+import IncidentsContainer from "./containers/IncidentsContainer";
+import Nav from "./navigation/Nav";
+import NoAccess from './navigation/NoAccess';
+import NotFound from './navigation/NotFound';
+import { getApprovedIncidents } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
-import Map from "./components/Map";
-import IncidentForm from "./components/IncidentForm";
-import AddIncidentButton from "./components/AddIncidentButton";
-import AddQueueButton from "./components/AddQueueButton";
-import IncidentQueueGrid from "./components/IncidentQueueGrid";
-import Nav from "./Nav";
-import {
-  getIncidents,
-  getCurrentUser,
-  getApprovedIncidents,
-} from "./requests/requests.js";
-import axios from "axios";
-import _ from 'lodash';
 
 class App extends React.Component {
   state = {
@@ -31,6 +31,9 @@ class App extends React.Component {
     },
     currentUser: null,
     grid: false,
+    lastIncidentPostedID: '', 
+    submitted: false,
+    FAQ: false, 
   };
 
   componentDidMount() {
@@ -87,10 +90,14 @@ class App extends React.Component {
   };
 
   updateForm = (event) => {
-    this.setState({
-      searchForm: event.target.value
-    })
-  };
+      console.log(event.target.value)
+      
+      this.setState({
+        searchForm: event.target.value
+      })
+    
+   
+  }
 
   handleShowGrid = () => {
     this.setState({
@@ -99,11 +106,36 @@ class App extends React.Component {
   };
 
   handleUserNotLoggedIn = () => {
-    alert('You must login before submitting an incident!')
+    alert('Sign in through Google to submit an incident!')
   }
+
+  handleLastIncidentID = (id) => {
+    this.setState({
+      lastIncidentPostedID: id
+    })
+  }
+
+  handleSubmittedIncident = (present) => {
+    this.setState({
+      submitted: !this.state.submitted
+    })
+    if(this.state.submitted === true && present){
+      alert("Thank you for effort! Your incident is pending review!")
+    }
+  }
+
+  handleFAQ = () => {
+    this.setState({
+      FAQ: !this.state.FAQ
+    })
+  }
+
+ 
+
   render() {
     console.log(this.state.currentUser)
     console.log(this.state.incidents);
+    console.log(this.state.lastIncidentPostedID)
     return (
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
@@ -118,6 +150,8 @@ class App extends React.Component {
               setMapCenter={this.setMapCenter}
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
+              <AddWhatsNextButton onClick={this.handleFAQ}></AddWhatsNextButton>
+              {this.state.FAQ && <WhatsNext></WhatsNext>}
               { this.state.currentUser ?
                <AddIncidentButton onClick={this.handleShowForm} />
                : 
@@ -128,9 +162,16 @@ class App extends React.Component {
               }
               {/* <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton> */}
             </div>
+            {this.state.submitted && 
+            <ImageForm 
+              lastIncidentID={this.state.lastIncidentPostedID}
+              submitted={this.handleSubmittedIncident}
+            ></ImageForm>}
             {this.state.incidentForm && (
               <IncidentForm
-                onClick={this.handleShowForm}
+                submitted={this.handleSubmittedIncident}
+                lastIncident={this.handleLastIncidentID}
+                showForm={this.handleShowForm}
                 updateIncidents={this.updateIncidents}
               />
             )}
@@ -181,7 +222,7 @@ class App extends React.Component {
                   )
                 }
               />
-
+              { this.state.currentUser && 
               <Route
                 path="/moderator"
                 render={(routerProps) => (
@@ -191,6 +232,26 @@ class App extends React.Component {
                   />
                 )}
               />
+              }
+              { !this.state.currentUser && 
+                <Route
+                  path="/moderator"
+                  render={(routerProps) => (
+                    <NoAccess
+                      {...routerProps}
+                    />
+                  )}
+               />
+              }
+              <Route
+               path='*'
+               render={(routerProps) => (
+                <NotFound
+                  {...routerProps}
+                />
+              )}
+              status={404}
+           />
             </Switch>
           </FlexColumn>
         </FlexRow>

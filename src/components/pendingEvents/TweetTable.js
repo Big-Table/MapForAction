@@ -8,8 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import EditTweetForm from './EditTweetForm'
-import { getPendingTweets, patchApproveTweet, patchDenyTweet } from '../requests/requests'
+import EditTweetForm from '../forms/EditTweetForm'
+import { getPendingTweets, patchApproveTweet, patchDenyTweet } from '../../requests/requests'
 
 const columns = [
   { id: 'url', label: 'URL', minWidth: 170 },
@@ -93,8 +93,6 @@ export default function StickyHeadTable(props) {
                     setTweets(body.data)
                     let rows2 = []
                     body.data.forEach(tweet => {
-                        console.log(tweet)
-
                         rows2.push(createData(tweet.url, tweet._id, tweet._id, tweet._id))
                     })
                     setRows(rows2)
@@ -104,13 +102,17 @@ export default function StickyHeadTable(props) {
 
   const handleApprove = (id) => {
     patchApproveTweet({_id: id})
-    props.approve()
+    .then(() => {
+      props.approve()
+    })
     alert("This has been approved")
   }
 
   const handleDeny = (id) => {
     patchDenyTweet({_id: id})
-    props.approve()
+    .then(() => {
+      props.approve()
+    })
     alert("This has been rejected")
   }
 

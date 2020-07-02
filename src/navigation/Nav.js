@@ -1,14 +1,11 @@
-import React from "react";
-import { useHistory, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import PopperMenu from "./PopperMenu";
-import TextField from "@material-ui/core/TextField";
-import logo from "./logo.png";
-import zIndex from "@material-ui/core/styles/zIndex";
-import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import _ from 'lodash';
+import TextField from "@material-ui/core/TextField";
+import SearchIcon from '@material-ui/icons/Search';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import logo from "./logo.png";
+import PopperMenu from "./PopperMenu";
 
 
 const useStyles = makeStyles({
@@ -41,21 +38,27 @@ const useStyles = makeStyles({
     // display: "inline-block",
   },
   search: {
-    width: "100%",
+    width: "32vw",
     background: "grey",
   },
   span: {
     color: "white",
     fontSize: "20px",
+    display: 'flex', 
+    justifyContent: 'center'
   },
+  test: {
+      width: 100
+  }
 });
 const NavBar = (props) => {
   const history = useHistory();
   const classes = useStyles(props);
 
-//   const debounceSearch = () => {
-//       _.debounce(props.updateForm, 400)
-//   }
+//   const debounceSearch = _.debounce((event) => {
+//       event.persist()
+//       props.updateForm(event.persist())
+//   }, 1000)
 
   console.log(props.search);
   return (
@@ -73,8 +76,10 @@ const NavBar = (props) => {
         </div>
       </div>
 
-      {!props.currentIncident ? (
+   
+      {!props.currentIncident && (
         <>
+        <div>
           <br></br>
           <TextField
             onChange={(event) => props.updateForm(event)}
@@ -95,8 +100,10 @@ const NavBar = (props) => {
           <br></br>
           <br></br>
           <span className={classes.span}>Incidents you should know about!</span>
+          </div>
         </>
-      ) : null}
+      )
+      }
     </div>
   );
 };

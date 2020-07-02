@@ -1,33 +1,34 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core'
- 
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles({
     root: {
-        margin: 30,
-        top: 10,
-        right: '16%',
+        position: "absolute",
+        top: 70,
+        right: '17%',
         zIndex: 4,
-        backgroundColor: "#FCC42C",
-        color: "#000000",
+        backgroundColor: "#000000",
+        color: "#FCC42C",
         borderStyle: "solid",
-        borderColor: "#000000",
+        borderColor: "#FCC42C",
         borderWidth: 1,
         height: 40,
         width: 150,
         borderRadius: 20,
+        fontFamily: 'Work Sans',
         fontWeight: 700,
         cursor: "pointer",
         outline: "none"
     }
 })
-const ActionsButton = props => {
+const AddQueueButton = props => {
     const classes = useStyles(props)
 
     return (
-        <button className={classes.root} onClick={props.onClick}>
-            Take Action!
+        <button className={classes.root}>
+            <Link to='/moderator'>Approval Page -></Link>
         </button>
     )
 }
 
-export default ActionsButton
+export default AddQueueButton

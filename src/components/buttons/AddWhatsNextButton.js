@@ -1,11 +1,11 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core'
-import {Link} from 'react-router-dom'
+ 
 const useStyles = makeStyles({
     root: {
         position: "absolute",
-        top: 70,
-        right: '17%',
+        top: 10,
+        right: '60%',
         zIndex: 4,
         backgroundColor: "#000000",
         color: "#FCC42C",
@@ -21,14 +21,14 @@ const useStyles = makeStyles({
         outline: "none"
     }
 })
-const AddQueueButton = props => {
+const AddWhatsNextButton = props => {
     const classes = useStyles(props)
 
     return (
-        <button className={classes.root}>
-            <Link to='/moderator'>Go to approval page</Link>
+        <button className={classes.root} onClick={props.onClick}>
+            FAQ / Whats Next
         </button>
     )
 }
 
-export default AddQueueButton
+export default AddWhatsNextButton

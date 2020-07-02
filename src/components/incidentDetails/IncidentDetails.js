@@ -1,12 +1,12 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles, Card, Button } from "@material-ui/core";
-import FlexColumn from "../Theme/FlexColumn";
-import FlexRow from "../Theme/FlexRow";
+import FlexColumn from "../../Theme/FlexColumn";
+import FlexRow from "../../Theme/FlexRow";
 import Avatar from '@material-ui/core/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
-import ActionsButtons from '../components/ActionsButton'
-import AddTweetButton from '../components/addTweetButton'
+import ActionsButtons from '../buttons/ActionsButton'
+import AddTweetButton from '../buttons/addTweetButton'
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -75,7 +75,7 @@ const IncidentDetails= (props) => {
   let incident = props.incident
 
   const userNotLoggedIn = () => {
-    alert('You must login in order to submit a tweet!')
+    alert('Sign in through Google to submit a tweet!')
   }
   return (
     <Paper>

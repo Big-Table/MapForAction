@@ -12,8 +12,8 @@ import {
   getPendingActions,
   patchApproveAction,
   patchDenyAction,
-} from "../requests/requests";
-import EditActionForm from "./EditActionForm";
+} from "../../requests/requests";
+import EditActionForm from "../forms/EditActionForm";
 
 const columns = [
   { id: "title", label: "Title", minWidth: 170 },
@@ -121,14 +121,18 @@ export default function StickyHeadTable(props) {
   }, [props.update, props.approve]);
 
   const handleApprove = (id) => {
-    patchApproveAction({ _id: id });
-    props.approve();
+    patchApproveAction({ _id: id })
+    .then(() => {
+      props.approve()
+    })
     alert("This has been approved");
   };
 
   const handleDeny = (id) => {
-    patchDenyAction({ _id: id });
-    props.approve();
+    patchDenyAction({ _id: id })
+    .then(() => {
+      props.approve()
+    })
     alert("This has been rejected");
   };
 
