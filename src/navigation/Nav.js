@@ -38,7 +38,8 @@ const useStyles = makeStyles({
     // display: "inline-block",
   },
   search: {
-    width: "32vw",
+    minWidth: '20px',
+    width: "100%",
     background: "grey",
   },
   span: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles({
     fontSize: "20px",
     display: 'flex', 
     justifyContent: 'center',
-    // paddingLeft: '20px'
+    paddingLeft: '10px'
   },
   test: {
       width: 100
@@ -68,7 +69,7 @@ const NavBar = (props) => {
       <div className={classes.root}>
         <div className={classes.wrapper}>
           <div className={classes.left}>
-            <img style={{ height: "100px", width: "250px" }} src={logo}></img>
+            <img style={{ height: "100px", width: "250px", paddingLeft: '10px'}} src={logo}></img>
           </div>
           <div className={classes.right}>
             <span>
@@ -81,7 +82,7 @@ const NavBar = (props) => {
    
       {!props.currentIncident && (
         <>
-        <div>
+        <div style={{position: 'relative'}}>
           <br></br>
           <TextField
             onChange={(event) => props.updateForm(event)}
@@ -102,7 +103,7 @@ const NavBar = (props) => {
           <br></br>
           <br></br>
               <span className={classes.span}> 
-              {props.currentUser && props.currentUser.firstName.toUpperCase()}, view current injustices!
+              {props.currentUser ? `${props.currentUser.firstName.toUpperCase()}, Here are some Incidents you should know about!` : 'Incidents you should know about!'}
               </span>
           </div>
         </>

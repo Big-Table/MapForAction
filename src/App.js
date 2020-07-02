@@ -106,7 +106,7 @@ class App extends React.Component {
   };
 
   handleUserNotLoggedIn = () => {
-    alert('Sign in through Google to submit an incident!')
+      alert('Sign in through Google to submit an incident!')
   }
 
   handleLastIncidentID = (id) => {
@@ -187,6 +187,7 @@ class App extends React.Component {
           </FlexColumn>
           <FlexColumn
             style={{
+              // position: 'relative',
               width: "35vw",
               height: "100vh",
               backgroundColor: "#000000",

@@ -92,7 +92,7 @@ const IncidentDetails= (props) => {
             <Avatar 
             src={incident.profilePicture}
             className={classes.smallPic}></Avatar>
-          <div className={classes.reporter}>Reported by: {incident.firstName}</div>
+          <div className={classes.reporter}>Reported by: {incident.firstName ? incident.firstName : 'Anonymous'}</div>
             <div className={classes.reporter}>-</div>
 
             <div className={classes.reporter}>{incident.date? incident.date : "Date Unknown"} </div>
