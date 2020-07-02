@@ -32,13 +32,10 @@ function WhatsNext(){
             </p>
             
             <ul>
-                <li>The app attempts to clarify incidents of police violence which adversely effect Black people and 
-                    People of Color.</li>
-                <li>By bringing together information about these incidents and coupling that information with action items 
-                    we can make this information actionable. 
-                </li>
+                <li>What is the app for?</li>
+                <li>How do you prevent misinformation and hateful content?</li>
                 <li>It uses a moderator system to make sure not just any information can be uploaded.</li>
-                <li>Contributors can help by suggesting incidents, actions and tweets by signing in through Google</li>
+                <li>Contributors can help by suggesting incidents, actions and tweets by signing in through Google.</li>
             </ul>
 
             <p>
