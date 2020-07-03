@@ -17,10 +17,10 @@ const useStyles = makeStyles({
             borderColor: "#FCC42C"
           },
           "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-            borderColor: "green"
+            borderColor: "#FCC42C"
           },
           "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "blue"
+            borderColor: "black"
           }
     }, 
     tooltip: {

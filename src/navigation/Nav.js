@@ -45,10 +45,10 @@ const useStyles = makeStyles({
       borderColor: "#FCC42C"
     },
     "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      borderColor: "green"
+      borderColor: "#FCC42C"
     },
     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "blue"
+      borderColor: "black"
     }
   },
   span: {
@@ -65,11 +65,6 @@ const useStyles = makeStyles({
 const NavBar = (props) => {
   const history = useHistory();
   const classes = useStyles(props);
-
-//   const debounceSearch = _.debounce((event) => {
-//       event.persist()
-//       props.updateForm(event.persist())
-//   }, 1000)
 
   console.log(props.search);
   console.log(props.currentUser)
@@ -94,6 +89,7 @@ const NavBar = (props) => {
         <div style={{position: 'relative'}}>
           <br></br>
           <TextField
+            spellCheck='false'
             onChange={(event) => props.updateForm(event)}
             value={props.search}
             className={classes.search}

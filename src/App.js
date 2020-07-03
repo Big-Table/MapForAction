@@ -92,13 +92,13 @@ class App extends React.Component {
   };
 
   updateForm = (event) => {
+    const re = /^[ ,'#.a-zA-Z]+$/
       console.log(event.target.value)
-      
-      this.setState({
-        searchForm: event.target.value
-      })
-    
-   
+      if (event.target.value === '' || re.test(event.target.value)) {
+        this.setState({
+          searchForm: event.target.value
+        })
+    }
   }
 
   handleShowGrid = () => {
