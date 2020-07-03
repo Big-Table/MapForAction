@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "node index.js"
   },
   "dependencies": {
     "cookie-session": "^1.4.0",
