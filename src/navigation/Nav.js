@@ -40,7 +40,16 @@ const useStyles = makeStyles({
   search: {
     minWidth: '20px',
     width: "100%",
-    background: "grey",
+    background: "black",
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#FCC42C"
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "green"
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "blue"
+    }
   },
   span: {
     color: "white",
@@ -92,7 +101,8 @@ const NavBar = (props) => {
             id="outlined-basic"
             variant="outlined"
             InputProps={{
-                startAdornment: (
+                style: {color: "#FCC42C"},
+                startAdornment: (      
                   <InputAdornment position="start">
                     <SearchIcon />
                   </InputAdornment>

@@ -19,8 +19,8 @@ const useStyles = makeStyles({
     cursor: "pointer"
   },
   avatar: {
-    height: 120,
-    width: 120,
+    height: 140,
+    width: 140,
     borderRadius: 10,
     margin: 10,
   },

@@ -18,6 +18,8 @@ import NotFound from './navigation/NotFound';
 import { getApprovedIncidents } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
+import ZipCodeSearch from './navigation/ZipCodeSearch'
+
 
 class App extends React.Component {
   state = {
@@ -140,6 +142,8 @@ class App extends React.Component {
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
+          <ZipCodeSearch></ZipCodeSearch>
+
             {/* Map goes here */}
             <Map
               deleteCurrentIncident={this.deleteCurrentIncident}
