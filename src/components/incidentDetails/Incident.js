@@ -24,6 +24,8 @@ const useStyles = makeStyles({
     width: 140,
     borderRadius: 10,
     margin: 10,
+    border: 'solid',
+    borderColor: '#FCC42C'
   },
   info: {
     display: "flex",

@@ -27,7 +27,12 @@ const useStyles = makeStyles({
         backgroundColor: 'black', 
         color: '#FCC42C',
         fontSize: 13,
-    }, 
+    },
+    tooltip2: {
+        backgroundColor: '#FCC42C', 
+        color: 'green',
+        fontSize: 13,
+    }
    
 })
 
@@ -89,31 +94,60 @@ function ZipCodeSearch(){
     return(
 
         <div >
-            <TextField 
-            onChange={e => handleZipCodeChange(e)}
-            onPaste={e => handleZipcodeInputPaste(e)}
-            value={zip}
-            className={classes.root}
-            style={{color: 'white'}}
-            placeholder='Enter Zip Code'
-            id="outlined-basic" 
-            variant="outlined"
-            InputProps={{
-                style: {color: color},
-                endAdornment: (
-                  <InputAdornment position="center">
-                    <Tooltip 
-                    classes={{
-                        tooltip: classes.tooltip,
-                        arrow: classes.arrow
-                      }}
-                    title='Search'>
-                        <SearchIcon cursor='pointer' onClick={zip.length === 5 &&onZipCodeSearchClick }/>
-                    </Tooltip>
-                  </InputAdornment>
-                 )
-            }}
-            />
+            {zip.length === 5 ? 
+                <TextField 
+                onChange={e => handleZipCodeChange(e)}
+                onPaste={e => handleZipcodeInputPaste(e)}
+                value={zip}
+                className={classes.root}
+                style={{color: 'white'}}
+                placeholder='Enter Zip Code'
+                id="outlined-basic" 
+                variant="outlined"
+                InputProps={{
+                    style: {color: color},
+                    endAdornment: (
+                      <InputAdornment position="center">
+                        <Tooltip 
+                        classes={{
+                            tooltip: classes.tooltip2,
+                            arrow: classes.arrow
+                          }}
+                        title='Search'>
+                            <SearchIcon cursor='pointer' onClick={zip.length === 5 &&onZipCodeSearchClick }/>
+                        </Tooltip>
+                      </InputAdornment>
+                     )
+                }}
+                />
+            :
+                <TextField 
+                onChange={e => handleZipCodeChange(e)}
+                onPaste={e => handleZipcodeInputPaste(e)}
+                value={zip}
+                className={classes.root}
+                style={{color: 'white'}}
+                placeholder='Enter Zip Code'
+                id="outlined-basic" 
+                variant="outlined"
+                InputProps={{
+                    style: {color: color},
+                    endAdornment: (
+                    <InputAdornment position="center">
+                        <Tooltip 
+                        classes={{
+                            tooltip: classes.tooltip,
+                            arrow: classes.arrow
+                        }}
+                        title='Search'>
+                            <SearchIcon cursor='pointer' onClick={zip.length === 5 &&onZipCodeSearchClick }/>
+                        </Tooltip>
+                    </InputAdornment>
+                    )
+                }}
+                />
+            }
+            
             
             
             

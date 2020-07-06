@@ -181,10 +181,8 @@ function IncidentForm2(props){
     return(
         <div className={classes.root}>
              <h2>Report an Incident</h2>
-        {/* <form onSubmit={this.handleSubmit} id="form"> */}
         <div className={classes.fakeForm}>
-          {/* <Grid container spacing={2}>
-            <Grid item md={6}> */}
+         
               <label className={classes.formLabel} htmlFor="title">
                 Title<span className="required">*</span>
               </label>
@@ -222,16 +220,7 @@ function IncidentForm2(props){
                      value={incidentForm.description}
                      onChange={(event) => handleChange(event)}
                />
-              {/* <textarea
-                id="descriptionInput"
-                name="description"
-                type="textArea"
-                
-                placeholder="The more details, the better!"
-                aria-describedby="required-description"
-                value={this.state.description}
-                onChange={this.handleChange}
-              /> */}
+              
             <br></br>
             <br></br>
             <label style={{display: 'flex', justifyContent: 'center'}} className={classes.formLabel} htmlFor="date">
@@ -244,23 +233,7 @@ function IncidentForm2(props){
             
             <DatePicker handleDate={handleDate} incidentForm={incidentForm} className={classes.input}></DatePicker>
             </div>
-              {/* <input
-                className={classes.input}
-                id="dateInput"
-                name="date"
-                type="date"
-                rows="5"
-                placeholder="Date"
-                aria-describedby="required-date"
-                value={incidentForm.date}
-                onChange={(event) => handleChange(event)}
-                />  */}
-              {/* </Grid> */}
-              {/* <Grid item md={1}>
-
-              </Grid> */}
-
-            {/* <Grid item md={6}> */}
+            
               <br></br>
               <br></br>
               <label  className={classes.formLabel} htmlFor="lat">
@@ -326,28 +299,7 @@ function IncidentForm2(props){
             />
             Submit Anonymously</label>
 
-            {/* <label htmlFor="image_url">Image</label>
-            <input
-              name="image_url"
-              type="text"
-              placeholder="Paste an Image URL"
-              value={this.state.image_url}
-              onChange={this.handleChange}
-            /> */}
-
-
-            {/* <label htmlFor="image_url">Upload Photo</label>
-            <input
-              name="image_url"
-              type="file"
-              id="imageUpload"
-              value={this.state.image_url}
-              onChange={this.handleImageChange}
-              accept=".png, .jpg, .jpeg"
-            /> */}
-            {/* </Grid>
-          </Grid>
-         */}
+           
           <br></br>
           <br></br>
           <br></br>
@@ -356,47 +308,14 @@ function IncidentForm2(props){
 
           <input type="submit" value="Submit" id="submitButton" style={{borderStyle: "solid", borderColor: "black"}} onClick={handleSubmit}/>
 
-          {/* <p aria-hidden="true" id="required-description">
-            <span className="required">*</span>Required field
-          </p> */}
-        {/* </form> */}
+        
         <CloseIcon
-            //  id="closeButton"
+         
           className={classes.closeButton}
           onClick={props.showForm}
           style={{ cursor: "pointer" }}
         />
   
-                {/* <div >
-                    <div className={classes.center}>
-                        <label>
-                            Title:
-                        </label>
-                        <input
-                        className={classes.input}
-                        name="title"
-                        type="text"
-                        maxLength="90"
-                        placeholder="Write the incident title"
-                        aria-describedby="required-description"
-                        //   value={this.state.title}
-                        //   onChange={this.handleChange}
-                        >
-                        </input>
-                    </div>
-                    <div className={classes.center}>
-                        <label >
-                            Description:
-                        </label>
-                        <TextareaAutosize
-                            className={classes.input}
-                            minRows={4}
-                            maxRows={6}
-                            defaultValue="The More Details the Better..."
-                        />
-                    </div>
-                </div>
-            */}
             </div>
         </div>
     )

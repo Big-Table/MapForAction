@@ -32,6 +32,9 @@ const useStyles = makeStyles({
     borderRadius: 50,
     margin: 5,
     alignSelf: 'start',
+    border: 'solid',
+    borderColor: '#FCC42C'
+  
   }, 
   reporter: {
     color: '#707070',
@@ -80,7 +83,7 @@ const IncidentDetails= (props) => {
   //   alert('Sign in through Google to submit a tweet!')
   // }
   return (
-    <Paper>
+    <Paper >
       <Card className={classes.root}>
         <FlexColumn style={{justifyContent: "start", alignItems:"start"}}>
           <FlexRow className={classes.title}>
@@ -103,7 +106,7 @@ const IncidentDetails= (props) => {
           </FlexRow>
           <FlexRow>
             {/* tiny avatar, reported by: anonymous */}
-            <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={incident.image_url}/>
+            <Avatar variant="square" className={classes.avatar} alt={incident.title} src={incident.image_url}/>
           </FlexRow>
           <br></br>
           <FlexRow className={classes.description}>
