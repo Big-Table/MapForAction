@@ -125,7 +125,6 @@ export default function StickyHeadTable(props) {
     .then(() => {
       props.approve()
     })
-    alert("This has been approved");
   };
 
   const handleDeny = (id) => {
@@ -133,7 +132,6 @@ export default function StickyHeadTable(props) {
     .then(() => {
       props.approve()
     })
-    alert("This has been rejected");
   };
 
   const [editActionForm, setEditForm] = useState(false);

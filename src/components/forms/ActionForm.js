@@ -61,7 +61,7 @@ class ActionForm extends React.Component {
     console.log(this.state)
 
     return (
-      <div id="actionForm" style={{color: 'black'}}>
+      <div id="actionForm"  style={{backgroundColor: '#FCC42C', color: 'black'}}>
         <h2 style={{color: 'black'}}>Add a Specific Action to Take!</h2>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title">
@@ -108,7 +108,7 @@ class ActionForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <input type="submit" value="Submit" id="submitButton" />
+          <input style={{border: 'solid', borderColor: 'black'}} type="submit" value="Submit" id="submitButton" />
           <label hidden>
             Incident ID
           </label>

@@ -5,6 +5,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import React from "react";
 import FlexColumn from "../../Theme/FlexColumn";
 import FlexRow from "../../Theme/FlexRow";
+import Moment from 'react-moment';
 
 const useStyles = makeStyles({
   root: {
@@ -19,10 +20,12 @@ const useStyles = makeStyles({
     cursor: "pointer"
   },
   avatar: {
-    height: 120,
-    width: 120,
+    height: 140,
+    width: 140,
     borderRadius: 10,
     margin: 10,
+    border: 'solid',
+    borderColor: '#FCC42C'
   },
   info: {
     display: "flex",
@@ -63,7 +66,10 @@ const Incident = (props) => {
         </FlexColumn>
         <FlexColumn className={classes.info}>
           <FlexRow >
-              {props.incident.date}
+            {props.incident.date &&  
+              <Moment date={props.incident.date} format='MM/DD/YYYY'/>
+            }
+              
           </FlexRow>
           <FlexRow className={classes.title}>
               {props.incident.title}

@@ -7,6 +7,8 @@ import Avatar from '@material-ui/core/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
 import ActionsButtons from '../buttons/ActionsButton'
 import AddTweetButton from '../buttons/addTweetButton'
+import Moment from 'react-moment';
+
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -30,6 +32,9 @@ const useStyles = makeStyles({
     borderRadius: 50,
     margin: 5,
     alignSelf: 'start',
+    border: 'solid',
+    borderColor: '#FCC42C'
+  
   }, 
   reporter: {
     color: '#707070',
@@ -74,11 +79,11 @@ const IncidentDetails= (props) => {
   console.log("details",props)
   let incident = props.incident
 
-  const userNotLoggedIn = () => {
-    alert('Sign in through Google to submit a tweet!')
-  }
+  // const userNotLoggedIn = () => {
+  //   alert('Sign in through Google to submit a tweet!')
+  // }
   return (
-    <Paper>
+    <Paper >
       <Card className={classes.root}>
         <FlexColumn style={{justifyContent: "start", alignItems:"start"}}>
           <FlexRow className={classes.title}>
@@ -95,13 +100,13 @@ const IncidentDetails= (props) => {
           <div className={classes.reporter}>Reported by: {incident.firstName ? incident.firstName : 'Anonymous'}</div>
             <div className={classes.reporter}>-</div>
 
-            <div className={classes.reporter}>{incident.date? incident.date : "Date Unknown"} </div>
+            <div className={classes.reporter}>{incident.date? <Moment format='MM/DD/YYYY' date={incident.date}/> : "Date Unknown"} </div>
             {/* Locaiton: */}
             {/* {incident.Lat} { incident.lng} */}
           </FlexRow>
           <FlexRow>
             {/* tiny avatar, reported by: anonymous */}
-            <Avatar variant="square" className={classes.avatar} alt="Remy Sharp" src={incident.image_url}/>
+            <Avatar variant="square" className={classes.avatar} alt={incident.title} src={incident.image_url}/>
           </FlexRow>
           <br></br>
           <FlexRow className={classes.description}>
@@ -111,11 +116,10 @@ const IncidentDetails= (props) => {
           <FlexRow>
             {/* Photo Gallery, maybe grid */}
             <ActionsButtons onClick={props.actionButton}/>
-            { props.currentUser ?
-              <AddTweetButton onClick={props.tweetButton}/>
-             : 
-             <AddTweetButton onClick={userNotLoggedIn}/>
-            }
+            
+              <AddTweetButton currentUser={props.currentUser} tweetButton={props.tweetButton}/>
+            
+          
 
           </FlexRow>
         </FlexColumn>

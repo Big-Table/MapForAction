@@ -92,4 +92,4 @@ export const patchIncident = (data, id) =>
 
   //patch to actions 
   export const patchAction = (data, id) => 
-  axios.patch(`${baseURL}/actions/${id}`, data)
+  axios.patch(`/actions/${id}`, data)

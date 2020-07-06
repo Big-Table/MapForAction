@@ -7,8 +7,8 @@ const useStyles = makeStyles({
         top: 10,
         right: '60%',
         zIndex: 4,
-        backgroundColor: "#000000",
-        color: "#FCC42C",
+        backgroundColor: "#FCC42C",
+        color: "black",
         borderStyle: "solid",
         borderColor: "#FCC42C",
         borderWidth: 1,
@@ -26,7 +26,7 @@ const AddWhatsNextButton = props => {
 
     return (
         <button className={classes.root} onClick={props.onClick}>
-            FAQ / Whats Next
+            FAQ
         </button>
     )
 }

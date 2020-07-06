@@ -40,7 +40,16 @@ const useStyles = makeStyles({
   search: {
     minWidth: '20px',
     width: "100%",
-    background: "grey",
+    background: "black",
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#FCC42C"
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#FCC42C"
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "black"
+    }
   },
   span: {
     color: "white",
@@ -56,11 +65,6 @@ const useStyles = makeStyles({
 const NavBar = (props) => {
   const history = useHistory();
   const classes = useStyles(props);
-
-//   const debounceSearch = _.debounce((event) => {
-//       event.persist()
-//       props.updateForm(event.persist())
-//   }, 1000)
 
   console.log(props.search);
   console.log(props.currentUser)
@@ -85,6 +89,7 @@ const NavBar = (props) => {
         <div style={{position: 'relative'}}>
           <br></br>
           <TextField
+            spellCheck='false'
             onChange={(event) => props.updateForm(event)}
             value={props.search}
             className={classes.search}
@@ -92,7 +97,8 @@ const NavBar = (props) => {
             id="outlined-basic"
             variant="outlined"
             InputProps={{
-                startAdornment: (
+                style: {color: "#FCC42C"},
+                startAdornment: (      
                   <InputAdornment position="start">
                     <SearchIcon />
                   </InputAdornment>
