@@ -39,7 +39,7 @@ export const getIncidentWithTweets = (id) =>
 
 //get to current user
 export const getCurrentUser = () =>
-  fetch(`${baseURL}/auth/currentUser`).then(parseData);
+  axios.get(`/auth/currentUser`)
 
 //POST REQUESTS
 
@@ -54,6 +54,10 @@ export const postActions = (data) =>
 //post to tweets
 export const postTweets = (data) =>
   axios.post(`/tweets`, data)
+
+//post to image upload 
+export const upload = (data) => 
+    axios.post('/incidents/upload', data)
 
 //PATCH REQUESTS 
 

@@ -8,7 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import {upload} from '../../requests/requests'
 
 const getStyles = makeStyles({
     root: {
@@ -92,13 +92,14 @@ function ImageForm(props){
         for (var key of formData.entries()) {
             console.log(key[0] + ', ' + key[1]);
           }
-        fetch('http://localhost:5000/incidents/upload', {
-            method: "POST",
-            // headers: {
-            //   'Content-Type': 'application/json'
-            // },
-            body: formData
-        })
+          upload(formData)
+        // fetch('http://localhost:5000/incidents/upload', {
+        //     method: "POST",
+        //     // headers: {
+        //     //   'Content-Type': 'application/json'
+        //     // },
+        //     body: formData
+        // })
           
     }
 

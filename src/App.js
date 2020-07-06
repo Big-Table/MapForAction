@@ -15,7 +15,7 @@ import IncidentsContainer from "./containers/IncidentsContainer";
 import Nav from "./navigation/Nav";
 import NoAccess from "./navigation/NoAccess";
 import NotFound from "./navigation/NotFound";
-import { getApprovedIncidents } from "./requests/requests.js";
+import { getApprovedIncidents, getCurrentUser } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import ZipCodeSearch from './navigation/ZipCodeSearch'
@@ -40,19 +40,25 @@ class App extends React.Component {
 
   componentDidMount() {
     this.updateIncidents();
-    this.updateCurrentUser();
+    getCurrentUser()
+    .then((user) => {
+      this.setState({
+        ...this.state,
+        currentUser: user.data,
+      });
+    })
   }
 
-  updateCurrentUser = async () => {
-    let user = await axios.get("/auth/currentUser", {
-      withCredentials: true,
-    });
+  // updateCurrentUser = async () => {
+  //   let user = await axios.get("/auth/currentUser", {
+  //     withCredentials: true,
+  //   });
 
-    this.setState({
-      ...this.state,
-      currentUser: user.data,
-    });
-  };
+  //   this.setState({
+  //     ...this.state,
+  //     currentUser: user.data,
+  //   });
+  // };
 
   // updateCurrentUser = () => {
   //   getCurrentUser().then((user) => {

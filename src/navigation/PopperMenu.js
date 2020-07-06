@@ -84,8 +84,9 @@ export default function MenuListComposition(props) {
             />
           </a>
         ) : (
-            <div style={{paddingRight: '50px', paddingLeft: '50px'}}>
+            <div style={{position: 'relative', width: '100px', height: '100px'}}>
             <Avatar
+                
                 className={classes.smallPic}
                 ref={anchorRef}
                 src={props.currentUser.profilePicture}
@@ -93,8 +94,11 @@ export default function MenuListComposition(props) {
                 aria-haspopup="true"
                 onClick={handleToggle}
                 style={{
-                  width: "100px",
-                  height: "100px"
+                  width: "60%",
+                  height: "60%",
+                  right: "70px",
+                  top: '20px',
+                  position: 'absolute'
                 }}
               >
               </Avatar>
