@@ -13,8 +13,8 @@ import WhatsNext from "./components/pendingEvents/WhatsNext";
 import IncidentDetailContainer from "./containers/IncidentDetailContainer";
 import IncidentsContainer from "./containers/IncidentsContainer";
 import Nav from "./navigation/Nav";
-import NoAccess from './navigation/NoAccess';
-import NotFound from './navigation/NotFound';
+import NoAccess from "./navigation/NoAccess";
+import NotFound from "./navigation/NotFound";
 import { getApprovedIncidents } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
@@ -33,9 +33,9 @@ class App extends React.Component {
     },
     currentUser: null,
     grid: false,
-    lastIncidentPostedID: '', 
+    lastIncidentPostedID: "",
     submitted: false,
-    FAQ: false, 
+    FAQ: false,
   };
 
   componentDidMount() {
@@ -61,7 +61,9 @@ class App extends React.Component {
   // };
 
   updateIncidents = () => {
-    getApprovedIncidents().then((incidents) => this.setIncidents(incidents.data));
+    getApprovedIncidents().then((incidents) =>
+      this.setIncidents(incidents.data)
+    );
   };
   handleShowForm = () => {
     this.setState({ incidentForm: !this.state.incidentForm });
@@ -113,31 +115,30 @@ class App extends React.Component {
 
   handleLastIncidentID = (id) => {
     this.setState({
-      lastIncidentPostedID: id
-    })
-  }
+      lastIncidentPostedID: id,
+    });
+  };
 
   handleSubmittedIncident = (present) => {
     this.setState({
-      submitted: !this.state.submitted
-    })
-    if(this.state.submitted === true && present){
-      alert("Thank you for effort! Your incident is pending review!")
+      submitted: !this.state.submitted,
+    });
+    if (this.state.submitted === true && present) {
+      alert("Thank you for effort! Your incident is pending review!");
     }
-  }
+  };
 
   handleFAQ = () => {
     this.setState({
-      FAQ: !this.state.FAQ
-    })
-  }
-
- 
+      FAQ: !this.state.FAQ,
+    });
+  };
 
   render() {
-    console.log(this.state.currentUser)
+    console.log(this.state.currentUser);
     console.log(this.state.incidents);
-    console.log(this.state.lastIncidentPostedID)
+    console.log(this.state.lastIncidentPostedID);
+    console.log(process.env);
     return (
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
@@ -234,36 +235,28 @@ class App extends React.Component {
                   )
                 }
               />
-              { this.state.currentUser && 
-              <Route
-                path="/moderator"
-                render={(routerProps) => (
-                  <IncidentQueueGrid
-                    {...routerProps}
-                    incidents={this.state.incidents}
-                  />
-                )}
-              />
-              }
-              { !this.state.currentUser && 
+              {this.state.currentUser && (
                 <Route
                   path="/moderator"
                   render={(routerProps) => (
-                    <NoAccess
+                    <IncidentQueueGrid
                       {...routerProps}
+                      incidents={this.state.incidents}
                     />
                   )}
-               />
-              }
-              <Route
-               path='*'
-               render={(routerProps) => (
-                <NotFound
-                  {...routerProps}
                 />
               )}
-              status={404}
-           />
+              {!this.state.currentUser && (
+                <Route
+                  path="/moderator"
+                  render={(routerProps) => <NoAccess {...routerProps} />}
+                />
+              )}
+              <Route
+                path="*"
+                render={(routerProps) => <NotFound {...routerProps} />}
+                status={404}
+              />
             </Switch>
           </FlexColumn>
         </FlexRow>
@@ -273,6 +266,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-

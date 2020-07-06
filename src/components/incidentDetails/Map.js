@@ -3,10 +3,14 @@ import mapStyles from "../../Theme/mapStyles";
 
 class Map extends Component {
   googleMapRef = createRef();
+  googleKey =
+    process.env.NODE_ENV === "production"
+      ? "AIzaSyA1Cq6ox4TlZp5HUfSzWoZDuHN9rhrgK6Q"
+      : "AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc";
 
   componentDidMount() {
     const googleScript = document.createElement("script");
-    googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
+    googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${this.googleKey}&libraries=places`;
     window.document.body.appendChild(googleScript);
 
     googleScript.addEventListener("load", () => {
@@ -17,7 +21,7 @@ class Map extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.mapCenter !== prevProps.mapCenter) {
       const googleScript = document.createElement("script");
-      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
+      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${this.googleKey}&libraries=places`;
       window.document.body.appendChild(googleScript);
 
       googleScript.addEventListener("load", () => {
@@ -27,7 +31,7 @@ class Map extends Component {
 
     if (this.props.incidents !== prevProps.incidents) {
       const googleScript = document.createElement("script");
-      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc&libraries=places`;
+      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${this.googleKey}&libraries=places`;
       window.document.body.appendChild(googleScript);
 
       googleScript.addEventListener("load", () => {
