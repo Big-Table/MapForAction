@@ -83,33 +83,51 @@ function ImageForm(props){
         setOpen(false);
         props.submitted()
       };
-
-    const handleImageDrop = (e) => {
-        // console.log(e)
-        console.log(e)
-        console.log(e.target)
-        console.log(e.target.value)
-        console.log(e.target.files)
     
-    
+    const handleImageUpload = (file) => {
+        console.log(file)
         let formData = new FormData()
-        formData.append("upload", e.target.files[0])
+        formData.append("upload", file)
         formData.append("id", props.lastIncidentID)
-        
         for (var key of formData.entries()) {
-          console.log(key[0] + ', ' + key[1]);
-        }
-        console.log(formData)
+            console.log(key[0] + ', ' + key[1]);
+          }
         fetch('http://localhost:5000/incidents/upload', {
-          method: "POST",
-          // headers: {
-          //   'Content-Type': 'application/json'
-          // },
-          body: formData
+            method: "POST",
+            // headers: {
+            //   'Content-Type': 'application/json'
+            // },
+            body: formData
         })
+          
+    }
+
+    // const handleImageDrop = (e) => {
+    //     // console.log(e)
+    //     console.log(e)
+    //     console.log(e.target)
+    //     console.log(e.target.value)
+    //     console.log(e.target.files)
+    
+    
+    //     let formData = new FormData()
+    //     formData.append("upload", e.target.files[0])
+    //     formData.append("id", props.lastIncidentID)
         
-        // props.submitted()
-      }
+    //     for (var key of formData.entries()) {
+    //       console.log(key[0] + ', ' + key[1]);
+    //     }
+    //     console.log(formData)
+    //     fetch('http://localhost:5000/incidents/upload', {
+    //       method: "POST",
+    //       // headers: {
+    //       //   'Content-Type': 'application/json'
+    //       // },
+    //       body: formData
+    //     })
+        
+    //     // props.submitted()
+    //   }
 
     //   const [submitted, setSubmitted] = useState(false)
 
@@ -120,7 +138,7 @@ function ImageForm(props){
            
             <h2>Your Incident has been reported! </h2>
             <h3>Please upload an image for your incident</h3>
-            <DropZone2 handleImageDrop={handleImageDrop}></DropZone2>
+            <DropZone2 handleImageUpload={handleImageUpload}></DropZone2>
             
             {/* <FileDrop></FileDrop> */}
             <div className={classes.center}>

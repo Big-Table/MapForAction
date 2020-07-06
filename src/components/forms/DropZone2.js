@@ -12,7 +12,7 @@ const baseStyle = {
   borderRadius: 2,
   borderColor: "#eeeeee",
   borderStyle: "dashed",
-  backgroundColor: "#fafafa",
+  backgroundColor: "black",
   color: "#bdbdbd",
   outline: "none",
   transition: "border .24s ease-in-out"
@@ -62,8 +62,31 @@ const img = {
   height: "100%"
 };
 
+const button = {
+    backgroundColor: "#FCC42C",
+    color: "#000000",
+    borderStyle: "solid",
+    borderColor: "black",
+    borderWidth: 2,
+    height: 40,
+    width: 150,
+    borderRadius: 20,
+    fontFamily: 'Work Sans',
+    fontWeight: 700,
+    cursor: "pointer",
+    outline: "none",
+    display: 'flex', 
+    justifyContent: 'center',
+    paddingTop: 2
+};
+
 function StyledDropzone(props) {
   const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+      props.handleImageUpload(files[0])
+  }, [files])
+
   const {
     getRootProps,
     getInputProps,
@@ -123,13 +146,13 @@ function StyledDropzone(props) {
       {file.path} - {file.size} bytes
     </li>
   ));
-
+  console.log(files)
   return (
     <div className="container">
-      <div {...getRootProps({ style })} onChange={(event) => props.handleImageDrop(event)}>
+      <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <p>Drag and Drop a picture here!</p>
-        <button type="button" onClick={open}>
+        <button style={button} type="button" onClick={open}>
           Choose a Photo
         </button>
       </div>

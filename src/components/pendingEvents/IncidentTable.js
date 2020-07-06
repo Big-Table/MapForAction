@@ -9,6 +9,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import EditForm from "../forms/EditForm";
+import NewIncidentEditForm from "../forms/NewIncidentEditForm"
+import Moment from 'react-moment';
+
 import {
   getPendingIncidents,
   patchApproveIncident,
@@ -144,7 +147,7 @@ export default function StickyHeadTable(props) {
       let rows2 = [];
       body.data.forEach((incident) => {
         console.log(incident);
-
+        
         rows2.push(
           createData(
             incident.title,
@@ -201,11 +204,12 @@ export default function StickyHeadTable(props) {
   return (
     <>
       {editForm && (
-        <EditForm
+        <NewIncidentEditForm
+          setEditForm={setEditForm}
           update={props.update}
           edit={handleEditForm}
           incident={incident}
-        ></EditForm>
+        ></NewIncidentEditForm>
       )}
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
@@ -241,7 +245,18 @@ export default function StickyHeadTable(props) {
                       >
                         {columns.map((column) => {
                           const value = row[column.id];
-
+                          if(column.id === "date"){
+                            return(
+                              <TableCell key={column.id} align={column.align}>
+                                {value && <Moment date={value} format='MM/DD/YYYY'/>}
+                                
+                              {/* {column.format && typeof value === "number"
+                                ? column.format(value)
+                                : value} */}
+                            
+                            </TableCell>
+                            )
+                          }
                           if (column.id === "edit") {
                             return (
                               <TableCell key={column.id} align={column.align}>

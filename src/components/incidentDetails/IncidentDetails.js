@@ -7,6 +7,8 @@ import Avatar from '@material-ui/core/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
 import ActionsButtons from '../buttons/ActionsButton'
 import AddTweetButton from '../buttons/addTweetButton'
+import Moment from 'react-moment';
+
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -74,9 +76,9 @@ const IncidentDetails= (props) => {
   console.log("details",props)
   let incident = props.incident
 
-  const userNotLoggedIn = () => {
-    alert('Sign in through Google to submit a tweet!')
-  }
+  // const userNotLoggedIn = () => {
+  //   alert('Sign in through Google to submit a tweet!')
+  // }
   return (
     <Paper>
       <Card className={classes.root}>
@@ -95,7 +97,7 @@ const IncidentDetails= (props) => {
           <div className={classes.reporter}>Reported by: {incident.firstName ? incident.firstName : 'Anonymous'}</div>
             <div className={classes.reporter}>-</div>
 
-            <div className={classes.reporter}>{incident.date? incident.date : "Date Unknown"} </div>
+            <div className={classes.reporter}>{incident.date? <Moment format='MM/DD/YYYY' date={incident.date}/> : "Date Unknown"} </div>
             {/* Locaiton: */}
             {/* {incident.Lat} { incident.lng} */}
           </FlexRow>
@@ -111,11 +113,10 @@ const IncidentDetails= (props) => {
           <FlexRow>
             {/* Photo Gallery, maybe grid */}
             <ActionsButtons onClick={props.actionButton}/>
-            { props.currentUser ?
-              <AddTweetButton onClick={props.tweetButton}/>
-             : 
-             <AddTweetButton onClick={userNotLoggedIn}/>
-            }
+            
+              <AddTweetButton currentUser={props.currentUser} tweetButton={props.tweetButton}/>
+            
+          
 
           </FlexRow>
         </FlexColumn>

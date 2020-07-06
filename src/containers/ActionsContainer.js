@@ -69,9 +69,7 @@ const ActionsContainer = (props) => {
     setActionButton(!actionButton);
   };
 
-  const userNotLoggedIn = () => {
-      alert('Sign in through Google to submit an action!')
-  }
+
   return (
     <div className={classes.root}>
       <div className={classes.title2}>{props.incident.title}</div>
@@ -100,15 +98,11 @@ const ActionsContainer = (props) => {
             <span>No actions have been suggested for this incident yet. </span>
           )}
           <br></br>
-          { props.currentUser ? 
-            <AddActionButton currentUser={props.currentUser} onClick={handleClick}>
+            <AddActionButton currentUser={props.currentUser} handleClick={handleClick}>
                 Suggest an action.
             </AddActionButton>
-           :
-           <AddActionButton currentUser={props.currentUser} onClick={userNotLoggedIn}>
-            Suggest an action.
-           </AddActionButton>
-          }
+           
+         
 
         </div>
         <br></br>
