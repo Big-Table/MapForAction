@@ -17,7 +17,11 @@ const getStyles = makeStyles({
         zIndex: "10",
         color: '#FCC42C',
         borderRadius: '10px',
-        overflowY: 'scroll'
+        overflowY: 'scroll',
+        border: 'solid', 
+        borderColor: '#FCC42C',
+        borderWidth: '5px',
+        borderRadius: '10px'
 
     },
     p: {

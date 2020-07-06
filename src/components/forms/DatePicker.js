@@ -14,20 +14,20 @@ function Example(props){
 
     const [startDate, setStartDate] = useState(new Date());
  
-//   handleChange = date => {
-//     this.setState({
-//       startDate: date
-//     });
-//   };
+  const handleChange = date => {
+    setStartDate(date)
+    props.handleDate(date)
+  };
  
  
     return (
       <DatePicker
+        dateFormat="MMMM d, yyyy"
         name='date'
         inline
         selected={startDate}
         value={props.incidentForm.date}
-        onChange={props.handleDate}
+        onChange={handleChange}
       />
     );
   

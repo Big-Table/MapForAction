@@ -19,7 +19,11 @@ const getStyles = makeStyles({
         top: "7%",
         left: "26%",
         zIndex: "10",
-        overflowY: 'scroll'
+        overflowY: 'scroll',
+        border: 'solid', 
+        borderColor: 'black',
+        borderWidth: '5px',
+        borderRadius: '10px'
     }, 
     input: {
         width: '30%'
@@ -44,7 +48,7 @@ const getStyles = makeStyles({
     }, 
     input: {
         width: "92%",
-        height: "15%",
+        height: "40px",
         fontSize: "20px",
         fontFamily: "Work Sans, sansSerif"
         
@@ -145,23 +149,7 @@ function IncidentForm2(props){
         setIncidentForm({
           ...incidentForm, 
           checked: event.target.checked
-        }, 
-        // () => {
-        //   if(setIncidentForm.checked === true){
-        //     setIncidentForm({
-        //           firstName: '', 
-        //           profilePicture: ''
-        //         })
-        //   } 
-        //   if(setIncidentForm.checked === false){
-        //     setIncidentForm({
-        //           firstName: props.currentUser.firstName, 
-        //           profilePicture: props.currentUser.profilePicture
-        //   })
-        // }
-        // }
-        )
-        
+        })
       }
 
       const handleSubmit = (e) => {
@@ -188,21 +176,7 @@ function IncidentForm2(props){
           props.showForm()
           props.submitted()
       }
-    //   const async handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log("Hello World");
-    //     console.log(this.state)
-    //     await postIncidents(this.state)
-    //     .then(resp => {
-    //       console.log(resp)
-    //       this.props.lastIncident(resp.data._id)
-    //     })
-    //     this.setState(incidentFormInitialState);
-    //     this.props.updateIncidents();
-    //     this.props.showForm()
-    //     this.props.submitted()
-    //     // alert("This incidence has been reported, thank you for being proactive!");
-    //   }
+   
       console.log(incidentForm)
     return(
         <div className={classes.root}>
@@ -218,7 +192,6 @@ function IncidentForm2(props){
             <br></br>
 
               <input
-                style={{color: 'black'}}
                 className={classes.input}
                 name="title"
                 type="text"
