@@ -27,8 +27,6 @@ const useStyles = makeStyles({
         backgroundColor: 'black', 
         color: '#FCC42C',
         fontSize: 13,
-        // height: '20px', 
-        // width: '10px'
     }, 
    
 })
@@ -62,10 +60,19 @@ function ZipCodeSearch(){
         handleZip(newContent)
     };
 
+    const [color, setColor] = useState('#FCC42C')
+    const correctLength = (newColor) => {
+        setColor(newColor)
+    }
     const handleZipCodeChange = (e) => {
-
+        //regex for only numbers
         const re = /^[0-9\b]+$/;
-
+        //if length is 1-4 keep yellow font, 5 change to green for good to go
+        if(e.target.value.length === 1 || e.target.value.length === 2 || e.target.value.length === 3 || e.target.value.length === 4){
+            correctLength('#FCC42C')
+        } else if(e.target.value.length === 5){
+            correctLength('green')
+        }
         // if value is not blank, then test the regex
         if(e.target.value.length <= 5){
             if (e.target.value === '' || re.test(e.target.value)) {
@@ -80,6 +87,7 @@ function ZipCodeSearch(){
 
     console.log(zip)
     return(
+
         <div >
             <TextField 
             onChange={e => handleZipCodeChange(e)}
@@ -91,7 +99,7 @@ function ZipCodeSearch(){
             id="outlined-basic" 
             variant="outlined"
             InputProps={{
-                style: {color: "#FCC42C"},
+                style: {color: color},
                 endAdornment: (
                   <InputAdornment position="center">
                     <Tooltip 
@@ -100,12 +108,15 @@ function ZipCodeSearch(){
                         arrow: classes.arrow
                       }}
                     title='Search'>
-                        <SearchIcon cursor='pointer' onClick={onZipCodeSearchClick}/>
+                        <SearchIcon cursor='pointer' onClick={zip.length === 5 &&onZipCodeSearchClick }/>
                     </Tooltip>
                   </InputAdornment>
                  )
             }}
             />
+            
+            
+            
 
         </div>
     )

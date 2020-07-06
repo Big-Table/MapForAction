@@ -101,11 +101,11 @@ const ActionsContainer = (props) => {
           )}
           <br></br>
           { props.currentUser ? 
-            <AddActionButton onClick={handleClick}>
+            <AddActionButton currentUser={props.currentUser} onClick={handleClick}>
                 Suggest an action.
             </AddActionButton>
            :
-           <AddActionButton onClick={userNotLoggedIn}>
+           <AddActionButton currentUser={props.currentUser} onClick={userNotLoggedIn}>
             Suggest an action.
            </AddActionButton>
           }

@@ -1,21 +1,22 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core'
 import logo from "../../navigation/logo.png";
+import CloseIcon from "@material-ui/icons/Close";
 
 const getStyles = makeStyles({
     root: {
         position: "absolute",
         textAlign: "left",
         /* margin: 2px; */
-        width: "60%",
+        width: "63%",
         height: "85vh",
         backgroundColor: "black",
         padding: "20px",
         top: "60px",
-        left: "20%",
+        left: "17%",
         zIndex: "10",
         color: '#FCC42C',
-        borderRadius: '20px',
+        borderRadius: '10px',
         overflowY: 'scroll'
 
     },
@@ -25,7 +26,7 @@ const getStyles = makeStyles({
 })
 
 
-function WhatsNext(){
+function WhatsNext(props){
     const classes = getStyles()
 
 
@@ -70,14 +71,14 @@ function WhatsNext(){
 
             <ul>
                 <li>
-                    Currently at this time we are still in the process of figuring out how to successfully turn the reigns over to public moderators. If you are interested at this time, please send us an email at mapforaction@gmail.com, or check back later for more updates!
+                    Currently at this time we are still in the process of figuring out how to successfully turn the reigns over to public moderators. If you are interested at this time, please send us an email at <a href='mailto:mapforaction@gmail.com'>mapforaction@gmail.com</a>, or check back later for more updates!
                 </li>
             </ul>
 
             <p className={classes.p}>Can I contribute to the code base?</p>
             <ul>
                 <li>
-                    Absolutely! If you are a software engineer and would like to contribute please visit our <a href="https://github.com/Big-Table/MapForAction" style={{textDecoration: "underline"}}>Github</a> and read our Readme. 
+                    Absolutely! If you are a software engineer and would like to contribute please visit our <a href="https://github.com/Big-Table/MapForAction" style={{textDecoration: "underline"}}>Github</a> and read our ReadMe. 
                 </li>
             </ul>
 
@@ -103,7 +104,11 @@ function WhatsNext(){
             <h5 style={{textAlign: 'center'}}>
                 Black Lives Matter. We remember and honor all victims depicted on this site. 
             </h5>
-           
+            <CloseIcon
+                id="close-button"
+                onClick={props.onClick}
+                style={{ cursor: "pointer" }}
+            />
         </div>
     )
 

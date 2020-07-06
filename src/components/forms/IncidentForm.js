@@ -142,7 +142,7 @@ class IncidentForm extends React.Component {
               <input
                 name="title"
                 type="text"
-                maxlength="90"
+                maxLength="90"
                 placeholder="Write the incident title"
                 aria-describedby="required-description"
                 value={this.state.title}
@@ -155,8 +155,8 @@ class IncidentForm extends React.Component {
               <textarea
                 id="descriptionInput"
                 name="description"
-                type="text"
-                rows="5"
+                type="textArea"
+                
                 placeholder="The more details, the better!"
                 aria-describedby="required-description"
                 value={this.state.description}
@@ -241,8 +241,7 @@ class IncidentForm extends React.Component {
           </Grid>
         
           <br></br>
-          <br></br>
-          <br></br>
+          
 
             <input type="submit" value="Submit" id="submitButton" style={{borderStyle: "solid", borderColor: "black"}}/>
 

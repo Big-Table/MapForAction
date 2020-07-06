@@ -170,7 +170,6 @@ export default function StickyHeadTable(props) {
         props.approve()
       })
     
-    alert("this has been approved");
   };
 
   const handleDeny = (id) => {
@@ -179,7 +178,6 @@ export default function StickyHeadTable(props) {
         props.approve()
       })
     
-    alert("this has been denied");
   };
 
   const [editForm, setEditForm] = useState(false);

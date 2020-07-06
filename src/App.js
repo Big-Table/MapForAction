@@ -19,7 +19,7 @@ import { getApprovedIncidents } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import ZipCodeSearch from './navigation/ZipCodeSearch'
-
+import NewIncidentForm from './components/forms/NewIncidentForm'
 
 class App extends React.Component {
   state = {
@@ -107,9 +107,9 @@ class App extends React.Component {
     });
   };
 
-  handleUserNotLoggedIn = () => {
-      alert('Sign in through Google to submit an incident!')
-  }
+  // handleUserNotLoggedIn = () => {
+  //     alert('Sign in through Google to submit an incident!')
+  // }
 
   handleLastIncidentID = (id) => {
     this.setState({
@@ -155,23 +155,29 @@ class App extends React.Component {
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
               <AddWhatsNextButton onClick={this.handleFAQ}></AddWhatsNextButton>
-              {this.state.FAQ && <WhatsNext></WhatsNext>}
+              {this.state.FAQ && <WhatsNext onClick={this.handleFAQ}></WhatsNext>}
               { this.state.currentUser ?
-               <AddIncidentButton onClick={this.handleShowForm} />
+               <AddIncidentButton currentUser={this.state.currentUser} onClick={this.handleShowForm} />
                : 
-               <AddIncidentButton onClick={this.handleUserNotLoggedIn}/>
+               <AddIncidentButton currentUser={this.state.currentUser}/>
               } 
               { this.state.currentUser && this.state.currentUser.moderator && 
                 <AddQueueButton></AddQueueButton>
               }
               {/* <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton> */}
             </div>
+            {this.state.incidentForm && <NewIncidentForm 
+             submitted={this.handleSubmittedIncident}
+             lastIncident={this.handleLastIncidentID}
+             showForm={this.handleShowForm}
+             updateIncidents={this.updateIncidents}
+             currentUser={this.state.currentUser}></NewIncidentForm>}
             {this.state.submitted && 
             <ImageForm 
               lastIncidentID={this.state.lastIncidentPostedID}
               submitted={this.handleSubmittedIncident}
             ></ImageForm>}
-            {this.state.incidentForm && (
+            {/* {this.state.incidentForm && (
               <IncidentForm
                 submitted={this.handleSubmittedIncident}
                 lastIncident={this.handleLastIncidentID}
@@ -179,7 +185,7 @@ class App extends React.Component {
                 updateIncidents={this.updateIncidents}
                 currentUser={this.state.currentUser}
               />
-            )}
+            )} */}
             {this.state.incidentForm ||
               (this.state.grid && <div id="overlay"></div>)}
             {this.state.grid && (
