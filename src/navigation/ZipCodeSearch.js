@@ -4,6 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from "@material-ui/core";
 import Tooltip from '@material-ui/core/Tooltip';
+import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+
 
 const useStyles = makeStyles({
     root: {
@@ -36,7 +38,7 @@ const useStyles = makeStyles({
    
 })
 
-function ZipCodeSearch(){
+function ZipCodeSearch(props){
 
     const classes = useStyles()
 
@@ -87,7 +89,11 @@ function ZipCodeSearch(){
     }
 
     const onZipCodeSearchClick = () => {
-        console.log("hi")
+            geocodeByAddress(zip)
+            .then(results => getLatLng(results[0]))
+            .then(({ lat, lng }) =>
+                props.handleZipCode(lat, lng)
+            );
     }
 
     console.log(zip)

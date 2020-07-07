@@ -140,6 +140,15 @@ class App extends React.Component {
     });
   };
 
+  handleZipCode = (latt, long) => {
+    this.setState({
+      mapCenter: {
+        lat: latt,
+        lng: long,
+      }
+    });
+  }
+
   render() {
     console.log(this.state.currentUser);
     console.log(this.state.incidents);
@@ -149,7 +158,7 @@ class App extends React.Component {
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
-          <ZipCodeSearch></ZipCodeSearch>
+          <ZipCodeSearch handleZipCode={this.handleZipCode}></ZipCodeSearch>
 
             {/* Map goes here */}
             <Map
