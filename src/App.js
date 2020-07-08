@@ -20,7 +20,7 @@ import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
 import ZipCodeSearch from './navigation/ZipCodeSearch'
 import NewIncidentForm from './components/forms/NewIncidentForm'
-
+import NewSearch from './navigation/NewSearch'
 class App extends React.Component {
   state = {
     incidents: [],
@@ -158,8 +158,8 @@ class App extends React.Component {
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
-          <ZipCodeSearch handleZipCode={this.handleZipCode}></ZipCodeSearch>
-
+          {/* <ZipCodeSearch handleZipCode={this.handleZipCode}></ZipCodeSearch> */}
+          <NewSearch handleZipCode={this.handleZipCode}></NewSearch>
             {/* Map goes here */}
             <Map
               deleteCurrentIncident={this.deleteCurrentIncident}

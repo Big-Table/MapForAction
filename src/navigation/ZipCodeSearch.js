@@ -96,12 +96,19 @@ function ZipCodeSearch(props){
             );
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key === 'Enter'){
+            onZipCodeSearchClick()
+        }
+    }
+
     console.log(zip)
     return(
 
         <div >
             {zip.length === 5 ? 
                 <TextField 
+                onKeyDown={e => handleKeyDown(e)}
                 onChange={e => handleZipCodeChange(e)}
                 onPaste={e => handleZipcodeInputPaste(e)}
                 value={zip}
