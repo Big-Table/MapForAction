@@ -16,15 +16,7 @@ const useStyles = makeStyles({
         zIndex: 10,
         color: '#FCC42C',
         backgroundColor: "#000000",
-        // "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-        //     borderColor: "#FCC42C"
-        //   },
-        //   "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-        //     borderColor: "#FCC42C"
-        //   },
-        //   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-        //     borderColor: "black"
-        //   }
+      
     }, 
     test: {
      
@@ -52,46 +44,6 @@ function NewSearch(props){
         setLocation(newLocation)
     }
 
-    // const handleZipcodeInputPaste = e => {
-    //     // test value: 123as8aa2129
-    //     e.preventDefault();
-    
-    //     // get pasted content
-    //     let pasteText = e.clipboardData.getData("text/plain");
-    //     // only allow integers
-    //     pasteText = pasteText.replace(/[^0-9]/g, "");
-    //     // add to current input value (target)
-    //     let newContent = e.target.value + pasteText;
-    //     // only allow 5 digits total
-    //     newContent = newContent.substring(0, 5);
-    //     // set new value of input
-    //     e.target.value = newContent;
-    //     console.log(newContent)
-    //     // set new state of zipcode
-    //     handleZip(newContent)
-    // };
-
-    // const [color, setColor] = useState('#FCC42C')
-    // const correctLength = (newColor) => {
-    //     setColor(newColor)
-    // }
-    // const handleZipCodeChange = (e) => {
-    //     //regex for only numbers
-    //     const re = /^[0-9\b]+$/;
-    //     //if length is 1-4 keep yellow font, 5 change to green for good to go
-    //     if(e.target.value.length === 1 || e.target.value.length === 2 || e.target.value.length === 3 || e.target.value.length === 4){
-    //         correctLength('#FCC42C')
-    //     } else if(e.target.value.length === 5){
-    //         correctLength('green')
-    //     }
-    //     // if value is not blank, then test the regex
-    //     if(e.target.value.length <= 5){
-    //         if (e.target.value === '' || re.test(e.target.value)) {
-    //             setZip(e.target.value)
-    //         }
-    //     }
-    // }
-
     const onZipCodeSearchClick = (newLocation) => {
             if(newLocation === 'undefined'){
                 geocodeByAddress(location)
@@ -116,7 +68,7 @@ function NewSearch(props){
     }
 
     const handleLocationChange = (e) => {
-        setLocation(e.target.value)
+        handleLocation(e.target.value)
     }
 
     console.log(location)
@@ -150,8 +102,9 @@ function NewSearch(props){
                 }}
                 /> */}
              <GooglePlacesAutocomplete
-                inputStyle={{width: '100%', height: '40px', backgroundColor: 'black', color: '#FCC42C', border: 'solid', borderColor: '#FCC42C'}}
-               
+                inputStyle={{width: '100%', height: '40px', backgroundColor: 'black', color: '#FCC42C', border: 'solid', borderColor: '#FCC42C', fontSize: "20px", fontFamily: "Work Sans, sansSerif"}}
+                onChange={e => handleLocationChange(e)}
+               onKeyDown={e => handleKeyDown(e)}
               inputClassName={classes.test}
               onSelect={(description) => onZipCodeSearchClick(description.description)}
               placeholder="Search location..."
