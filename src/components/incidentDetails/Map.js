@@ -5,7 +5,8 @@ class Map extends Component {
   googleMapRef = createRef();
   googleKey =
     process.env.NODE_ENV === "production"
-      ? "AIzaSyA1Cq6ox4TlZp5HUfSzWoZDuHN9rhrgK6Q"
+      ? "AIzaSyBB3ATce2KnKp2P7gIEbpj5pdkChDArnic"
+      // "AIzaSyA1Cq6ox4TlZp5HUfSzWoZDuHN9rhrgK6Q"
       : "AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc";
 
   componentDidMount() {
