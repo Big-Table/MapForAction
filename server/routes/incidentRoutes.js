@@ -3,8 +3,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
-const requireLogin = require("../middleware/requireLogin")
-const requireModerator = require("../middleware/requireModerator")
+const requireLogin = require("../middleware/requireLogin");
+const requireModerator = require("../middleware/requireModerator");
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 });
 
 //requireLogin,
-router.post("/",  async (req, res) => {
+router.post("/", async (req, res) => {
   const {
     title,
     description,
@@ -30,8 +30,9 @@ router.post("/",  async (req, res) => {
     lng,
     organization,
     petition,
-    profilePicture, 
-    firstName
+    profilePicture,
+    firstName,
+    _user,
   } = req.body;
 
   const newIncident = new Incident({
@@ -45,20 +46,22 @@ router.post("/",  async (req, res) => {
     petition,
     status: "pending",
     profilePicture,
-    firstName
+    firstName,
+    _user,
   });
-   
-   console.log(newIncident)
-  
-   try {
+
+  try {
     await newIncident.save();
-    newIncident.image_url = `/incidents/${newIncident._id}/image`
-    newIncident.save()
-    console.log(newIncident)
+    newIncident.image_url = `/incidents/${newIncident._id}/image`;
+    newIncident.save();
+    console.log(newIncident);
 
     res.json(newIncident);
   } catch (err) {
-    res.status(400).json("Error:" + err);
+    res.status(400).json(err);
+    for (let ele in err.errors) {
+      console.log(ele.properties);
+    }
   }
 });
 
@@ -171,7 +174,7 @@ const upload = multer({
     fileSize: 3000000,
   },
   fileFilter(req, file, cb) {
-    console.log(file )
+    console.log(file);
     //uses regex to only allow png, jpg, jpeg
     if (!file.originalname.match(/\.(png|jpg|jpeg|JPEG|JPG|PNG)$/)) {
       cb(new Error("Please upload an image."));
@@ -189,25 +192,25 @@ router.post(
   "/upload",
   upload.single("upload"),
   async (req, res) => {
-    console.log(req.body)
-    console.log(req.file.buffer)
+    console.log(req.body);
+    console.log(req.file.buffer);
     try {
       const incident = await Incident.findById(req.body.id);
-      console.log(incident)
+      console.log(incident);
       const buffer = await sharp(req.file.buffer)
         .resize({ width: 500, height: 500 })
         .png()
         .toBuffer();
       incident.image = buffer;
       incident.save();
-      console.log("CREATED")
+      console.log("CREATED");
       res.send();
     } catch (e) {
       res.status(400).send(e);
     }
   },
   (error, req, res, next) => {
-    console.log(error.message)
+    console.log(error.message);
     res.status(400).send({ error: error.message });
   }
 );
@@ -242,18 +245,18 @@ router.get("/:id/image", async (req, res) => {
 });
 
 // requireLogin, requireModerator,
-router.delete('/:id',  async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     //remove the user from database
-    const incident = await Incident.findOne({ _id: req.params.id })
-    await Action.deleteMany({ _incident: incident._id })
-    await Tweet.deleteMany({ _incident: incident._id })
+    const incident = await Incident.findOne({ _id: req.params.id });
+    await Action.deleteMany({ _incident: incident._id });
+    await Tweet.deleteMany({ _incident: incident._id });
 
-    await incident.remove()
-    res.send(incident)
+    await incident.remove();
+    res.send(incident);
   } catch (e) {
-    res.status(500).send(e)
+    res.status(500).send(e);
   }
-})
+});
 
 module.exports = router;

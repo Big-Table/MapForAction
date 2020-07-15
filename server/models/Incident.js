@@ -3,14 +3,20 @@ mongoose.set("useCreateIndex", true);
 const uniqueValidator = require("mongoose-unique-validator");
 const { Schema } = mongoose;
 
-const Tweet = require("../models/Tweet");
-const Action = require("../models/Action");
-
 const IncidentSchema = new Schema(
   {
-    title: String,
-    description: String,
-    date: String,
+    title: {
+      type: String,
+      required: [true, "Please enter a title for the incident"],
+    },
+    description: {
+      type: String,
+      required: [true, "Please enter a description for the incident"],
+    },
+    date: {
+      type: String,
+      required: [true, "Please enter a date for the incident"],
+    },
     image_url: String,
     lat: String,
     lng: String,
@@ -18,10 +24,11 @@ const IncidentSchema = new Schema(
     petition: String,
     status: String,
     image: {
-      type: Buffer
-    }, 
-    profilePicture: String, 
-    firstName: String
+      type: Buffer,
+    },
+    profilePicture: String,
+    firstName: String,
+    _user: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
