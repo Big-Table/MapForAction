@@ -2,6 +2,7 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("../config/keys");
 const mongoose = require("mongoose");
+const { sendWelcomeEmail } = require('../emails/account');
 
 const User = mongoose.model("User");
 
@@ -31,6 +32,7 @@ passport.use(
       }
         // console.log(profile);
       const user = await new User({ googleID: profile.id, profilePicture: profile.photos[0].value, firstName: profile.name.givenName, lastName: profile.name.familyName, email: profile.emails[0].value }).save();
+      sendWelcomeEmail(user.email)
       done(null, user);
     }
   )

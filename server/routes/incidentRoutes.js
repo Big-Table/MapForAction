@@ -3,13 +3,14 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
-const requireLogin = require("../middleware/requireLogin")
-const requireModerator = require("../middleware/requireModerator")
-const { sendWelcomeEmail } = require('../emails/account')
+const { sendIncidentApprovedEmail } = require('../emails/account');
+const requireLogin = require("../middleware/requireLogin");
+const requireModerator = require("../middleware/requireModerator");
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
 const Action = mongoose.model("Action");
+const User = mongoose.model("User")
 
 
 router.get("/", async (req, res) => {
@@ -22,7 +23,7 @@ router.get("/", async (req, res) => {
 });
 
 //requireLogin,
-router.post("/",  async (req, res) => {
+router.post("/", async (req, res) => {
   const {
     title,
     description,
@@ -32,8 +33,9 @@ router.post("/",  async (req, res) => {
     lng,
     organization,
     petition,
-    profilePicture, 
-    firstName
+    profilePicture,
+    firstName,
+    _user,
   } = req.body;
 
   const newIncident = new Incident({
@@ -47,20 +49,22 @@ router.post("/",  async (req, res) => {
     petition,
     status: "pending",
     profilePicture,
-    firstName
+    firstName,
+    _user: req.user,
   });
-   
-   console.log(newIncident)
-  
-   try {
+
+  try {
     await newIncident.save();
-    newIncident.image_url = `/incidents/${newIncident._id}/image`
-    newIncident.save()
-    console.log(newIncident)
+    newIncident.image_url = `/incidents/${newIncident._id}/image`;
+    newIncident.save();
+    console.log(newIncident);
 
     res.json(newIncident);
   } catch (err) {
-    res.status(400).json("Error:" + err);
+    res.status(400).json(err);
+    for (let ele in err.errors) {
+      console.log(ele.properties);
+    }
   }
 });
 
@@ -96,9 +100,13 @@ router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
   //when approved user should receive an email letting them know it was approved.
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
-    //here is where i use the send email
-    //first I have to find the User's information
-    //then send that email
+    // console.log(incident._user)
+    let user = await User.findOne({_id: incident._user})
+    // console.log("USER", user)
+    if(user && user.email.length){
+      sendIncidentApprovedEmail(user.email)
+    }
+
     incident.status = "approved";
     incident.save();
     delete incident.image;
@@ -177,7 +185,7 @@ const upload = multer({
     fileSize: 3000000,
   },
   fileFilter(req, file, cb) {
-    console.log(file )
+    console.log(file);
     //uses regex to only allow png, jpg, jpeg
     if (!file.originalname.match(/\.(png|jpg|jpeg|JPEG|JPG|PNG)$/)) {
       cb(new Error("Please upload an image."));
@@ -195,25 +203,25 @@ router.post(
   "/upload",
   upload.single("upload"),
   async (req, res) => {
-    console.log(req.body)
-    console.log(req.file.buffer)
+    console.log(req.body);
+    console.log(req.file.buffer);
     try {
       const incident = await Incident.findById(req.body.id);
-      console.log(incident)
+      console.log(incident);
       const buffer = await sharp(req.file.buffer)
         .resize({ width: 500, height: 500 })
         .png()
         .toBuffer();
       incident.image = buffer;
       incident.save();
-      console.log("CREATED")
+      console.log("CREATED");
       res.send();
     } catch (e) {
       res.status(400).send(e);
     }
   },
   (error, req, res, next) => {
-    console.log(error.message)
+    console.log(error.message);
     res.status(400).send({ error: error.message });
   }
 );
@@ -248,18 +256,18 @@ router.get("/:id/image", async (req, res) => {
 });
 
 // requireLogin, requireModerator,
-router.delete('/:id',  async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     //remove the user from database
-    const incident = await Incident.findOne({ _id: req.params.id })
-    await Action.deleteMany({ _incident: incident._id })
-    await Tweet.deleteMany({ _incident: incident._id })
+    const incident = await Incident.findOne({ _id: req.params.id });
+    await Action.deleteMany({ _incident: incident._id });
+    await Tweet.deleteMany({ _incident: incident._id });
 
-    await incident.remove()
-    res.send(incident)
+    await incident.remove();
+    res.send(incident);
   } catch (e) {
-    res.status(500).send(e)
+    res.status(500).send(e);
   }
-})
+});
 
 module.exports = router;
