@@ -1,8 +1,8 @@
 const sgMail = require("@sendgrid/mail")
-const sendgridAPIKey = ""
+const keys = require('../config/keys.js')
 
 
-sgMail.setApiKey(sendgridAPIKey)
+sgMail.setApiKey(keys.sendgridKey)
 
 sgMail.send({
     to: "mapforaction@gmail.com",
