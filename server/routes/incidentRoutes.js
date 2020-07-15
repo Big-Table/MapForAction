@@ -5,10 +5,12 @@ const multer = require("multer");
 const sharp = require("sharp");
 const requireLogin = require("../middleware/requireLogin")
 const requireModerator = require("../middleware/requireModerator")
+const { sendWelcomeEmail } = require('../emails/account')
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
 const Action = mongoose.model("Action");
+
 
 router.get("/", async (req, res) => {
   try {
@@ -91,8 +93,12 @@ router.get("/denied", requireLogin, requireModerator, async (req, res) => {
 });
 
 router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
+  //when approved user should receive an email letting them know it was approved.
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
+    //here is where i use the send email
+    //first I have to find the User's information
+    //then send that email
     incident.status = "approved";
     incident.save();
     delete incident.image;

@@ -4,9 +4,17 @@ const keys = require('../config/keys.js')
 
 sgMail.setApiKey(keys.sendgridKey)
 
-sgMail.send({
-    to: "mapforaction@gmail.com",
-    from: "mapforaction@gmail.com",
-    subject: "this is my first creation",
-    text: "I hope this one gets to you."
-})
+
+
+const sendWelcomeEmail = (email) => {
+    sgMail.send({
+        to: email,
+        from: "mapforaction@gmail.com",
+        subject: "Thanks for contributing to MapForAction",
+        text: "Thank you for contributing to MapForAction. Your incident has been approved!"
+    })
+}
+
+module.exports = {
+    sendWelcomeEmail
+}
