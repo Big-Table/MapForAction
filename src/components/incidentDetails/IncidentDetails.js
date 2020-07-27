@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
   avatar: {
     height: "400px",
-    width: '100%',
+    width: '90%',
     borderRadius: 50,
     margin: 5,
     alignSelf: 'start',
