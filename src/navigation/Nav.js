@@ -83,6 +83,9 @@ const NavBar = (props) => {
         </div>
       </div>
 
+      <div style={{visibility: 'hidden', position: 'relative', height: '1px'}}>
+        this is text to keep spacing. this is text to keep spacing. more text
+      </div>
    
       {!props.currentIncident && (
         <>
