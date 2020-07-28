@@ -38,6 +38,18 @@ const useStyles = makeStyles({
     width: "100%",
     border: "solid",
   },
+  overlay: {
+    position: "fixed", 
+    width: "100%", 
+    height: "100%", 
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.8)", 
+    zIndex: 5, 
+    cursor: "pointer"
+  }
 });
 const ActionsContainer = (props) => {
   const classes = useStyles(props);
@@ -88,8 +100,8 @@ const ActionsContainer = (props) => {
               refresh={props.refresh}
             ></ActionForm>
           </div>
-        ) 
-        }
+        )}
+        {actionButton && <div className={classes.overlay}></div>}
 
         <div className={classes.spacing}>
           {actions.length > 0 ? (

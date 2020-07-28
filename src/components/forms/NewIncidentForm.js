@@ -67,12 +67,17 @@ const getStyles = makeStyles({
         height: 40,
         width: 150,
         borderRadius: 20,
-        fontFamily: 'Work Sans',
+        fontFamily: "Work Sans, sansSerif",
         fontWeight: 700,
         cursor: "pointer",
         outline: "none",
         display: "flex",
         justifyContent: "center"
+    }, 
+    errorMessages: {
+      color: 'red',
+      fontWeight: 'bold',
+      fontFamily: "Work Sans, sansSerif"
     }
 })
 function IncidentForm2(props){
@@ -119,7 +124,6 @@ function IncidentForm2(props){
     }
 
    useEffect(() => {
-       console.log('ITS ME')
     if(incidentForm.checked === true){
         setIncidentForm({
               ...incidentForm,
@@ -154,27 +158,98 @@ function IncidentForm2(props){
 
       const handleSubmit = (e) => {
           e.preventDefault()
-          postIncidents(incidentForm)
-          .then(resp => {
-              console.log(resp)
-              props.lastIncident(resp.data._id)
-          })
-          setIncidentForm({
-            title: "",
-            description: "",
-            date: "",
-            lat: "",
-            lng: "",
-            organization: "",
-            petition: "",
-            image_url: "",
-            profilePicture: "", 
-            firstName: "", 
-            checked: false
-          })
-          props.updateIncidents()
-          props.showForm()
-          props.submitted()
+          let valid = handleValidation()
+          if(valid){
+            postIncidents(incidentForm)
+            .then(resp => {
+                console.log(resp)
+                props.lastIncident(resp.data._id)
+            })
+            setIncidentForm({
+              title: "",
+              description: "",
+              date: "",
+              lat: "",
+              lng: "",
+              organization: "",
+              petition: "",
+              image_url: "",
+              profilePicture: "", 
+              firstName: "", 
+              checked: false
+            })
+            props.updateIncidents()
+            props.showForm()
+            props.submitted()
+          }
+      }
+
+      const [errors, setErrors] = useState({})
+
+      const handleValidation = () => {
+        let errors = {}
+        let isFormValid = true 
+
+        if(!incidentForm.title){
+          isFormValid = false 
+          errors.title = "Title cannot be empty!"
+        } else if(typeof(incidentForm.title) !== undefined){
+          if(!incidentForm.title.match(/^[a-zA-Z ]+$/)){
+              isFormValid = false 
+              errors.title = "Title can only include letters!"
+          } else if (incidentForm.title.length > 50){
+              isFormValid = false 
+              errors.title = "Title must be less than 50 characters long!"
+          }
+        }
+
+        if(!incidentForm.description){
+          isFormValid = false 
+          errors.description = "Description cannot be empty!"
+        } else if(typeof(incidentForm.description) !== undefined){
+          if (incidentForm.description.length < 50){
+              isFormValid = false 
+              errors.description = "Description must be longer than 50 characters!"
+          }
+        }
+
+        if(!incidentForm.date){
+          isFormValid = false 
+          errors.date = "Please Choose a Date!"
+        } 
+
+        if(!incidentForm.lat){
+          isFormValid = false 
+          errors.location = "Please Choose a Location!"
+        } 
+
+        if(incidentForm.organization){
+          if(!validURL(incidentForm.organization)){
+            isFormValid = false 
+            errors.organization = "Please enter a valid URL"
+          }
+        }
+
+        if(incidentForm.petition){
+          if(!validURL(incidentForm.petition)){
+            isFormValid = false 
+            errors.petition = "Please enter a valid URL"
+          }
+        }
+
+        setErrors(errors)
+        return isFormValid
+
+      }
+
+      const validURL = (str) => {
+        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+          '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+          '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+          '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+          '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+          '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return !!pattern.test(str);
       }
    
       console.log(incidentForm)
@@ -187,20 +262,18 @@ function IncidentForm2(props){
                 Title<span className="required">*</span>
               </label>
             <br></br>
-            <br></br>
+              <span className={classes.errorMessages}>{errors.title}</span>
 
               <input
                 className={classes.input}
                 name="title"
                 type="text"
                 maxLength="90"
-                placeholder="Write the incident title"
+                placeholder="Write the Incident Title."
                 aria-describedby="required-description"
                 value={incidentForm.title}
                 onChange={handleChange}
               />
-
-            <br></br>
             <br></br>
 
               <label className={classes.formLabel} htmlFor="description">
@@ -208,7 +281,7 @@ function IncidentForm2(props){
               </label>
 
             <br></br>
-            <br></br>
+              <span className={classes.errorMessages}>{errors.description}</span>
 
               <TextareaAutosize
                     name='description'
@@ -216,58 +289,58 @@ function IncidentForm2(props){
                     minRows={5}
                     maxRows={9}
                     placeholder="Who, What, Where, When, Why!
-                     Give us the details"
+                     Give Us the Details."
                      value={incidentForm.description}
                      onChange={(event) => handleChange(event)}
                />
-              
-            <br></br>
+            
             <br></br>
             <label style={{display: 'flex', justifyContent: 'center'}} className={classes.formLabel} htmlFor="date">
                 Date<span className="required">*</span>
-              </label>
+            </label>
+
             <br></br>
-            <br></br>
+            <span className={classes.errorMessages}>{errors.date}</span>
+
             <div style={{display: 'flex', justifyContent: 'center'}}>
               
-            
             <DatePicker handleDate={handleDate} incidentForm={incidentForm} className={classes.input}></DatePicker>
             </div>
             
               <br></br>
-              <br></br>
+
               <label  className={classes.formLabel} htmlFor="lat">
                 Location<span className="required">*</span>
               </label>
 
             <br></br>
-            <br></br>
+
+            <span className={classes.errorMessages}>{errors.location}</span>
 
             <GooglePlacesAutocomplete
               inputClassName={classes.input}
               onSelect={(description) => handleAddress(description.description)}
-              placeholder="Address or nearby location"
+              placeholder="Address or nearby location."
             />
 
             <br></br>
-            <br></br>
 
-            <label className={classes.formLabel}   htmlFor="organization">Organization
+            <label className={classes.formLabel} htmlFor="organization">Organization
             </label>
 
             <br></br>
-            <br></br>
+
+            <span className={classes.errorMessages}>{errors.organization}</span>
 
             <input
               className={classes.input}
               name="organization"
               type="text"
-              placeholder="Add a link to related organization"
+              placeholder="Add a link to related organization."
               value={incidentForm.organization}
               onChange={handleChange}
             />
 
-            <br></br>
             <br></br>
 
             <label className={classes.formLabel} htmlFor="petition">
@@ -275,22 +348,23 @@ function IncidentForm2(props){
             </label>
 
             <br></br>
-            <br></br>
+
+            <span className={classes.errorMessages}>{errors.petition}</span>
 
             <input
               className={classes.input}
               name="petition"
               type="text"
-              placeholder="Add a link to related petition"
+              placeholder="Add a link to related petition."
               value={incidentForm.petition}
               onChange={handleChange}
             />
 
-            <br></br>
+          
             <br></br>
             <br></br>
 
-            <label style={{display: 'flex', justifyContent: 'center', paddingRight: '30px'}}htmlFor="petition">
+            <label style={{display: 'flex', justifyContent: 'center', paddingRight: '30px'}}htmlFor="checkbox">
             <Checkbox
             type="checkbox"
             checked={incidentForm.checked}
@@ -302,7 +376,7 @@ function IncidentForm2(props){
            
           <br></br>
           <br></br>
-          <br></br>
+        
     
           
 

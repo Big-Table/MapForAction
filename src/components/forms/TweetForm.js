@@ -6,8 +6,9 @@ import { postTweets } from "../../requests/requests";
 class TweetForm extends React.Component {
 
   state = {
-    url: "",
-    _incident: ""
+    url: '',
+    _incident: "",
+    errors: {}
   }
 
   componentDidMount(){
@@ -23,22 +24,51 @@ class TweetForm extends React.Component {
   }
 
   handleSubmit = (event) => {
-    console.log('u pressed submit'
-    )
     event.preventDefault()
-    postTweets(this.state)
-    this.setState({
-        url: "",
-        _incident: ""
-    })
-    this.props.tweetButton()
+    let valid = this.handleValidation()
+    if(valid){
+      postTweets(this.state)
+      this.setState({
+          url: "",
+          _incident: ""
+      })
+      this.props.tweetButton()
+    }
+  }
 
+  handleValidation = () => {
+    let errors = {}
+    let isFormValid = true
+
+    if(!this.state.url){
+      isFormValid = false 
+      errors.url = "URL cannot be empty!"
+    } else if((typeof(this.state.url) !== undefined)){
+        if(!this.validURL(this.state.url)){
+            isFormValid = false 
+            errors.url = "Please enter a valid URL"
+        }
+    }
+
+    this.setState({
+      errors: errors
+    })
+    return isFormValid
+  }
+
+  validURL = (url) => {
+    let re = /https?:\/\/twitter\.com/
+
+    for(let i=0; i < url.length; i++){
+      if(url[i] === 'm' && url[i - 1] === 'o' && url[i - 2] === 'c'){
+        let testString = url.slice(0, i + 1)
+        if(re.test(testString)) return true
+      }
+    }
+    return false
   }
 
   render() {
-    console.log(this.props)
-    console.log(this.state)
-
     return (
       <div id="actionForm" style={{backgroundColor: '#FCC42C', color: 'black'}}>
         <h2 style={{color: 'black'}}>Add a Tweet!</h2>
@@ -46,6 +76,14 @@ class TweetForm extends React.Component {
           <label htmlFor="url" >
               Url<span className="required">*</span>
           </label>
+          <span style={{
+              color: 'red',
+              fontWeight: 'bold',
+              fontFamily: "Work Sans, sansSerif"
+              }}
+          >
+          {this.state.errors.url}
+          </span>
           <input
             name="url"
             type="text"
@@ -54,7 +92,6 @@ class TweetForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <input style={{border: 'solid', borderColor: 'black'}} type="submit" value="Submit" id="submitButton" />
           <label hidden>
             Incident ID
           </label>
@@ -65,7 +102,11 @@ class TweetForm extends React.Component {
            value={this.state.incidentID}
           >
           </input>
+          <br></br>
+          <input style={{border: 'solid', borderColor: 'black'}} type="submit" value="Submit" id="submitButton" />
         </form>
+        <br></br>
+      
         <CloseIcon
           id="close-button"
           onClick={this.props.tweetButton}

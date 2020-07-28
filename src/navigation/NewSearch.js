@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         top: 60, 
         left: '.70%',
         width: '22%',
-        zIndex: 10,
+        zIndex: 3,
         color: '#FCC42C',
         backgroundColor: "#000000",
       

@@ -36,6 +36,18 @@ const useStyles = makeStyles({
   icon: {
     color: "#FCC42C",
   },
+  overlay: {
+    position: "fixed", 
+    width: "100%", 
+    height: "100%", 
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.8)", 
+    zIndex: 5, 
+    cursor: "pointer"
+  }
 });
 
 const IncidentDetailContainer = (props) => {
@@ -93,6 +105,7 @@ const IncidentDetailContainer = (props) => {
                     tweetButton={handleTweet}
                   ></TweetForm>
                 )}
+                {tweetState && <div className={classes.overlay}></div>}
                 <TwitterContainer
                   tweetButton={handleTweet}
                   incident={props.incident}
