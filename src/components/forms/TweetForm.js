@@ -24,8 +24,6 @@ class TweetForm extends React.Component {
   }
 
   handleSubmit = (event) => {
-    console.log('u pressed submit'
-    )
     event.preventDefault()
     let valid = this.handleValidation()
     if(valid){
@@ -78,7 +76,14 @@ class TweetForm extends React.Component {
           <label htmlFor="url" >
               Url<span className="required">*</span>
           </label>
-          <span>{this.state.errors.url}</span>
+          <span style={{
+              color: 'red',
+              fontWeight: 'bold',
+              fontFamily: "Work Sans, sansSerif"
+              }}
+          >
+          {this.state.errors.url}
+          </span>
           <input
             name="url"
             type="text"
@@ -87,7 +92,6 @@ class TweetForm extends React.Component {
             onChange={this.handleChange}
           />
 
-          <input style={{border: 'solid', borderColor: 'black'}} type="submit" value="Submit" id="submitButton" />
           <label hidden>
             Incident ID
           </label>
@@ -98,8 +102,11 @@ class TweetForm extends React.Component {
            value={this.state.incidentID}
           >
           </input>
+          <br></br>
+          <input style={{border: 'solid', borderColor: 'black'}} type="submit" value="Submit" id="submitButton" />
         </form>
         <br></br>
+      
         <CloseIcon
           id="close-button"
           onClick={this.props.tweetButton}
