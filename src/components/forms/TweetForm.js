@@ -46,7 +46,7 @@ class TweetForm extends React.Component {
     } else if((typeof(this.state.url) !== undefined)){
         if(!this.validURL(this.state.url)){
             isFormValid = false 
-            errors.url = "Please enter a valid URL"
+            errors.url = "Please Enter a valid Twitter URL"
         }
     }
 
