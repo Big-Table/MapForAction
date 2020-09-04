@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core";
-import TextareaAutosize from "react-textarea-autosize";
-import { postIncidents } from "../../requests/requests";
+import { Checkbox, makeStyles } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import React, { useEffect, useState } from "react";
 import GooglePlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-google-places-autocomplete";
-import Grid from "@material-ui/core/Grid";
-import { Checkbox } from "@material-ui/core";
+import TextareaAutosize from "react-textarea-autosize";
+import { postIncidents } from "../../requests/requests";
 import DatePicker from "./DatePicker";
 const getStyles = makeStyles({
   root: {

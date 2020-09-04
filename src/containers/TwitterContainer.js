@@ -40,7 +40,7 @@ const TwitterContainer = (props) => {
       );
       setTweets(filter);
     });
-  }, [props.tweetButton]);
+  }, [props.incident._id, props.tweetButton]);
 
   const renderTweets = () => {
     return tweets.map((tweet) => {

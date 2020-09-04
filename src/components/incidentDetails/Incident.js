@@ -3,9 +3,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import React from "react";
+import Moment from "react-moment";
 import FlexColumn from "../../Theme/FlexColumn";
 import FlexRow from "../../Theme/FlexRow";
-import Moment from 'react-moment';
 
 const useStyles = makeStyles({
   root: {
@@ -17,20 +17,19 @@ const useStyles = makeStyles({
     justifyContent: "start",
     height: "150px",
     backgroundColor: "#212121",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   avatar: {
     height: 140,
     width: 140,
     borderRadius: 10,
     margin: 10,
-    border: 'solid',
-    borderColor: '#FCC42C'
+    border: "solid",
+    borderColor: "#FCC42C",
   },
   info: {
     display: "flex",
     alignItems: "center",
-    alignItems: "start",
     paddingLeft: 10,
     color: "#898989",
     // padding: 5
@@ -65,15 +64,12 @@ const Incident = (props) => {
           {/* <FlexRow>{props.image_url}</FlexRow> */}
         </FlexColumn>
         <FlexColumn className={classes.info}>
-          <FlexRow >
-            {props.incident.date &&  
-              <Moment date={props.incident.date} format='MM/DD/YYYY'/>
-            }
-              
+          <FlexRow>
+            {props.incident.date && (
+              <Moment date={props.incident.date} format="MM/DD/YYYY" />
+            )}
           </FlexRow>
-          <FlexRow className={classes.title}>
-              {props.incident.title}
-          </FlexRow>
+          <FlexRow className={classes.title}>{props.incident.title}</FlexRow>
           {/* <FlexRow style={{overflow: 'auto', maxHeight: '80px', width: '275px'}}>
               {props.incident.description}
           </FlexRow> */}

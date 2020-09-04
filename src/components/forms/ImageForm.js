@@ -1,14 +1,14 @@
 import { makeStyles } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import React, { useEffect, useState } from "react";
-import "./IncidentForm.css";
-import DropZone2 from "./DropZone2";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import CloseIcon from "@material-ui/icons/Close";
+import React from "react";
 import { upload } from "../../requests/requests";
+import DropZone2 from "./DropZone2";
+import "./IncidentForm.css";
 
 const getStyles = makeStyles({
   root: {

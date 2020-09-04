@@ -3,7 +3,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
-import { useHistory } from "react-router-dom";
 import logo from "./logo.png";
 import PopperMenu from "./PopperMenu";
 
@@ -62,7 +61,6 @@ const useStyles = makeStyles({
   },
 });
 const NavBar = (props) => {
-  const history = useHistory();
   const classes = useStyles(props);
 
   return (
@@ -73,6 +71,7 @@ const NavBar = (props) => {
             <img
               style={{ height: "100px", width: "250px", paddingLeft: "10px" }}
               src={logo}
+              alt="logo"
             ></img>
           </div>
           <div className={classes.right}>

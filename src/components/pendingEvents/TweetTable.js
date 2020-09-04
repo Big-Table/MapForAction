@@ -38,8 +38,6 @@ function createData(url, approve, reject, edit) {
   return { url, approve, reject, edit };
 }
 
-let rows2 = [];
-// #898989
 const useStyles = makeStyles({
   root: {
     width: "100%",

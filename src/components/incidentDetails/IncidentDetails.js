@@ -1,13 +1,12 @@
-import React from "react";
+import { Card, makeStyles } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles, Card, Button } from "@material-ui/core";
+import React from "react";
+import Moment from "react-moment";
 import FlexColumn from "../../Theme/FlexColumn";
 import FlexRow from "../../Theme/FlexRow";
-import Avatar from "@material-ui/core/Avatar";
-import PersonIcon from "@material-ui/icons/Person";
 import ActionsButtons from "../buttons/ActionsButton";
 import AddTweetButton from "../buttons/addTweetButton";
-import Moment from "react-moment";
 
 const useStyles = makeStyles({
   root: {
@@ -22,8 +21,6 @@ const useStyles = makeStyles({
     color: "#707070",
     fontSize: 10,
     alignSelf: "start",
-    color: "white",
-    fontSize: "20px",
     paddingLeft: "20px",
     paddingBottom: "5px",
   },

@@ -7,7 +7,6 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MenuListComposition(props) {
-  const history = useHistory();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
