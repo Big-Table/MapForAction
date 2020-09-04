@@ -6,17 +6,17 @@ class Map extends Component {
   googleKey =
     process.env.NODE_ENV === "production"
       ? "AIzaSyBB3ATce2KnKp2P7gIEbpj5pdkChDArnic"
-      // "AIzaSyA1Cq6ox4TlZp5HUfSzWoZDuHN9rhrgK6Q"
-      : "AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc";
+      : // "AIzaSyA1Cq6ox4TlZp5HUfSzWoZDuHN9rhrgK6Q"
+        "AIzaSyCeB3fijFTmeINUL-CSVErtAIIfxv5LNxc";
 
   componentDidMount() {
     const googleScript = document.createElement("script");
     googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${this.googleKey}&libraries=places`;
     window.document.body.appendChild(googleScript);
 
-    googleScript.addEventListener("load", () => {
-      this.googleMap = this.createGoogleMap();
-    });
+    // googleScript.addEventListener("load", () => {
+    //   this.googleMap = this.createGoogleMap();
+    // });
   }
 
   componentDidUpdate(prevProps) {

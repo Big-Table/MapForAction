@@ -59,9 +59,6 @@ router.post("/", async (req, res) => {
     res.json(newIncident);
   } catch (err) {
     res.status(400).json(err);
-    for (let ele in err.errors) {
-      console.log(ele.properties);
-    }
   }
 });
 
