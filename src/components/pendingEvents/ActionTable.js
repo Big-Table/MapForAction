@@ -99,12 +99,10 @@ export default function StickyHeadTable(props) {
   const [actions, setActions] = React.useState([]);
 
   useEffect(() => {
-    console.log("hi");
     getPendingActions().then((body) => {
       setActions(body.data);
       let rows2 = [];
       body.data.forEach((action) => {
-        console.log(action);
         rows2.push(
           createData(
             action.title,
@@ -121,17 +119,15 @@ export default function StickyHeadTable(props) {
   }, [props.update, props.approve]);
 
   const handleApprove = (id) => {
-    patchApproveAction({ _id: id })
-    .then(() => {
-      props.approve()
-    })
+    patchApproveAction({ _id: id }).then(() => {
+      props.approve();
+    });
   };
 
   const handleDeny = (id) => {
-    patchDenyAction({ _id: id })
-    .then(() => {
-      props.approve()
-    })
+    patchDenyAction({ _id: id }).then(() => {
+      props.approve();
+    });
   };
 
   const [editActionForm, setEditForm] = useState(false);
@@ -139,10 +135,7 @@ export default function StickyHeadTable(props) {
   const [action, setAction] = useState();
 
   const handleEditActionForm = (id) => {
-    console.log(actions);
-    console.log(id);
     let action = actions.filter((action) => action._id === id);
-    console.log(action);
     setAction(action);
     setEditForm(!editActionForm);
   };

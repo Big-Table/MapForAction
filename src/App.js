@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -6,21 +5,19 @@ import AddIncidentButton from "./components/buttons/AddIncidentButton";
 import AddQueueButton from "./components/buttons/AddQueueButton";
 import AddWhatsNextButton from "./components/buttons/AddWhatsNextButton";
 import ImageForm from "./components/forms/ImageForm";
-import IncidentForm from "./components/forms/IncidentForm";
+import NewIncidentForm from "./components/forms/NewIncidentForm";
 import Map from "./components/incidentDetails/Map";
 import IncidentQueueGrid from "./components/pendingEvents/IncidentQueueGrid";
 import WhatsNext from "./components/pendingEvents/WhatsNext";
 import IncidentDetailContainer from "./containers/IncidentDetailContainer";
 import IncidentsContainer from "./containers/IncidentsContainer";
 import Nav from "./navigation/Nav";
+import NewSearch from "./navigation/NewSearch";
 import NoAccess from "./navigation/NoAccess";
 import NotFound from "./navigation/NotFound";
 import { getApprovedIncidents, getCurrentUser } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
-import ZipCodeSearch from './navigation/ZipCodeSearch'
-import NewIncidentForm from './components/forms/NewIncidentForm'
-import NewSearch from './navigation/NewSearch'
 class App extends React.Component {
   state = {
     incidents: [],
@@ -40,13 +37,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.updateIncidents();
-    getCurrentUser()
-    .then((user) => {
+    getCurrentUser().then((user) => {
       this.setState({
         ...this.state,
         currentUser: user.data,
       });
-    })
+    });
   }
 
   // updateCurrentUser = async () => {
@@ -100,14 +96,14 @@ class App extends React.Component {
   };
 
   updateForm = (event) => {
-    const re = /^[ ,'#.a-zA-Z]+$/
-      console.log(event.target.value)
-      if (event.target.value === '' || re.test(event.target.value)) {
-        this.setState({
-          searchForm: event.target.value
-        })
+    const re = /^[ ,'#.a-zA-Z]+$/;
+    // console.log(event.target.value);
+    if (event.target.value === "" || re.test(event.target.value)) {
+      this.setState({
+        searchForm: event.target.value,
+      });
     }
-  }
+  };
 
   handleShowGrid = () => {
     this.setState({
@@ -145,21 +141,17 @@ class App extends React.Component {
       mapCenter: {
         lat: latt,
         lng: long,
-      }
+      },
     });
-  }
+  };
 
   render() {
-    console.log(this.state.currentUser);
-    console.log(this.state.incidents);
-    console.log(this.state.lastIncidentPostedID);
-    console.log(process.env);
     return (
       <Router>
         <FlexRow style={{ backgroundColor: "black" }}>
           <FlexColumn style={{ width: "70vw", height: "100vh" }}>
-          {/* <ZipCodeSearch handleZipCode={this.handleZipCode}></ZipCodeSearch> */}
-          <NewSearch handleZipCode={this.handleZipCode}></NewSearch>
+            {/* <ZipCodeSearch handleZipCode={this.handleZipCode}></ZipCodeSearch> */}
+            <NewSearch handleZipCode={this.handleZipCode}></NewSearch>
             {/* Map goes here */}
             <Map
               deleteCurrentIncident={this.deleteCurrentIncident}
@@ -171,28 +163,37 @@ class App extends React.Component {
             />
             <div style={{ width: "100%", position: "absolute", top: 0 }}>
               <AddWhatsNextButton onClick={this.handleFAQ}></AddWhatsNextButton>
-              {this.state.FAQ && <WhatsNext onClick={this.handleFAQ}></WhatsNext>}
-              { this.state.currentUser ?
-               <AddIncidentButton currentUser={this.state.currentUser} onClick={this.handleShowForm} />
-               : 
-               <AddIncidentButton currentUser={this.state.currentUser}/>
-              } 
-              { this.state.currentUser && this.state.currentUser.moderator && 
+              {this.state.FAQ && (
+                <WhatsNext onClick={this.handleFAQ}></WhatsNext>
+              )}
+              {this.state.currentUser ? (
+                <AddIncidentButton
+                  currentUser={this.state.currentUser}
+                  onClick={this.handleShowForm}
+                />
+              ) : (
+                <AddIncidentButton currentUser={this.state.currentUser} />
+              )}
+              {this.state.currentUser && this.state.currentUser.moderator && (
                 <AddQueueButton></AddQueueButton>
-              }
+              )}
               {/* <AddQueueButton onClick={this.handleShowGrid}></AddQueueButton> */}
             </div>
-            {this.state.incidentForm && <NewIncidentForm 
-             submitted={this.handleSubmittedIncident}
-             lastIncident={this.handleLastIncidentID}
-             showForm={this.handleShowForm}
-             updateIncidents={this.updateIncidents}
-             currentUser={this.state.currentUser}></NewIncidentForm>}
-            {this.state.submitted && 
-            <ImageForm 
-              lastIncidentID={this.state.lastIncidentPostedID}
-              submitted={this.handleSubmittedIncident}
-            ></ImageForm>}
+            {this.state.incidentForm && (
+              <NewIncidentForm
+                submitted={this.handleSubmittedIncident}
+                lastIncident={this.handleLastIncidentID}
+                showForm={this.handleShowForm}
+                updateIncidents={this.updateIncidents}
+                currentUser={this.state.currentUser}
+              ></NewIncidentForm>
+            )}
+            {this.state.submitted && (
+              <ImageForm
+                lastIncidentID={this.state.lastIncidentPostedID}
+                submitted={this.handleSubmittedIncident}
+              ></ImageForm>
+            )}
             {/* {this.state.incidentForm && (
               <IncidentForm
                 submitted={this.handleSubmittedIncident}

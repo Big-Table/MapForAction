@@ -39,9 +39,6 @@ class IncidentForm extends React.Component {
   }
 
   handleChange(event) {
-    console.log(event);
-    console.log(event.target);
-    console.log(event.target.name);
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -85,7 +82,6 @@ class IncidentForm extends React.Component {
   //   }
 
   render() {
-    console.log(this.state);
     return (
       <div id="incidentForm">
         <h2>Report an Incident</h2>

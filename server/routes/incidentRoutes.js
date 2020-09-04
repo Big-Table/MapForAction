@@ -3,15 +3,14 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
-const { sendIncidentApprovedEmail } = require('../emails/account');
+const { sendIncidentApprovedEmail } = require("../emails/account");
 const requireLogin = require("../middleware/requireLogin");
 const requireModerator = require("../middleware/requireModerator");
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
 const Action = mongoose.model("Action");
-const User = mongoose.model("User")
-
+const User = mongoose.model("User");
 
 router.get("/", async (req, res) => {
   try {
@@ -57,7 +56,6 @@ router.post("/", async (req, res) => {
     await newIncident.save();
     newIncident.image_url = `/incidents/${newIncident._id}/image`;
     newIncident.save();
-    console.log(newIncident);
 
     res.json(newIncident);
   } catch (err) {
@@ -98,10 +96,10 @@ router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
     // console.log(incident._user)
-    let user = await User.findOne({_id: incident._user})
+    let user = await User.findOne({ _id: incident._user });
     // console.log("USER", user)
-    if(user && user.email.length){
-      sendIncidentApprovedEmail(user.email)
+    if (user && user.email.length) {
+      sendIncidentApprovedEmail(user.email);
     }
 
     incident.status = "approved";
@@ -182,7 +180,6 @@ const upload = multer({
     fileSize: 3000000,
   },
   fileFilter(req, file, cb) {
-    console.log(file);
     //uses regex to only allow png, jpg, jpeg
     if (!file.originalname.match(/\.(png|jpg|jpeg|JPEG|JPG|PNG)$/)) {
       cb(new Error("Please upload an image."));
@@ -200,25 +197,24 @@ router.post(
   "/upload",
   upload.single("upload"),
   async (req, res) => {
-    console.log(req.body);
-    console.log(req.file.buffer);
+    // console.log(req.body);
+    // console.log(req.file.buffer);
     try {
       const incident = await Incident.findById(req.body.id);
-      console.log(incident);
       const buffer = await sharp(req.file.buffer)
         .resize({ width: 500, height: 500 })
         .png()
         .toBuffer();
       incident.image = buffer;
       incident.save();
-      console.log("CREATED");
+      // console.log("CREATED");
       res.send();
     } catch (e) {
       res.status(400).send(e);
     }
   },
   (error, req, res, next) => {
-    console.log(error.message);
+    // console.log(error.message);
     res.status(400).send({ error: error.message });
   }
 );

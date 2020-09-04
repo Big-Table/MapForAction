@@ -12,7 +12,6 @@ class EditActionForm extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.action[0]);
     this.setState({
       id: this.props.action[0]._id,
       title: this.props.action[0].title,
@@ -43,8 +42,6 @@ class EditActionForm extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div id="incidentForm">
         <h2>Modify an Action</h2>

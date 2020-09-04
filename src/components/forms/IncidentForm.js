@@ -2,8 +2,11 @@ import React from "react";
 import "./IncidentForm.css";
 import { postIncidents } from "../../requests/requests";
 import CloseIcon from "@material-ui/icons/Close";
-import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
-import Grid from '@material-ui/core/Grid'
+import GooglePlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-google-places-autocomplete";
+import Grid from "@material-ui/core/Grid";
 import { Checkbox } from "@material-ui/core";
 
 const incidentFormInitialState = {
@@ -14,9 +17,9 @@ const incidentFormInitialState = {
   organization: "",
   petition: "",
   image_url: "",
-  profilePicture: "", 
-  firstName: "", 
-  checked: false
+  profilePicture: "",
+  firstName: "",
+  checked: false,
 };
 
 class IncidentForm extends React.Component {
@@ -27,14 +30,12 @@ class IncidentForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
       profilePicture: this.props.currentUser.profilePicture,
-      firstName: this.props.currentUser.firstName
-    })
+      firstName: this.props.currentUser.firstName,
+    });
   }
-
-  
 
   handleChange(event) {
     this.setState({
@@ -44,17 +45,14 @@ class IncidentForm extends React.Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    console.log("Hello World");
-    console.log(this.state)
-    await postIncidents(this.state)
-    .then(resp => {
-      console.log(resp)
-      this.props.lastIncident(resp.data._id)
-    })
+    await postIncidents(this.state).then((resp) => {
+      console.log(resp);
+      this.props.lastIncident(resp.data._id);
+    });
     this.setState(incidentFormInitialState);
     this.props.updateIncidents();
-    this.props.showForm()
-    this.props.submitted()
+    this.props.showForm();
+    this.props.submitted();
     // alert("This incidence has been reported, thank you for being proactive!");
   }
 
@@ -69,7 +67,7 @@ class IncidentForm extends React.Component {
   //   let formData = new FormData()
   //   formData.append("upload", e.target.files[0])
   //   formData.append("id", this.props.lastIncidentID)
-    
+
   //   for (var key of formData.entries()) {
   //     console.log(key[0] + ', ' + key[1]);
   //   }
@@ -85,50 +83,45 @@ class IncidentForm extends React.Component {
 
   handleAddress(address) {
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) =>
-        this.setState({ lat, lng })
-      );
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => this.setState({ lat, lng }));
   }
 
   handleCheckBox = (event) => {
-    console.log('here i am')
-    this.setState({
-      checked: event.target.checked
-    }, () => {
-      if(this.state.checked === true){
-        this.setState({
-              firstName: '', 
-              profilePicture: ''
-            })
-      } 
-      if(this.state.checked === false){
-        this.setState({
-              firstName: this.props.currentUser.firstName, 
-              profilePicture: this.props.currentUser.profilePicture
-      })
-    }
-    })
-    
-  }
+    this.setState(
+      {
+        checked: event.target.checked,
+      },
+      () => {
+        if (this.state.checked === true) {
+          this.setState({
+            firstName: "",
+            profilePicture: "",
+          });
+        }
+        if (this.state.checked === false) {
+          this.setState({
+            firstName: this.props.currentUser.firstName,
+            profilePicture: this.props.currentUser.profilePicture,
+          });
+        }
+      }
+    );
+  };
 
-    
-    // if(this.state.firstName !== ''){
-    //   this.setState({
-    //     firstName: '', 
-    //     profilePicture: ''
-    //   })
-    // } else {
-    //   this.setState({
-    //     firstName: this.props.currentUser.firstName, 
-    //     profilePicture: this.props.currentUser.profilePicture
-    //   })
-    // }
-  
+  // if(this.state.firstName !== ''){
+  //   this.setState({
+  //     firstName: '',
+  //     profilePicture: ''
+  //   })
+  // } else {
+  //   this.setState({
+  //     firstName: this.props.currentUser.firstName,
+  //     profilePicture: this.props.currentUser.profilePicture
+  //   })
+  // }
 
   render() {
-    console.log(this.state)
-
     return (
       <div id="incidentForm">
         <h2>Report an Incident</h2>
@@ -138,7 +131,7 @@ class IncidentForm extends React.Component {
               <label htmlFor="title">
                 Title<span className="required">*</span>
               </label>
-              
+
               <input
                 name="title"
                 type="text"
@@ -156,13 +149,12 @@ class IncidentForm extends React.Component {
                 id="descriptionInput"
                 name="description"
                 type="textArea"
-                
                 placeholder="The more details, the better!"
                 aria-describedby="required-description"
                 value={this.state.description}
                 onChange={this.handleChange}
               />
-            
+
               <label htmlFor="date">
                 Date<span className="required">*</span>
               </label>
@@ -175,9 +167,9 @@ class IncidentForm extends React.Component {
                 aria-describedby="required-date"
                 value={this.state.date}
                 onChange={this.handleChange}
-                /> 
-              </Grid>
-              {/* <Grid item md={1}>
+              />
+            </Grid>
+            {/* <Grid item md={1}>
 
               </Grid> */}
 
@@ -186,39 +178,49 @@ class IncidentForm extends React.Component {
                 Location<span className="required">*</span>
               </label>
 
-            <GooglePlacesAutocomplete
-              onSelect={(description) => this.handleAddress(description.description)}
-              placeholder="Address or nearby location"
-            />
+              <GooglePlacesAutocomplete
+                onSelect={(description) =>
+                  this.handleAddress(description.description)
+                }
+                placeholder="Address or nearby location"
+              />
 
-            <label htmlFor="organization">Organization</label>
-            <input
-              name="organization"
-              type="text"
-              placeholder="Add a link to related organization"
-              value={this.state.organization}
-              onChange={this.handleChange}
-            />
+              <label htmlFor="organization">Organization</label>
+              <input
+                name="organization"
+                type="text"
+                placeholder="Add a link to related organization"
+                value={this.state.organization}
+                onChange={this.handleChange}
+              />
 
-            <label htmlFor="petition">Petition</label>
-            <input
-              name="petition"
-              type="text"
-              placeholder="Add a link to related petition"
-              value={this.state.petition}
-              onChange={this.handleChange}
-            />
-          
-            <label style={{display: 'flex', justifyContent: 'center', paddingRight: '30px'}}htmlFor="petition">
-            <Checkbox
-            type="checkbox"
-            checked={this.state.checked}
-            onChange={this.handleCheckBox}
-            style={{ color: "black" }}
-            />
-            Submit Anonymously</label>
+              <label htmlFor="petition">Petition</label>
+              <input
+                name="petition"
+                type="text"
+                placeholder="Add a link to related petition"
+                value={this.state.petition}
+                onChange={this.handleChange}
+              />
 
-            {/* <label htmlFor="image_url">Image</label>
+              <label
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingRight: "30px",
+                }}
+                htmlFor="petition"
+              >
+                <Checkbox
+                  type="checkbox"
+                  checked={this.state.checked}
+                  onChange={this.handleCheckBox}
+                  style={{ color: "black" }}
+                />
+                Submit Anonymously
+              </label>
+
+              {/* <label htmlFor="image_url">Image</label>
             <input
               name="image_url"
               type="text"
@@ -227,8 +229,7 @@ class IncidentForm extends React.Component {
               onChange={this.handleChange}
             /> */}
 
-
-            {/* <label htmlFor="image_url">Upload Photo</label>
+              {/* <label htmlFor="image_url">Upload Photo</label>
             <input
               name="image_url"
               type="file"
@@ -239,11 +240,15 @@ class IncidentForm extends React.Component {
             /> */}
             </Grid>
           </Grid>
-        
-          <br></br>
-          
 
-            <input type="submit" value="Submit" id="submitButton" style={{borderStyle: "solid", borderColor: "black"}}/>
+          <br></br>
+
+          <input
+            type="submit"
+            value="Submit"
+            id="submitButton"
+            style={{ borderStyle: "solid", borderColor: "black" }}
+          />
 
           {/* <p aria-hidden="true" id="required-description">
             <span className="required">*</span>Required field

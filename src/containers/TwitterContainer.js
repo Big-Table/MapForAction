@@ -34,7 +34,6 @@ const TwitterContainer = (props) => {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    console.log(props.incident);
     getApprovedTweets(props.incident._id).then((body) => {
       let filter = body.data.filter(
         (tweet) => tweet._incident === props.incident._id
@@ -53,7 +52,6 @@ const TwitterContainer = (props) => {
     });
   };
 
-  console.log(tweets);
   return (
     <div className={classes.root}>
       <span className={classes.logo}>

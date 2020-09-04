@@ -1,5 +1,4 @@
-import React, { useMemo, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 const baseStyle = {
@@ -15,27 +14,27 @@ const baseStyle = {
   backgroundColor: "black",
   color: "#bdbdbd",
   outline: "none",
-  transition: "border .24s ease-in-out"
+  transition: "border .24s ease-in-out",
 };
 
 const activeStyle = {
-  borderColor: "#2196f3"
+  borderColor: "#2196f3",
 };
 
 const acceptStyle = {
-  borderColor: "#00e676"
+  borderColor: "#00e676",
 };
 
 const rejectStyle = {
-  borderColor: "#ff1744"
+  borderColor: "#ff1744",
 };
 
 const thumbsContainer = {
   display: "flex",
-  justifyContent: 'center',
+  justifyContent: "center",
   flexDirection: "row",
   flexWrap: "wrap",
-  marginTop: 16
+  marginTop: 16,
 };
 
 const thumb = {
@@ -47,45 +46,45 @@ const thumb = {
   width: "auto",
   height: 200,
   padding: 4,
-  boxSizing: "border-box"
+  boxSizing: "border-box",
 };
 
 const thumbInner = {
   display: "flex",
   minWidth: 0,
-  overflow: "hidden"
+  overflow: "hidden",
 };
 
 const img = {
   display: "block",
   width: "auto",
-  height: "100%"
+  height: "100%",
 };
 
 const button = {
-    backgroundColor: "#FCC42C",
-    color: "#000000",
-    borderStyle: "solid",
-    borderColor: "black",
-    borderWidth: 2,
-    height: 40,
-    width: 150,
-    borderRadius: 20,
-    fontFamily: 'Work Sans',
-    fontWeight: 700,
-    cursor: "pointer",
-    outline: "none",
-    display: 'flex', 
-    justifyContent: 'center',
-    paddingTop: 2
+  backgroundColor: "#FCC42C",
+  color: "#000000",
+  borderStyle: "solid",
+  borderColor: "black",
+  borderWidth: 2,
+  height: 40,
+  width: 150,
+  borderRadius: 20,
+  fontFamily: "Work Sans",
+  fontWeight: 700,
+  cursor: "pointer",
+  outline: "none",
+  display: "flex",
+  justifyContent: "center",
+  paddingTop: 2,
 };
 
 function StyledDropzone(props) {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-      props.handleImageUpload(files[0])
-  }, [files])
+    props.handleImageUpload(files[0]);
+  }, [files, props]);
 
   const {
     getRootProps,
@@ -94,7 +93,7 @@ function StyledDropzone(props) {
     isDragAccept,
     isDragReject,
     acceptedFiles,
-    open
+    open,
   } = useDropzone({
     maxFiles: 1,
     multiple: false,
@@ -102,17 +101,17 @@ function StyledDropzone(props) {
     noClick: true,
     noKeyboard: true,
     onChange: (event) => {
-        props.handleImageDrop(event)
+      props.handleImageDrop(event);
     },
-    onDrop: acceptedFiles => {
+    onDrop: (acceptedFiles) => {
       setFiles(
-        acceptedFiles.map(file =>
+        acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
           })
         )
       );
-    }
+    },
   });
 
   const style = useMemo(
@@ -120,15 +119,15 @@ function StyledDropzone(props) {
       ...baseStyle,
       ...(isDragActive ? activeStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {})
+      ...(isDragReject ? rejectStyle : {}),
     }),
-    [isDragActive, isDragReject]
+    [isDragActive, isDragAccept, isDragReject]
   );
 
-  const thumbs = files.map(file => (
+  const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
-      <div style={{display: 'flex', justifyContent: 'center'}} style={thumbInner}>
-        <img src={file.preview} style={img} />
+      <div style={{ display: "flex", justifyContent: "center", thumbInner }}>
+        <img src={file.preview} style={img} alt="thumbnail" />
       </div>
     </div>
   ));
@@ -136,17 +135,17 @@ function StyledDropzone(props) {
   useEffect(
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
     },
     [files]
   );
 
-  const filepath = acceptedFiles.map(file => (
+  const filepath = acceptedFiles.map((file) => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
     </li>
   ));
-  console.log(files)
+  // console.log(files);
   return (
     <div className="container">
       <div {...getRootProps({ style })}>
@@ -165,4 +164,4 @@ function StyledDropzone(props) {
   );
 }
 
-export default StyledDropzone
+export default StyledDropzone;

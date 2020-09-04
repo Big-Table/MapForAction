@@ -37,17 +37,17 @@ const useStyles = makeStyles({
     color: "#FCC42C",
   },
   overlay: {
-    position: "fixed", 
-    width: "100%", 
-    height: "100%", 
+    position: "fixed",
+    width: "100%",
+    height: "100%",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.8)", 
-    zIndex: 5, 
-    cursor: "pointer"
-  }
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    zIndex: 5,
+    cursor: "pointer",
+  },
 });
 
 const IncidentDetailContainer = (props) => {
@@ -68,8 +68,6 @@ const IncidentDetailContainer = (props) => {
   const handleRefresh = () => {
     setRefresh(!refresh);
   };
-
-  console.log(props.incident);
 
   return (
     <FlexColumn className={classes.container}>

@@ -10,7 +10,7 @@ class IncidentForm extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.tweet[0]);
+    // console.log(this.props.tweet[0]);
     this.setState({
       id: this.props.tweet[0]._id,
       url: this.props.tweet[0].url,
@@ -18,9 +18,6 @@ class IncidentForm extends React.Component {
   }
 
   handleChange(event) {
-    console.log(event);
-    console.log(event.target);
-    console.log(event.target.name);
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -35,8 +32,6 @@ class IncidentForm extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div id="incidentForm">
         <h2>Modify a Tweet</h2>

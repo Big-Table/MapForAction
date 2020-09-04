@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     // paddingRight: 50
   },
- 
+
   paper: {
     marginRight: theme.spacing(2),
   },
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     border: "solid",
     borderColor: "#FCC42C",
     borderWidth: 5,
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
 }));
 
@@ -65,7 +65,7 @@ export default function MenuListComposition(props) {
 
     prevOpen.current = open;
   }, [open]);
-  console.log(props.currentUser)
+
   return (
     <div className={classes.root}>
       <div>
@@ -84,28 +84,27 @@ export default function MenuListComposition(props) {
             />
           </a>
         ) : (
-            <div style={{position: 'relative', width: '100px', height: '100px'}}>
+          <div
+            style={{ position: "relative", width: "100px", height: "100px" }}
+          >
             <Avatar
-                
-                className={classes.smallPic}
-                ref={anchorRef}
-                src={props.currentUser.profilePicture}
-                aria-controls={open ? "menu-list-grow" : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-                style={{
-                  width: "60%",
-                  height: "60%",
-                  right: "70px",
-                  top: '20px',
-                  position: 'absolute'
-                }}
-              >
-              </Avatar>
-        </div>
-        )
-        }
-        
+              className={classes.smallPic}
+              ref={anchorRef}
+              src={props.currentUser.profilePicture}
+              aria-controls={open ? "menu-list-grow" : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
+              style={{
+                width: "60%",
+                height: "60%",
+                right: "70px",
+                top: "20px",
+                position: "absolute",
+              }}
+            ></Avatar>
+          </div>
+        )}
+
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -122,7 +121,7 @@ export default function MenuListComposition(props) {
                   placement === "bottom" ? "center top" : "center bottom",
               }}
             >
-              <Paper style={{backgroundColor: 'black'}}>
+              <Paper style={{ backgroundColor: "black" }}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}

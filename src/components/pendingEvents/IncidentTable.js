@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,16 +7,14 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import EditForm from "../forms/EditForm";
-import NewIncidentEditForm from "../forms/NewIncidentEditForm"
-import Moment from 'react-moment';
-
+import React, { useEffect, useState } from "react";
+import Moment from "react-moment";
 import {
   getPendingIncidents,
   patchApproveIncident,
   patchDenyIncident,
-  patchDenyTweet,
 } from "../../requests/requests";
+import NewIncidentEditForm from "../forms/NewIncidentEditForm";
 
 const columns = [
   { id: "title", label: "Title", minWidth: 170 },
@@ -140,14 +137,10 @@ export default function StickyHeadTable(props) {
   const [incidents, setIncidents] = React.useState([]);
 
   useEffect(() => {
-    console.log("hi");
-
     getPendingIncidents().then((body) => {
       setIncidents(body.data);
       let rows2 = [];
       body.data.forEach((incident) => {
-        console.log(incident);
-        
         rows2.push(
           createData(
             incident.title,
@@ -168,19 +161,15 @@ export default function StickyHeadTable(props) {
   }, [props.update, props.approve]);
 
   const handleApprove = (id) => {
-    patchApproveIncident({ _id: id })
-    .then(() => {
-        props.approve()
-      })
-    
+    patchApproveIncident({ _id: id }).then(() => {
+      props.approve();
+    });
   };
 
   const handleDeny = (id) => {
-    patchDenyIncident({ _id: id })
-    .then(() => {
-        props.approve()
-      })
-    
+    patchDenyIncident({ _id: id }).then(() => {
+      props.approve();
+    });
   };
 
   const [editForm, setEditForm] = useState(false);
@@ -245,17 +234,18 @@ export default function StickyHeadTable(props) {
                       >
                         {columns.map((column) => {
                           const value = row[column.id];
-                          if(column.id === "date"){
-                            return(
+                          if (column.id === "date") {
+                            return (
                               <TableCell key={column.id} align={column.align}>
-                                {value && <Moment date={value} format='MM/DD/YYYY'/>}
-                                
-                              {/* {column.format && typeof value === "number"
+                                {value && (
+                                  <Moment date={value} format="MM/DD/YYYY" />
+                                )}
+
+                                {/* {column.format && typeof value === "number"
                                 ? column.format(value)
                                 : value} */}
-                            
-                            </TableCell>
-                            )
+                              </TableCell>
+                            );
                           }
                           if (column.id === "edit") {
                             return (
