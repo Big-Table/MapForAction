@@ -1,34 +1,34 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core'
- 
+import React from "react";
+import { makeStyles } from "@material-ui/core";
+
 const useStyles = makeStyles({
-    root: {
-        position: "absolute",
-        top: 10,
-        left: '425px',
-        zIndex: 4,
-        backgroundColor: "#FCC42C",
-        color: "black",
-        borderStyle: "solid",
-        borderColor: "#FCC42C",
-        borderWidth: 1,
-        height: 40,
-        width: 150,
-        borderRadius: 20,
-        fontFamily: 'Work Sans',
-        fontWeight: 700,
-        cursor: "pointer",
-        outline: "none"
-    }
-})
-const AddWhatsNextButton = props => {
-    const classes = useStyles(props)
+  root: {
+    position: "absolute",
+    top: 10,
+    left: "28vw",
+    zIndex: 4,
+    backgroundColor: "#FCC42C",
+    color: "black",
+    borderStyle: "solid",
+    borderColor: "#FCC42C",
+    borderWidth: 1,
+    height: 40,
+    width: 150,
+    borderRadius: 20,
+    fontFamily: "Work Sans",
+    fontWeight: 700,
+    cursor: "pointer",
+    outline: "none",
+  },
+});
+const AddWhatsNextButton = (props) => {
+  const classes = useStyles(props);
 
-    return (
-        <button className={classes.root} onClick={props.onClick}>
-            FAQ
-        </button>
-    )
-}
+  return (
+    <button className={classes.root} onClick={props.onClick}>
+      FAQ
+    </button>
+  );
+};
 
-export default AddWhatsNextButton
+export default AddWhatsNextButton;
