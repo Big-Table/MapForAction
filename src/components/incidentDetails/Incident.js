@@ -3,9 +3,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import React from "react";
-import Moment from "react-moment";
 import FlexColumn from "../../Theme/FlexColumn";
 import FlexRow from "../../Theme/FlexRow";
+import Moment from "react-moment";
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
   info: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "start",
     paddingLeft: 10,
     color: "#898989",
     // padding: 5
