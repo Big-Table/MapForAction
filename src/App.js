@@ -202,8 +202,7 @@ class App extends React.Component {
                 currentUser={this.state.currentUser}
               />
             )} */}
-            {this.state.incidentForm ||
-              (this.state.grid && <div id="overlay"></div>)}
+            {this.state.incidentForm && <div id="overlay"></div>}
             {this.state.grid && (
               <IncidentQueueGrid
                 grid={this.handleShowGrid}

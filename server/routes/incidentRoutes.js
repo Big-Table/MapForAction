@@ -3,12 +3,15 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
+const { sendIncidentApprovedEmail } = require('../emails/account');
 const requireLogin = require("../middleware/requireLogin");
 const requireModerator = require("../middleware/requireModerator");
 
 const Incident = mongoose.model("Incident");
 const Tweet = mongoose.model("Tweet");
 const Action = mongoose.model("Action");
+const User = mongoose.model("User")
+
 
 router.get("/", async (req, res) => {
   try {
@@ -47,7 +50,7 @@ router.post("/", async (req, res) => {
     status: "pending",
     profilePicture,
     firstName,
-    _user,
+    _user: req.user,
   });
 
   try {
@@ -91,8 +94,16 @@ router.get("/denied", requireLogin, requireModerator, async (req, res) => {
 });
 
 router.patch("/approve", requireLogin, requireModerator, async (req, res) => {
+  //when approved user should receive an email letting them know it was approved.
   try {
     let incident = await Incident.findOne({ _id: req.body._id });
+    // console.log(incident._user)
+    let user = await User.findOne({_id: incident._user})
+    // console.log("USER", user)
+    if(user && user.email.length){
+      sendIncidentApprovedEmail(user.email)
+    }
+
     incident.status = "approved";
     incident.save();
     delete incident.image;
