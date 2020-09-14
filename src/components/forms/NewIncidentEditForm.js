@@ -23,6 +23,9 @@ const getStyles = makeStyles({
     borderWidth: "5px",
     borderRadius: "10px",
   },
+  input: {
+    width: "30%",
+  },
   center: {
     display: "flex",
     // justifyContent: "center",

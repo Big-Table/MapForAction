@@ -106,7 +106,7 @@ function NewSearch(props) {
         }
         placeholder="Search location..."
         //   autoFocus={false}
-        debounce={500}
+        debounce="500"
       />
       {/* {zip.length === 5 ? 
                 <TextField 

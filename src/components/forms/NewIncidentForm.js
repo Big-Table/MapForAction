@@ -26,6 +26,9 @@ const getStyles = makeStyles({
     borderWidth: "5px",
     borderRadius: "10px",
   },
+  input: {
+    width: "30%",
+  },
   center: {
     display: "flex",
     // justifyContent: "center",
@@ -101,7 +104,7 @@ function IncidentForm2(props) {
         firstName: props.currentUser.firstName,
       });
     }
-  }, [incidentForm, props.currentUser]);
+  }, [props.currentUser]);
 
   const handleChange = (event) => {
     setIncidentForm({

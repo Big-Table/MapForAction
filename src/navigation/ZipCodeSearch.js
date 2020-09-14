@@ -1,10 +1,13 @@
-import { makeStyles } from "@material-ui/core";
+import React, { useState } from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
 import SearchIcon from "@material-ui/icons/Search";
-import React, { useState } from "react";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import { makeStyles } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
+import GooglePlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-google-places-autocomplete";
 
 const useStyles = makeStyles({
   root: {

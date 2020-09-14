@@ -18,7 +18,6 @@ import NotFound from "./navigation/NotFound";
 import { getApprovedIncidents, getCurrentUser } from "./requests/requests.js";
 import FlexColumn from "./Theme/FlexColumn";
 import FlexRow from "./Theme/FlexRow";
-
 class App extends React.Component {
   state = {
     incidents: [],
